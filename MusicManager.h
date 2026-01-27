@@ -4,7 +4,7 @@
 using namespace std;
 //管理歌单，播放模式，暂停
 
-enum PlayMode {Sequence,Sing_Loop,Random};
+enum class PlayMode {Sequence,Sing_Loop,Random};
 
 class MusicManager {
 private:

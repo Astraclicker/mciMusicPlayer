@@ -2,7 +2,7 @@
 
 MusicManager::MusicManager() {
     index = 0;
-    mode = 0;
+    Mode = PlayMode::Sequence;
 }
 void MusicManager::addSong() {
 
