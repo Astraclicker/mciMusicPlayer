@@ -1,72 +1,30 @@
-
-/*
- *按钮类
- *提供了三种形式的按钮
- *内部填充颜色的按钮
- *内部填充文字，背景为颜色的按钮
- *内部填充图片的按钮
- *提供了检测坐标是否存在于按钮内的函数
- *提供了分别画出三种按钮的函数
- */
 #pragma once
-#include "txt.h"
-#include "def.h"
-//按钮基类
-class button {
-protected:
-    int length;
-    int width;
-    int color;
-    button_style b_style;
+#include <graphics.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
+/*
+ * 自定义按钮类
+ * 包含位置，大小，颜色，文字属性
+ */
+class Button {
+private:
+    int x,y;//左上角坐标
+    int width,height;//按钮宽度/高度
+    COLORREF color;//颜色
+    string text;//按钮内容
+    IMAGE img;
+    bool isimage;
 public:
-    button(int length,int width,int color,button_style b_style);
+    //文字按钮
+    Button (int _x,int _y,int _width,int _height,COLORREF _color,string _text);
+    //图片按钮
+    Button(int _x,int _y,int _width,int _height,COLORREF _color,const char * imagePath);
+    //绘制按钮
+    void Draw();
+    //判断点击
+    bool IsClicked();
+    //点击效果
+    void ClickVision();
 };
-//内部填充颜色的按钮
-class button_color : public button {
-protected:
-    int x;
-    int y;
-public:
-    button_color(int x,int y,int length,int width,int color,button_style b_style);
-    button_color(int x,int y,const button & b_obj);
-    void drawButton();
-    bool checkButton(int x,int y);
-};
-//内部填充文字，背景为颜色的按钮
-class button_txt : public button {
-protected:
-    int x;
-    int y;
-    std::string text;
-    int t_length;
-    int t_width;
-    int t_color;
-    std::string Font_name;
-public:
-    button_txt(int x,int y,std::string text,int length,int width,int color,button_style b_style,const txt &obj);
-    button_txt(int x,int y,std::string text,const button & b_obj,const txt &t_obj);
-    void drawButton();
-    bool checkButton(int x,int y);
-};
-//内部填充图片的按钮
-class button_img :public button{
-protected:
-    int x;
-    int y;
-    std::string img_address;
-public:
-    button_img(int x,int y,int length,int width,int color,button_style b_style,std::string img_address);
-    button_img(int x,int y,const button & b_obj,std::string img_address);
-    void drawButton();
-    bool checkButton(int x,int y);
-};
-
-
-
-
-
-
-
-
-
-
