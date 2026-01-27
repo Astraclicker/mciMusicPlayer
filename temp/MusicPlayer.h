@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MusicManager.h"
-#include "Button.h"
-#include "Song.h"
+#include "../service/button.h"
+#include "../Song.h"
 #include "UI.h"
 
 class MusicPlayer {

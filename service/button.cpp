@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "button.h"
 
 Button::Button(int _x,int _y,int _width,int _height,COLORREF _color,string _text) {
     x = _x;
