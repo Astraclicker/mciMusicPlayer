@@ -1,19 +1,50 @@
-#include <easyx.h>
-#include "button.h"
+// main.cpp - ´øÒôÁ¿¿ØÖÆ
+#include <graphics.h>
+#include "ui.h"
+#include "player.h"
+#include <vector>
+// ¼òµ¥µÄÈ«¾Ö²¥·ÅÁĞ±í
+   std::vector<std::string> playlist = {
+       "½­ÄÏ.mp3",
+       "test.mp3"
+   };
+int currentSongIndex = 0;
 int main() {
-    //æä¾›äº†width_windowå’Œlength_windowä¸ºçª—å£æä¾›å‚æ•°
-    initgraph(width_window,length_window);
 
-    //æ„é€ å­—ä½“ç±»æ—¶æä¾›å››ä¸ªå‚æ•°ï¼Œå•ä¸ªå­—çš„é•¿/å®½ï¼ˆè‹¥å¡«å†™0ï¼Œä¼šè‡ªåŠ¨å¤„ç†ï¼‰ï¼Œå­—é¢œè‰²ï¼Œå­—ä½“
-    txt CN(0,0,RED,"é»‘ä½“");
-    txt EN(0,0,RED,"JetBrainsMono Nerd Font");
 
-    //åˆ›å»ºåŸºç¡€æŒ‰é’®ç±»ï¼Œç”¨äºåˆå§‹åŒ–åé¢æ›´å¤šçš„æŒ‰é’®,æä¾›å››ä¸ªå‚æ•°ï¼ŒæŒ‰é’®çš„é•¿/å®½ï¼Œé¢œè‰²ï¼ŒæŒ‰é’®å½¢çŠ¶
-    button base(50,100,BLUE,button_style::roundrect);
+    // 1. ³õÊ¼»¯Í¼ĞÎ´°¿Ú
+    initgraph(500, 400);
 
-    //åˆ›å»ºæ–‡æœ¬æŒ‰é’®ï¼Œæä¾›5ä¸ªå‚æ•°ï¼ŒæŒ‰é’®çš„xï¼Œyåæ ‡ï¼ŒæŒ‰é’®å†…æ–‡æœ¬ï¼ŒåŸºç¡€æŒ‰é’®ç±»ï¼Œå­—ä½“æ ·å¼ç±»
-    button_txt button1(50,50,"Hello World",base,CN);
+    // 2. ´´½¨²¥·ÅÆ÷
+    Player player;
+    // Ê¹ÓÃ²¥·ÅÁĞ±íÌí¼Ó¸èÇú
+    player.addToPlaylist("½­ÄÏ.mp3");
+    player.addToPlaylist("test.mp3");
+    // 3. ¼ÓÔØÒôÀÖÎÄ¼ş
+    if (!playlist.empty()) {
+        player.load(playlist[currentSongIndex]);
+        // ´íÎó´¦Àí
+    }
 
-    button1.drawButton();//ç”¨è¿™ä¸ªå‡½æ•°ç”»å‡ºæ¥
-    while (true);
+    // 4. ¿ªÊ¼²¥·Å
+    //player.play();
+
+    // 5. ´´½¨½çÃæ¹ÜÀíÆ÷
+    PlayerUI ui(player);
+
+    // 6. Ö÷Ñ­»·
+    bool shouldExit = false;
+    BeginBatchDraw();
+    while (!shouldExit) {
+        // »æÖÆ½çÃæ
+        ui.draw();
+
+
+        FlushBatchDraw();
+        // ¿ØÖÆË¢ĞÂÆµÂÊ
+        Sleep(10);
+    }
+    EndBatchDraw();
+    // 7. ÇåÀí×ÊÔ´
+    return 0;
 }
