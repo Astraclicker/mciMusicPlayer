@@ -7,7 +7,7 @@
 constexpr int width_window =1080;
 constexpr int  length_window= 720;
 
-inline extern std::string bk_img ("sources/img/background.png");
+inline std::string bk_img = "sources/image/bk.png";
 
 //按钮形状
 enum class button_style {

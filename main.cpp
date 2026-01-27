@@ -1,19 +1,58 @@
+//引用头文件时，只能引用归档的头文件，即除了temp文件夹下的文件，具体看CMakeLists.txt
+#include "service/button.h"
 #include <easyx.h>
-#include "button.h"
 int main() {
-    //提供了width_window和length_window为窗口提供参数
+    //初始化窗口
     initgraph(width_window,length_window);
 
-    //构造字体类时提供四个参数，单个字的长/宽（若填写0，会自动处理），字颜色，字体
-    txt CN(0,0,RED,"黑体");
-    txt EN(0,0,RED,"JetBrainsMono Nerd Font");
+    //构建一个功能基础按钮
+    button base_function (60,60,WHITE,button_style::roundrect);
+    button base_spectrum (50,600,0xb79724,button_style::roundrect);
+    //构建文本类
+    txt CN(0,0,0xfcf7f1,"黑体");
 
-    //创建基础按钮类，用于初始化后面更多的按钮,提供四个参数，按钮的长/宽，颜色，按钮形状
-    button base(50,100,BLUE,button_style::roundrect);
+    //初始化按钮
+    button_img button_setting(30,30,base_function,"sources/image/files_ui/btn_settings_down.png");
+    button_img button_pause(490,650,base_function,"sources/image/control/btn_pause_down.png");
+    button_txt button_spectrum(300,300,"是否开启频谱",base_spectrum,CN);
 
-    //创建文本按钮，提供5个参数，按钮的x，y坐标，按钮内文本，基础按钮类，字体样式类
-    button_txt button1(50,50,"Hello World",base,CN);
+    //初始化两种消息
+    ExMessage mouse;
+    ExMessage Key;
 
-    button1.drawButton();//用这个函数画出来
-    while (true);
+    //初始化状态机
+    statu condition;
+    condition = statu::main;
+
+    while (true) {
+        switch (condition) {
+            case statu::main: {
+                BeginBatchDraw();
+                loadimage(NULL,bk_img.c_str());
+                button_setting.drawButton();
+                button_pause.drawButton();
+                FlushBatchDraw();
+                EndBatchDraw();
+                if (peekmessage(&mouse,EX_MOUSE)) {
+                    if (mouse.message == WM_LBUTTONDOWN && button_setting.checkButton(mouse.x,mouse.y)) {
+                        condition = statu::setting;
+                    }
+                    if (mouse.message == WM_LBUTTONDOWN && button_pause.checkButton(mouse.x,mouse.y)) {
+                        condition = statu::main;
+                    }
+                }
+                break;
+            }
+            case statu::setting: {
+                setfillcolor(0x808080);
+                fillroundrect(width_window/8,length_window/8,width_window-width_window/8,length_window-length_window/8,10,10);
+                if (peekmessage(&Key,EX_KEY)) {
+                    if (Key.message == WM_KEYDOWN && Key.vkcode == VK_ESCAPE) {
+                        condition = statu::main;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
