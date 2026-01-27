@@ -11,11 +11,16 @@ add_executable(mciMusicPlayer main.cpp
         txt.h
         def.h
         drawAlpha.h
+        MusicPlayer.h
         MusicPlayer.cpp
+        MusicManager.h
         MusicManager.cpp
         Button.cpp
         UI.cpp
+        Song.h
         Song.cpp
+        UI.h
+
 )
 
 target_link_libraries(mciMusicPlayer libeasyx.a)

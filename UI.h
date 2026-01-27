@@ -1,7 +1,7 @@
 #pragma once
 #include <graphics.h>
 #include <iostream>
-#include MusicManger.h
+#include "MusicManager.h"
 using namespace std;
 
 //播放器的ui界面
@@ -21,7 +21,7 @@ public:
     void InitResource();
     //绘制主界面
     //从MusicManager里获取信息
-    void DrawMainScreen(MusicManger &manager);
+    void DrawMainScreen(MusicManager &manager);
     //绘制设置界面
     void DrawSetSreen();
 };

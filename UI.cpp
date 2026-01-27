@@ -8,9 +8,11 @@ void UI::InitResource() {
     loadimage();
     //.......
 }
-void UI::DrawMainScreen(MusicManger &manager) {
+void UI::DrawMainScreen(MusicManager &manager) {
 
 }
 void UI::DrawSetSreen() {
+
+
 
 }
