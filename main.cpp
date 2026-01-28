@@ -1,5 +1,5 @@
 //引用头文件时，只能引用归档的头文件，即除了temp文件夹下的文件，具体看CMakeLists.txt
-//test
+//abc
 #include "view/drawMain.h"
 #include "view/drewSetting.h"
 #include <easyx.h>
