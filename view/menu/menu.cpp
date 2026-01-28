@@ -2,7 +2,7 @@
 // Created by 神秘服务 on 2026/1/26.
 //
 #include "menu.h"
-
+#include <easyx.h>
 
 using namespace std;
 void menu::show_menu() {
@@ -49,7 +49,6 @@ monitor::monitor() {
     if (this->monitor_start()) {;}// 监测是否点击播放按钮
 }
 }
-
 
 
 

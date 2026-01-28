@@ -1,10 +1,10 @@
 
 
 #include "view/menu/menu.h"
-
+#include "function/printmainPage.h"
 int main()
 {
-
+    void printPage();
 
 
 
