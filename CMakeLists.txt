@@ -4,15 +4,16 @@ project(mciMusicPlayer)
 
 set(CMAKE_CXX_STANDARD 20)
 
-file(GLOB SERVICE "service/*.cpp" "service/*.h")
-file(GLOB FUNCTION "function/*.cpp" "function/*.h")
-file(GLOB VIEW "view/*.cpp" "view/*.h")
+file(GLOB_RECURSE SERVICE "service/*.cpp" "service/*.h")
+file(GLOB_RECURSE FUNCTION "function/*.cpp" "function/*.h")
+file(GLOB_RECURSE VIEW "view/*.cpp" "view/*.h")
+#GLOB_RECURSE 根目录也能搜索
 add_executable(mciMusicPlayer main.cpp
         ${SERVICE}
         ${FUNCTION}
         ${VIEW}
-        view/drawMain.h
-        view/drewSetting.h
+        service/log/log.cpp
+
 )
 
 target_link_libraries(mciMusicPlayer libeasyx.a)

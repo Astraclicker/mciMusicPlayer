@@ -1,5 +1,5 @@
 #include "button.h"
-#include "../function/drawAlpha.h"
+#include "drawAlpha.h"
 #include <iostream>
 //构造基本按钮（color）
 button::button(int length, int width, int color, button_style b_style) {

@@ -1,9 +1,9 @@
 #pragma once
-#include "../service/button.h"
+#include "button.h"
 
 inline button base_spectrum (50,200,0xb79724,button_style::roundrect);
-//³õÊ¼»¯°´Å¥
-inline button_txt button_spectrum(200,150,"¿ªÆôÆµÆ×",base_spectrum,CN);
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Å¥
+inline button_txt button_spectrum(200,150,"ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½",base_spectrum,CN);
 void drawSetting () {
     setfillcolor(0x808080);
     BeginBatchDraw();

@@ -1,5 +1,5 @@
 #pragma once
-#include "../service/button.h"
+#include "button.h"
 #include <easyx.h>
 //构建一个功能基础按钮
 inline button base_function(60, 60,WHITE, button_style::roundrect);
