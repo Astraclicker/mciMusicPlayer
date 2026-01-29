@@ -1,7 +1,7 @@
 // player.h
 #pragma once
 #include <string>
-#include "playlist.h"
+#include "../service/playlist.h"
 class Player {
 private:
     bool isPlaying = false;//true:正在播放   false:暂停（关闭）

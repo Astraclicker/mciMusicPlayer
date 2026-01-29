@@ -1,6 +1,6 @@
 #include "Song.h"
 
-Song::Song(string _path) {//路径
+Song::Song(string _path) {
     this->songPath = _path;
     parsePath();//调用函数解析
 }

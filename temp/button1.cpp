@@ -211,3 +211,5 @@ bool button_img::checkButton(int mouse_x, int mouse_y) {
     // 没有掩码图，既然通过了矩形检测，那就是点中了
     return true;
 }
+
+

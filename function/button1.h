@@ -6,8 +6,12 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+#include <graphics.h>
 #include "def.h" // 包含 button_style 枚举定义
 #include "txt.h" // 包含文字处理相关类（根据您的项目结构保留）
+
+using namespace std;
 
 // 按钮状态枚举：管理三种形态
 enum class ButtonState {
@@ -126,4 +130,26 @@ public:
 
     // 重写检测逻辑：支持像素级遮罩检测
     bool checkButton(int mouse_x, int mouse_y) override;
+};
+
+
+class Button {
+private:
+    int x,y;//左上角坐标
+    int width,height;//按钮宽度/高度
+    COLORREF color;//颜色
+    string text;//按钮内容
+    IMAGE img;
+    bool isimage;
+public:
+    //文字按钮
+    Button (int _x,int _y,int _width,int _height,COLORREF _color,string _text);
+    //图片按钮
+    Button(int _x,int _y,int _width,int _height,COLORREF _color,const char * imagePath);
+    //绘制按钮
+    void Draw();
+    //判断点击
+    bool IsClicked();
+    //点击效果
+    void ClickVision();
 };

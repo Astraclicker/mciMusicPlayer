@@ -1,11 +1,12 @@
 #include <easyx.h>
 #include <iostream>
 #include <fstream>
-#include "huodou.h"
+
 
 using namespace std;
 
-
+bool isPlaying;
+bool isCollect;
 //————————————————————————————————————————————逻辑属性——————————————————————————————————————
 //这一部分是声明一些结构体，全局变量等内在的属性，方便做展示部分的时候直接调用
 typedef struct {

@@ -4,20 +4,13 @@
 
 using namespace std;
 //存放歌曲数据信息
-typedef struct music {
-    string name;//歌名
-    string artist;//歌手
-    string songPath;//路径
-    int time;//歌曲时间
-}music;
-//我实在找不到应该从哪里开始读取文件 我就写成结构体了
-
-class Song {//存放选择当前播放文件？
+class Song {
 private:
-    string name;//歌名
-    string artist;//歌手
-    string songPath;//路径
-    int time;//歌曲时间
+        string name;//歌名
+        string artist;//歌手
+        string songPath;//路径
+
+
 public:
         Song(string _path);
         string getPath();

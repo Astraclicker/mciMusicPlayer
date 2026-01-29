@@ -1,17 +1,16 @@
-#include "UI.h"
+#include "./UI.h"
 
 UI::UI() {
 
 }
 void UI::InitResource() {
-    loadimage();
-    loadimage();
+    //loadimage();
     //.......
 }
 void UI::DrawMainScreen(MusicManager &manager) {
 
 }
-void UI::DrawSetSreen() {
+void UI::DrawSetScreen() {
 
 
 
