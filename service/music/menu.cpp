@@ -21,16 +21,31 @@ void menu::show_list() {
 menu::menu() {
     initgraph(width_window,length_window);
     condition = statu::main;
+    drawMain();
     ExMessage mouse;
     while (1) {
 
         switch (condition) {
             case statu::main:
-                drawMain();
+                //drawMain();
                 getmessage(&mouse,EX_MOUSE);
+                //设置按钮的点击检测
                 if (mouse.message==WM_LBUTTONDOWN&&button_setting.checkButton(mouse.x,mouse.y)) {
                     condition = statu::setting;
-                }
+                }//单击设置
+
+
+                if(mouse.message==WM_LBUTTONDOWN&&button_backward.checkButton(mouse.x,mouse.y)) {
+                    //将歌曲进度回退15秒
+                }//单击回退
+                // if (mouse.message==WM_LBUTTONDOWN&&button_add.checkButton(mouse.x,mouse.y)) {
+                //
+                // }//添加文件
+                // if (mouse.message==WM_LBUTTONDOWN&&button_add.checkButton(mouse.x,mouse.y)) {
+                //
+                // }//添加目录
+
+
                 break;
             case statu::setting:
                 drawSetting();

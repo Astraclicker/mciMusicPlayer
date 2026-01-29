@@ -10,9 +10,14 @@
 constexpr int width_window =1080;
 constexpr int  length_window= 720;
 
-inline std::string music_path = "sources";
-inline std::string bk_img = "sources/image/bk.png";
-
+inline std::string music_path = "sources";  //音乐路径
+inline std::string bk_img = "sources/image/bk.png";//播放按钮
+/*
+ * 三个路径
+ */
+const std::string PATH_CONTROL = "sources/image/control/";
+const std::string PATH_MODE    = "sources/image/audio_modes/";
+const std::string PATH_UI      = "sources/image/files_ui/";
 //播放方式
 enum class PlayMode {Sequence,Sing_Loop,Random};
 
