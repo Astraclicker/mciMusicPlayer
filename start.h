@@ -5,20 +5,21 @@
 #include "view/drewSetting.h"
 #include "service/def.h"
 #include <iostream>
+
+#include "function/playMusic.h"
 using std::cout;
 using std::endl;
 void start() {
     initgraph(width_window, length_window);
     condition = statu::main;
-    drawMain();
-
-
-
+    play_statu = playStatu::play;
+    play_mode = PlayMode::Sequence;
     while (true) {
         switch (condition) {
             case statu::main:
+                flushmessage();
                 drawMain();
-                getmessage(&msg,EX_MOUSE);
+                getmessage(&msg);
                 //单击设置
                 if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
                     cout<<"设置"<<endl;
@@ -29,6 +30,17 @@ void start() {
                 //单击暂停/播放
                 if (msg.message == WM_LBUTTONDOWN && button_pause.checkButton(msg.x, msg.y)) {
                     cout<<"播放暂停"<<endl;
+                    switch (play_statu) {
+                        case playStatu::play:
+                            play_music(songs_list,&log,playStatu::play);
+                            play_statu = playStatu::pause;
+                            break;
+                        case playStatu::pause:
+                            play_music(songs_list,&log,playStatu::pause);
+                            play_statu = playStatu::play;
+                            break;
+                    }
+
                 }
 
                 //单击回退
@@ -50,20 +62,32 @@ void start() {
                 if (msg.message == WM_LBUTTONDOWN && button_next.checkButton(msg.x,msg.y)) {
                     cout<<"下一曲"<<endl;
                 }
+
+                //单击播放模式切换
+                if (msg.message == WM_LBUTTONDOWN && button_all_on.checkButton(msg.x,msg.y)) {
+                    switch (play_mode) {
+                        case PlayMode::Random:
+                            play_mode = PlayMode::Sing_Loop;
+                            break;
+                        case PlayMode::Sequence :
+                            play_mode = PlayMode::Random;
+                            break;
+                        case PlayMode::Sing_Loop:
+                            play_mode = PlayMode::Sequence;
+                            break;
+                    }
+
+
+                }
                 break;
 
 
             case statu::setting:
+
                 drawSetting();
                 getmessage(&msg);
-                //按下esc
-                if (msg.message == WM_KEYDOWN) {
-                    if (msg.message == 256) {
-                        condition = statu::main;
-                    }
-                }
-                //按下鼠标
-                else if (msg.message == WM_LBUTTONDOWN) {
+
+                if (msg.message == WM_LBUTTONDOWN) {
                     cout<<msg.x<<"||"<<msg.y<<endl;
 
                     if (exit_setting.checkButton(msg.x,msg.y)) {

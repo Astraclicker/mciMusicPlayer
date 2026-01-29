@@ -16,6 +16,13 @@ add_executable(mciMusicPlayer main.cpp
         view/base.h
         view/drawPlayList.h
         view/drawPlayList.cpp
+        service/loadfile.h
+        service/loadfile.cpp
+        service/Song.h
+        function/playMusic.h
+        function/playMusic.cpp
+        view/drawPlayLine.cpp
+        view/drawPlayLine.h
 )
 
 target_link_libraries(mciMusicPlayer libeasyx.a winmm.lib)

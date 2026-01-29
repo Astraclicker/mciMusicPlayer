@@ -6,5 +6,5 @@
 #define MCIMUSICPLAYER_DRAWPLAYLIST_H
 #include <string>
 #include <vector>
-void draw_play_list(std::vector<std::string>songs_list);
+void draw_play_list(std::vector<std::string> &songs_list,int song_time);
 #endif
