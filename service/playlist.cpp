@@ -2,7 +2,7 @@
 #include "playlist.h"
 
 void Playlist::add(const std::string& filePath) { // 添加歌曲到播放列表。如果列表为空，将当前索引设为0。
-    songs.push_back(filePath);
+    this->songs.push_back(filePath);
     if (currentIndex == -1) {
         currentIndex = 0;
     }

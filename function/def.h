@@ -4,12 +4,18 @@
  */
 #pragma once
 
+#include <vector>
+
 //窗口大小
 constexpr int width_window =1080;
 constexpr int  length_window= 720;
 
+inline std::string music_path = "sources";
 inline std::string bk_img = "sources/image/bk.png";
-enum class PlayMode {Sequence,Sing_Loop,Random};//播放方式
+
+//播放方式
+enum class PlayMode {Sequence,Sing_Loop,Random};
+
 //按钮形状
 enum class button_style {
     ellipse,
@@ -21,3 +27,5 @@ enum class statu {
     main,
     setting
 };
+
+inline statu condition;

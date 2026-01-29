@@ -1,6 +1,6 @@
 #pragma once
 #include<vector>
-#include "../service/misic/Song.h"
+#include "../service/music/Song.h"
 using namespace std;
 //管理歌单，播放模式，暂停
 

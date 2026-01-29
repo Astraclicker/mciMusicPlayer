@@ -1,8 +1,8 @@
 #include <iostream>
 #include "../temp/MusicManager.h"
 #include "../temp/button.h"
-#include "./misic/Song.h"
-#include "../function//UI.h"
+#include "./music/Song.h"
+#include "../temp/UI.h"
 
 class MusicPlayer {
 private:

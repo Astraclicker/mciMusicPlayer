@@ -12,8 +12,6 @@ add_executable(mciMusicPlayer main.cpp
         ${SERVICE}
         ${FUNCTION}
         ${VIEW}
-
-
 )
 
 target_link_libraries(mciMusicPlayer libeasyx.a)

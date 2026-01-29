@@ -1,7 +1,7 @@
 #pragma once
 #include <graphics.h>
 #include <iostream>
-#include "../temp/MusicManager.h"
+#include "MusicManager.h"
 using namespace std;
 
 //播放器的ui界面

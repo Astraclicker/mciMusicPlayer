@@ -1,6 +1,6 @@
 
-
-#include "service/misic/menu/menu.h"
+#include "view/drawMain.h"
+#include "service/music/menu.h"
 
 int main()
 {

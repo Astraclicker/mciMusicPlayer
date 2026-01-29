@@ -5,14 +5,12 @@
 using namespace std;
 //存放歌曲数据信息
 class Song {
-private:
-        string name;//歌名
-        string artist;//歌手
+
+protected:
+        string songName;//歌名
         string songPath;//路径
-
-
 public:
-        Song(string _path);
+        Song(string songPath);
         string getPath();
         string getName();
         string getArtist();
