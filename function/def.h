@@ -7,6 +7,7 @@
 #include <vector>
 
 //窗口大小
+constexpr int wid =90;
 constexpr int width_window =1080;
 constexpr int  length_window= 720;
 

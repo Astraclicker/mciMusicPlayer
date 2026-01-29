@@ -1,7 +1,7 @@
 // player.cpp - 带音量控制
 #include "player.h"
 #include <windows.h>
-#include <string>
+
 
 #pragma comment(lib, "winmm.lib")
 

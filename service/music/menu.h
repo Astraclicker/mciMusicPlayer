@@ -2,16 +2,17 @@
 
 #include <iostream>
 #include <vector>
-
+//#include "../player.h"
 class menu{//实现主菜单的显示
 
 protected:
 
 public:
     menu();
+
     void show_list();//根据数据展示播放列表
 };
-
+void log();
 
 class comment{//弹幕实现对象
 public:
