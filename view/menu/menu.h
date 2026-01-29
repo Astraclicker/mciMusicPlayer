@@ -7,10 +7,12 @@
 #include <iostream>
 #include <vector>
 class menu{//实现主菜单的显示
+private:
+    //展示播放列表?
 public:
     menu();
     void show_menu();//展示主菜单界面
-
+    void show_list();//根据数据展示播放列表
 };
 
 class comment{//弹幕实现对象
@@ -20,21 +22,7 @@ public:
    void show_comments();//实现弹幕的输出
 };
 
-class monitor{
-private:
-    bool monitor_addlist();//添加音乐监测
-    bool monitor_add_he_list();//添加目录
-    bool monitor_start();//是否正在进行播放
-    bool monitor_list();//是否操作播放列表中的音乐(双击)
-    bool change_list();//是否改变播放列表
-    bool monitor_comments();//是否操作弹幕
-    bool monitor_log();//是否操作设置
-    bool monitor_end();//是否进行退出
-    public:
-    monitor();//监测用户操作
-    bool monitor_list_end();//音乐是否播放停止
 
-};
 
 
 

@@ -3,65 +3,75 @@
  * 实现检测用户是否进行相应操作
  */
 
-#include "../view/menu/menu.h"
+#include "montior.h"
 
 using  namespace std ;
 
-bool monitor::monitor_addlist() {
-    cout<<"monitor_addlist"<<endl;
-    return true;
-}//添加文件
-bool monitor::monitor_add_he_list() {//判断是否添加合集
-    cout<<"monitor_add_he_list"<<endl;
+bool monitor::mouse() {
+    cout<<"mouse"<<endl;
     return true;
 }
 
-bool monitor::monitor_list() {
+bool monitor::key() {
+    cout<<"key"<<endl;
+    return true;
+}
+
+void monitor::one_add() {
+    cout<<"monitor_addlist"<<endl;
+
+}//添加文件
+void monitor::one_add_he_list() {//判断是否添加合集
+    cout<<"monitor_add_he_list"<<endl;
+
+}
+
+void monitor::monitor_list() {
     cout<<"monitor_list"<<endl;
-    return true;
-}//是否操作播放列表
 
-bool monitor::monitor_start() {
+}//操作播放列表(//双击操作)
+
+void monitor::one_start() {
     cout<<"monitor_start"<<endl;
-    return true;
-}//监测是否进行播放操作
 
-bool monitor::monitor_comments() {
+}//点击了播放按钮 切换状态
+
+void monitor::monitor_comments() {
     cout<<"monitor_comments"<<endl;
-       return true;
-}//是否进行输入弹幕操作
 
-bool monitor::monitor_log() {
+}//输入弹幕操作
+
+void monitor::ont_log() {
     cout<<"monitor_log"<<endl;
-    return true;
-}//是否进行设置操作
+
+}//设置操作
 
 bool monitor::monitor_list_end() {
     cout<<"monitor_list_end"<<endl;
     return true;
-}
+}//检测歌曲是否结束
 /*
  *监测改变音乐的播放方式
  */
-bool monitor::change_list() {
+void monitor::one_list() {
 cout<<"change_list"<<endl;
-    return true;
+
 }
-bool monitor::monitor_end() {
-    if (getchar() == '\n') {
+void monitor::one_end() {
+    if (getchar() == '0') {
         exit(0);
     }
-    return false;
+
 }//是否退出程序
 
 
 
 
 
-void comment::sever_comments() {// 实现弹幕的读入功能
-    cout<<11<<endl;
-}
-
-void comment::show_comments() {}//  实现弹幕的输出功能
+// void comment::sever_comments() {// 实现弹幕的读入功能
+//     cout<<11<<endl;
+// }
+//
+// void comment::show_comments() {}//  实现弹幕的输出功能
 
 
