@@ -12,9 +12,7 @@ add_executable(mciMusicPlayer main.cpp
         ${SERVICE}
         ${FUNCTION}
         ${VIEW}
-        service/log/log.cpp
-        function/printmainPage.h
-        function/printmainPage.cpp
+
 
 )
 

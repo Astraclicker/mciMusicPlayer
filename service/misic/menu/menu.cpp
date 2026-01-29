@@ -2,10 +2,10 @@
 // Created by 神秘服务 on 2026/1/26.
 //
 #include "menu.h"
-#include "../../function/def.h"
+#include "../../../function/def.h"
+#include "../../montior.h"
 
-
-#include ".../monitor.h"
+#include "../../../function/button1.h"
 
 using namespace std;
 void menu::show_menu() {
