@@ -1,42 +1,70 @@
 #pragma once
 #include "../function/button.h"
 #include <easyx.h>
-//æ„å»ºä¸€ä¸ªåŠŸèƒ½åŸºç¡€æŒ‰é’®
-inline button base_function(50,50,WHITE, button_style::roundrect);
-//å·¦å®½å³é«˜
-//æ„å»ºæ–‡æœ¬ç±»
-inline txt CN(0,0,0xfcf7f1,"FZCuYuan-M03");
+#include "base.h"
 
-//åˆå§‹åŒ–æŒ‰é’®
 
-//è®¾ç½®
-inline button_img button_setting(30,30,base_function,"sources/image/files_ui/btn_settings_down.png");
-//æ’­æ”¾
-inline button_img button_pause(490,650,base_function,"sources/image/control/btn_pause_norm.png");
-//å›é€€
-inline button_img button_backward(490-wid ,650,base_function,"sources/image/control/btn_backward_norm.png");
-//å¿«è¿›
-inline button_img button_forward(490+wid,650,base_function,"sources/image/control/btn_forward_norm.png");
-//ä¸‹ä¸€é¦–
-inline button_img button_next(490+2*wid,650,base_function,"sources/image/control/btn_next_norm.png");
-//ä¸Šä¸€é¦–
-inline button_img button_previous(490-wid*2,650,base_function,"sources/image/control/btn_prev_norm.png");
-
-//ç”»å‡ºä¸»ç•Œé¢
-inline void drawMain() {
+//ÉèÖÃ
+button_img button_setting(30, 30, base_function, "sources/image/files_ui/btn_settings_down.png");
+button_img button_setting_on(30, 30, base_function, "sources/image/files_ui/btn_settings_hover.png");
+//²¥·Å
+button_img button_pause(490, 650, base_function, "sources/image/control/btn_pause_norm.png");
+button_img button_pause_on(490, 650, base_function, "sources/image/control/btn_pause_hover.png");
+//»ØÍË
+button_img button_backward(490 - wid, 650, base_function, "sources/image/control/btn_backward_norm.png");
+button_img button_backward_on(490 - wid, 650, base_function, "sources/image/control/btn_backward_hover.png");
+//¿ì½ø
+button_img button_forward(490 + wid, 650, base_function, "sources/image/control/btn_forward_norm.png");
+button_img button_forward_on(490 + wid, 650, base_function, "sources/image/control/btn_forward_hover.png");
+//ÏÂÒ»Ê×
+button_img button_next(490 + 2 * wid, 650, base_function, "sources/image/control/btn_next_norm.png");
+button_img button_next_on(490 + 2 * wid, 650, base_function, "sources/image/control/btn_next_hover.png");
+//ÉÏÒ»Ê×
+button_img button_previous(490 - wid * 2, 650, base_function, "sources/image/control/btn_prev_norm.png");
+button_img button_previous_on(490 - wid * 2, 650, base_function, "sources/image/control/btn_prev_hover.png");
+//»­³öÖ÷½çÃæ
+void drawMain() {
     BeginBatchDraw();
-    loadimage(NULL,bk_img.c_str());
+    loadimage(NULL, bk_img.c_str());
 
-    /*
-     * æŒ‰é’®
-     */
-    button_setting.drawButton();
-    button_pause.drawButton();
-    button_backward.drawButton();
-    button_forward.drawButton();
-    button_next.drawButton();
-    button_previous.drawButton();
-    //å±•ç¤º
+    //»­³ö°´Å¥
+    if (button_setting.checkButton(msg.x,msg.y)) {
+        button_setting_on.drawButton();
+    }else {
+        button_setting.drawButton();
+    }
+
+    if (button_pause.checkButton(msg.x, msg.y)) {
+        button_pause_on.drawButton();
+    } else {
+        button_pause.drawButton();
+    }
+
+    if (button_backward.checkButton(msg.x, msg.y)) {
+        button_backward_on.drawButton();
+    } else {
+        button_backward.drawButton();
+    }
+
+    if (button_forward.checkButton(msg.x, msg.y)) {
+        button_forward_on.drawButton();
+    } else {
+        button_forward.drawButton();
+    }
+
+    if (button_next.checkButton(msg.x, msg.y)) {
+        button_next_on.drawButton();
+    } else {
+        button_next.drawButton();
+    }
+
+    if (button_previous.checkButton(msg.x, msg.y)) {
+        button_previous_on.drawButton();
+    } else {
+        button_previous.drawButton();
+    }
+
+
     FlushBatchDraw();
     EndBatchDraw();
 }
