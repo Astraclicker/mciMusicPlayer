@@ -96,6 +96,25 @@ void start() {
                     if (spectrum_setting.checkButton(msg.x,msg.y)) {
                         system("start sources/cava/cava.exe");
                     }
+                    if (msg.x >= 350 && msg.x <= 550 &&
+                        msg.y >= 350 && msg.y <= 355) {
+                        dragging = true;
+                    }
+                }
+                else if (msg.message == WM_LBUTTONUP) {
+                    dragging=false;
+                }else if (msg.message == WM_MOUSEMOVE&&dragging) {
+                    // 拖动滑块
+                    sliderX = msg.x;
+                    if (sliderX < 350) sliderX = 350;
+                    if (sliderX > 550) sliderX = 550;
+
+                    // 计算新音量
+                    int newVolume = (sliderX - 350) / 2;
+                    if (newVolume != volume) {
+                        // 设置新音量
+                        setVloume(newVolume);
+                    }
                 }
                 flushmessage();
                 break;

@@ -10,8 +10,25 @@ button_txt exit_setting_on(190,140,"退出",base_function_setting_on,CN);
 button_txt spectrum_setting(190,220,"频谱",base_function_setting,CN);
 button_txt spectrum_setting_on(190,220,"频谱",base_function_setting_on,CN);
 
-//画出设置界面
+//1.滑块的坐标和点击状态
+int sliderX=470;
+bool dragging = false;
+//2.MCI音量调节
+void setVloume(int v) {
+    //边界处理
+    if (v<0) v=0;
+    if (v>100) v=100;
+    volume=v;
+    //设置音量
+    char cmd[100];
+    sprintf(cmd, "setaudio myaudio volume to %d", v * 10);
+    mciSendString(cmd, NULL, 0, NULL);
+}
+
+//3.画出设置界面
 void drawSetting () {
+    IMAGE image;
+    loadimage(&image,"sources/image/audio_modes/btn_volume_on_down.png",40,40);
     setfillcolor(0x808080);
     BeginBatchDraw();
     solidroundrect(width_window/8,length_window/8,width_window-width_window/8,length_window-length_window/8,10,10);
@@ -31,7 +48,29 @@ void drawSetting () {
 
     //画出音乐音量条
     //负责人：凉雨
+    outtextxy(200,330,"音量:");
+
+    putimage(300, 330, &image);  //
+    // 绘制音量滑块轨道
+    rectangle(350, 350, 550, 355);
+
+    // 绘制填充部分（蓝色）
+    setfillcolor(RGB(38,120,255));
+    fillrectangle(350, 350, sliderX, 355);
+
+    // 绘制滑块
+    // // 2. 画白色内圆
+     setfillcolor(WHITE);
+     solidcircle(sliderX, 352.5, 8);
+    // 显示音量数值
+    char volText[20];
+    sprintf(volText, "%d%%", volume);
+    outtextxy(560, 335, volText);
 
     FlushBatchDraw();
+
+
+
     EndBatchDraw();
 }
+
