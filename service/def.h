@@ -41,6 +41,8 @@ inline PlayMode play_mode;
 //播放列表
 inline std::vector<Song>songs_list;
 
+
+
 //当前播放音乐的编号
 inline int index = 0;
 

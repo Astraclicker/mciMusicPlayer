@@ -2,41 +2,42 @@
 #include "../function/button.h"
 #include <easyx.h>
 #include "base.h"
+#include "drawPlayList.h"
 
 
-//ÉèÖÃ
+//è®¾ç½®
 button_img button_setting(24, 23, base_function, "sources/image/files_ui/btn_settings_down.png");
 button_img button_setting_on(24, 23, base_function, "sources/image/files_ui/btn_settings_hover.png");
-//²¥·Å
+//æ’­æ”¾
 button_img button_pause(607,720, base_function, "sources/image/control/btn_pause_norm.png");
 button_img button_pause_on(607,720, base_function, "sources/image/control/btn_pause_hover.png");
-//»ØÍË
+//å›é€€
 button_img button_backward(450,720, base_function, "sources/image/control/btn_backward_norm.png");
 button_img button_backward_on(450,720, base_function, "sources/image/control/btn_backward_hover.png");
-//¿ì½ø
+//å¿«è¿›
 button_img button_forward(802,720, base_function, "sources/image/control/btn_forward_norm.png");
 button_img button_forward_on(802,720, base_function, "sources/image/control/btn_forward_hover.png");
-//ÏÂÒ»Ê×
+//ä¸‹ä¸€é¦–
 button_img button_next(716,720, base_function, "sources/image/control/btn_next_norm.png");
 button_img button_next_on(716,720, base_function, "sources/image/control/btn_next_hover.png");
-//ÉÏÒ»Ê×
+//ä¸Šä¸€é¦–
 button_img button_previous(521,720, base_function, "sources/image/control/btn_prev_norm.png");
 button_img button_previous_on(521,720, base_function, "sources/image/control/btn_prev_hover.png");
-//Ë³Ğò²¥·Å
+//é¡ºåºæ’­æ”¾
 button_img button_all(369,720,base_function,"sources/image/audio_modes/btn_loop_all_down.png");
 button_img button_all_on(369,720,base_function,"sources/image/audio_modes/btn_loop_all_hover.png");
-//µ¥ÇúÑ­»·
+//å•æ›²å¾ªç¯
 button_img button_all_one(369,720,base_function,"sources/image/audio_modes/btn_loop_one_down.png");
 button_img button_all_one_on(369,720,base_function,"sources/image/audio_modes/btn_loop_one_hover.png");
-//Ëæ»ú²¥·Å
+//éšæœºæ’­æ”¾
 button_img button_random(369,720,base_function,"sources/image/audio_modes/btn_shuffle_down.png");
 button_img button_random_on(369,720,base_function,"sources/image/audio_modes/btn_shuffle_hover.png");
-//»­³öÖ÷½çÃæ
+//ç”»å‡ºä¸»ç•Œé¢
 void drawMain() {
     BeginBatchDraw();
     loadimage(NULL, bk_img.c_str());
 
-    //»­³ö°´Å¥
+    //ç”»å‡ºæŒ‰é’®
     if (button_setting.checkButton(msg.x, msg.y)) {
         button_setting_on.drawButton();
     } else {
@@ -97,6 +98,8 @@ void drawMain() {
             break;
 
     }
+    
+    draw_play_list(songs_list);
 
     FlushBatchDraw();
     EndBatchDraw();
