@@ -10,8 +10,15 @@
 constexpr int width_window =1280;
 constexpr int  length_window= 800;
 
-inline std::string music_path = "sources";  //音乐路径
-inline std::string bk_img = "sources/image/bk.png";//背景图片
+//专辑封面大小
+constexpr int width_album = 450;
+constexpr int length_album= 450;
+
+//音乐路径
+inline std::string music_path = "sources/music/";
+
+//背景图片
+inline std::string bk_img = "sources/image/bk.png";
 
 //播放方式
 enum class PlayMode {Sequence,Sing_Loop,Random};
