@@ -23,19 +23,16 @@ void draw_play_list(std::vector<Song> &songs_list) {
         bg_playlist_color,
         button_style::roundrect
     );
-    int gap = 5;
+    int gap = 2;
     int padding = 10;
 
     bg_playlist.drawButton();
 
     for (size_t i = 0; i < songs_list.size(); ++i) {
-
         int currentY = bg_playlist_y + padding + static_cast<int>(i) * (song_buttons_H + gap);
-
         if (currentY + song_buttons_H > bg_playlist_y + bg_playlist_H) {
             break;
         }
-
         button_txt* song_button = new button_txt(
             bg_playlist_x + 8,
             currentY,
@@ -46,7 +43,6 @@ void draw_play_list(std::vector<Song> &songs_list) {
             button_style::roundrect,
             songFont
         );
-
         song_buttons.push_back(song_button);
         song_button->drawButton();
     }
