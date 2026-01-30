@@ -10,7 +10,7 @@
 class Song {
 
     public:
-    int song_log;
+    int song_index;
     std::string song_name;
 
 };

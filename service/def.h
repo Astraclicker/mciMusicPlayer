@@ -7,9 +7,8 @@
 #include <vector>
 #include "Song.h"
 //窗口大小
-constexpr int wid =90;
-constexpr int width_window =1080;
-constexpr int  length_window= 720;
+constexpr int width_window =1280;
+constexpr int  length_window= 800;
 
 inline std::string music_path = "sources";  //音乐路径
 inline std::string bk_img = "sources/image/bk.png";//背景图片
@@ -43,7 +42,7 @@ inline PlayMode play_mode;
 inline std::vector<Song>songs_list;
 
 //当前播放音乐的编号
-inline int log = 0;
+inline int index = 0;
 
 //快进/快退指数
 inline  int play_argument = 5000;

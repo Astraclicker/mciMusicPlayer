@@ -10,15 +10,15 @@
 #include "../service/def.h"
 #include <vector>
 //播放/暂停音乐
-void play_music (std::vector<Song> &songs_list,int *log,playStatu play_statu);
+void play_music (std::vector<Song> &songs_list,int *index,playStatu play_statu);
 
 //播放下一曲/上一曲
-void play_NextMusic(std::vector<Song> &songs_list,int *log,PlayMode play_mode);
+void play_NextMusic(std::vector<Song> &songs_list,int *index,PlayMode play_mode);
 
 
 //快进/快退
-void play_music_argument(std::vector<Song> &songs_list,int log,int play_argument);
+void play_music_argument(std::vector<Song> &songs_list,int index,int play_argument);
 
 //快进/快退指数转换
-int change_argument(std::vector<Song> &songs_list,int log,int x);
+int change_argument(std::vector<Song> &songs_list,int index,int x);
 #endif

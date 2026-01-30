@@ -32,11 +32,11 @@ void start() {
                     cout<<"²¥·ÅÔİÍ£"<<endl;
                     switch (play_statu) {
                         case playStatu::play:
-                            play_music(songs_list,&log,playStatu::play);
+                            play_music(songs_list,&index,playStatu::play);
                             play_statu = playStatu::pause;
                             break;
                         case playStatu::pause:
-                            play_music(songs_list,&log,playStatu::pause);
+                            play_music(songs_list,&index,playStatu::pause);
                             play_statu = playStatu::play;
                             break;
                     }

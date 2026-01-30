@@ -5,32 +5,32 @@
 
 
 //设置
-button_img button_setting(30, 30, base_function, "sources/image/files_ui/btn_settings_down.png");
-button_img button_setting_on(30, 30, base_function, "sources/image/files_ui/btn_settings_hover.png");
+button_img button_setting(24, 23, base_function, "sources/image/files_ui/btn_settings_down.png");
+button_img button_setting_on(24, 23, base_function, "sources/image/files_ui/btn_settings_hover.png");
 //播放
-button_img button_pause(490, 650, base_function, "sources/image/control/btn_pause_norm.png");
-button_img button_pause_on(490, 650, base_function, "sources/image/control/btn_pause_hover.png");
+button_img button_pause(607,720, base_function, "sources/image/control/btn_pause_norm.png");
+button_img button_pause_on(607,720, base_function, "sources/image/control/btn_pause_hover.png");
 //回退
-button_img button_backward(490 - wid, 650, base_function, "sources/image/control/btn_backward_norm.png");
-button_img button_backward_on(490 - wid, 650, base_function, "sources/image/control/btn_backward_hover.png");
+button_img button_backward(450,720, base_function, "sources/image/control/btn_backward_norm.png");
+button_img button_backward_on(450,720, base_function, "sources/image/control/btn_backward_hover.png");
 //快进
-button_img button_forward(490 + wid, 650, base_function, "sources/image/control/btn_forward_norm.png");
-button_img button_forward_on(490 + wid, 650, base_function, "sources/image/control/btn_forward_hover.png");
+button_img button_forward(802,720, base_function, "sources/image/control/btn_forward_norm.png");
+button_img button_forward_on(802,720, base_function, "sources/image/control/btn_forward_hover.png");
 //下一首
-button_img button_next(490 + 2 * wid, 650, base_function, "sources/image/control/btn_next_norm.png");
-button_img button_next_on(490 + 2 * wid, 650, base_function, "sources/image/control/btn_next_hover.png");
+button_img button_next(716,720, base_function, "sources/image/control/btn_next_norm.png");
+button_img button_next_on(716,720, base_function, "sources/image/control/btn_next_hover.png");
 //上一首
-button_img button_previous(490 - wid * 2, 650, base_function, "sources/image/control/btn_prev_norm.png");
-button_img button_previous_on(490 - wid * 2, 650, base_function, "sources/image/control/btn_prev_hover.png");
+button_img button_previous(521,720, base_function, "sources/image/control/btn_prev_norm.png");
+button_img button_previous_on(521,720, base_function, "sources/image/control/btn_prev_hover.png");
 //顺序播放
-button_img button_all(490 + 3 * wid, 650,base_function,"sources/image/audio_modes/btn_loop_all_down.png");
-button_img button_all_on(490 + 3 * wid, 650,base_function,"sources/image/audio_modes/btn_loop_all_hover.png");
+button_img button_all(369,720,base_function,"sources/image/audio_modes/btn_loop_all_down.png");
+button_img button_all_on(369,720,base_function,"sources/image/audio_modes/btn_loop_all_hover.png");
 //单曲循环
-button_img button_all_one(490 + 3 * wid, 650,base_function,"sources/image/audio_modes/btn_loop_one_down.png");
-button_img button_all_one_on(490 + 3 * wid, 650,base_function,"sources/image/audio_modes/btn_loop_one_hover.png");
+button_img button_all_one(369,720,base_function,"sources/image/audio_modes/btn_loop_one_down.png");
+button_img button_all_one_on(369,720,base_function,"sources/image/audio_modes/btn_loop_one_hover.png");
 //随机播放
-button_img button_random(490 + 3 * wid, 650,base_function,"sources/image/audio_modes/btn_shuffle_down.png");
-button_img button_random_on(490 + 3 * wid, 650,base_function,"sources/image/audio_modes/btn_shuffle_hover.png");
+button_img button_random(369,720,base_function,"sources/image/audio_modes/btn_shuffle_down.png");
+button_img button_random_on(369,720,base_function,"sources/image/audio_modes/btn_shuffle_hover.png");
 //画出主界面
 void drawMain() {
     BeginBatchDraw();
