@@ -1,20 +1,18 @@
 #include "start.h"
-#include "view/drawPlayList.h"
-
+#include "service/StoW.h"
 int main() {
 
-    // songs_list.push_back({1, "告白气球 - 周杰伦"});
-    // songs_list.push_back({2, "残酷天使的行动纲领 (EVA)"}); // 嘿嘿，这首猫娘最喜欢了喵~
-    // songs_list.push_back({3, "Lemon - 米津玄師"});
-    // songs_list.push_back({4, "晴天 - Jay Chou"});
-    // songs_list.push_back({5, "大声ダイヤモンド"});
-    // songs_list.push_back({6, "那些年 - 胡夏"});
-    // songs_list.push_back({7, "夜に駆ける - YOASOBI"});
-    // songs_list.push_back({8, "平凡之路 - 朴树"});
-    // songs_list.push_back({9, "The Spectre - Alan Walker"});
-    // songs_list.push_back({10, "打上花火 - DAOKO × 米津玄師"});
-    //
-    // draw_play_list(songs_list);
+    //mci使用示例
+
+    //声明音乐路径
+    std::string music_address =music_path+"ちっちゃな私.mp3";
+
+    //声明播放命令（只要在音乐路径前加一个play 就行注意，注意，注意，这里的play后有一个空格，一定要加！！！）
+    std::string play_command = "play "+music_address;
+
+    //用mciSendStringW()函数，第一个参数写StoW(播放命令).c_str()
+    mciSendStringW(StoW(play_command).c_str(),NULL,0,NULL);
+
     start();
     return 0;
 }
