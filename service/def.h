@@ -47,3 +47,6 @@ inline int log = 0;
 
 //快进/快退指数
 inline  int play_argument = 5000;
+
+//音量大小
+inline int volume = 60;

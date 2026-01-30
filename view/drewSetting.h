@@ -29,6 +29,8 @@ void drawSetting () {
         spectrum_setting.drawButton();
     }
 
+    //画出音乐音量条
+    //负责人：凉雨
 
     FlushBatchDraw();
     EndBatchDraw();

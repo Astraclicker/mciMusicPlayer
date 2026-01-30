@@ -1,6 +1,8 @@
 /*
  *功能：
  *根据传入的vector数组和编号播放音乐
+ *负责人：
+ *111
  */
 
 #ifndef MCIMUSICPLAYER_PLAYMUSIC_H

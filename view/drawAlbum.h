@@ -1,5 +1,8 @@
 /*
+ *功能：
  *画出专辑封面
+ *负责人：
+ *叁拾
  */
 
 #ifndef MCIMUSICPLAYER_DRAWALBUM_H
