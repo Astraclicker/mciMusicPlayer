@@ -6,8 +6,8 @@
  */
 #ifndef MCIMUSICPLAYER_DRAWPLAYLIST_H
 #define MCIMUSICPLAYER_DRAWPLAYLIST_H
-#include <string>
 #include "../service/Song.h"
 #include <vector>
-void draw_play_list(std::vector<Song> &songs_list,int song_time);
+
+void draw_play_list(std::vector<Song> &songs_list);
 #endif
