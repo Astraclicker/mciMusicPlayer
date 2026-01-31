@@ -1,7 +1,7 @@
 /*
- *åŠŸèƒ½ï¼š
- *ç”»å‡ºå½“å‰æ’­æ”¾çš„è¿›åº¦æ¡
- *è´Ÿè´£äººï¼š
+ *¹¦ÄÜ£º
+ *»­³öµ±Ç°²¥·ÅµÄ½ø¶ÈÌõ
+ *¸ºÔðÈË£º
  *111
  */
 #ifndef MCIMUSICPLAYER_DRAWPLAYLINE_H

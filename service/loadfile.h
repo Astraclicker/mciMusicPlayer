@@ -1,8 +1,8 @@
 /*
- *åŠŸèƒ½ï¼š
- *å°†songs_addressåœ°å€ä¸‹çš„æ‰€æœ‰éŸ³ä¹æ–‡ä»¶ä¿å­˜åˆ°vectoræ•°ç»„ä¸­
- *åŒ…æ‹¬éŸ³ä¹ç¼–å·å’ŒéŸ³ä¹æ–‡ä»¶å
- *è´Ÿè´£äººï¼šç«è±†
+ *¹¦ÄÜ£º
+ *½«songs_addressµØÖ·ÏÂµÄËùÓÐÒôÀÖÎÄ¼þ±£´æµ½vectorÊý×éÖÐ
+ *°üÀ¨ÒôÀÖ±àºÅºÍÒôÀÖÎÄ¼þÃû
+ *¸ºÔðÈË£º»ð¶¹
  */
 #ifndef MCIMUSICPLAYER_LOADFILE_H
 #define MCIMUSICPLAYER_LOADFILE_H

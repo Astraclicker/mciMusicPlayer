@@ -1,8 +1,8 @@
 /*
- *åŠŸèƒ½ï¼š
- *ç”»å‡ºä¸“è¾‘å°é¢
- *è´Ÿè´£äººï¼š
- *åæ‹¾
+ *¹¦ÄÜ£º
+ *»­³ö×¨¼­·âÃæ
+ *¸ºÔðÈË£º
+ *ÈþÊ°
  */
 
 #ifndef MCIMUSICPLAYER_DRAWALBUM_H

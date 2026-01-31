@@ -1,20 +1,20 @@
 #include "playMusic.h"
-//æ’­æ”¾/æš‚åœéŸ³ä¹
+//²¥·Å/ÔİÍ£ÒôÀÖ
 void play_music (std::vector<Song> &songs_list,int *index,playStatu play_statu) {
 
 }
 
-//æ’­æ”¾ä¸‹ä¸€æ›²/ä¸Šä¸€æ›²
+//²¥·ÅÏÂÒ»Çú/ÉÏÒ»Çú
 void play_NextMusic(std::vector<Song> &songs_list,int *index,PlayMode play_mode) {
 
 }
 
-//å¿«è¿›/å¿«é€€
+//¿ì½ø/¿ìÍË
 void play_music_argument(std::vector<Song> &songs_list,int index,int play_argument) {
 
 }
 
-//å¿«è¿›/å¿«é€€æŒ‡æ•°è½¬æ¢
+//¿ì½ø/¿ìÍËÖ¸Êı×ª»»
 int change_argument(std::vector<Song> &songs_list,int index,int x) {
 
 }
