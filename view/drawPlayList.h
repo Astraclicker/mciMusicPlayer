@@ -1,8 +1,8 @@
 /*
- *åŠŸèƒ½ï¼š
- *åœ¨ä¸»ç•Œé¢æ‰“å°vectoræ•°ç»„å†…çš„éŸ³ä¹åç§°åˆ°ä¸»ç•Œé¢å·¦è¾¹
- *è´Ÿè´£äººï¼š
- *çŽ°å®žçš„å»¶ç»­
+ *¹¦ÄÜ£º
+ *ÔÚÖ÷½çÃæ´òÓ¡vectorÊý×éÄÚµÄÒôÀÖÃû³Æµ½Ö÷½çÃæ×ó±ß
+ *¸ºÔðÈË£º
+ *ÏÖÊµµÄÑÓÐø
  */
 #ifndef MCIMUSICPLAYER_DRAWPLAYLIST_H
 #define MCIMUSICPLAYER_DRAWPLAYLIST_H

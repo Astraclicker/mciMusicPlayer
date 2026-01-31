@@ -5,7 +5,7 @@
 
 void draw_play_list(std::vector<Song> &songs_list) {
     std::vector<button_txt*> song_buttons;
-    txt songFont(18, 8, 0x333333, "å¾®è½¯é›…é»‘");
+    txt songFont(18, 8, 0x333333, "Î¢ÈíÑÅºÚ");
 
     int bg_playlist_x = 952;
     int bg_playlist_y = 164;

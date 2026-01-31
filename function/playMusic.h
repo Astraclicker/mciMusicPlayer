@@ -1,7 +1,7 @@
 /*
- *åŠŸèƒ½ï¼š
- *æ ¹æ®ä¼ å…¥çš„vectoræ•°ç»„å’Œç¼–å·æ’­æ”¾éŸ³ä¹
- *è´Ÿè´£äººï¼š
+ *¹¦ÄÜ£º
+ *¸ù¾İ´«ÈëµÄvectorÊı×éºÍ±àºÅ²¥·ÅÒôÀÖ
+ *¸ºÔğÈË£º
  *111
  */
 
@@ -9,16 +9,16 @@
 #define MCIMUSICPLAYER_PLAYMUSIC_H
 #include "../service/def.h"
 #include <vector>
-//æ’­æ”¾/æš‚åœéŸ³ä¹
+//²¥·Å/ÔİÍ£ÒôÀÖ
 void play_music (std::vector<Song> &songs_list,int *index,playStatu play_statu);
 
-//æ’­æ”¾ä¸‹ä¸€æ›²/ä¸Šä¸€æ›²
+//²¥·ÅÏÂÒ»Çú/ÉÏÒ»Çú
 void play_NextMusic(std::vector<Song> &songs_list,int *index,PlayMode play_mode);
 
 
-//å¿«è¿›/å¿«é€€
+//¿ì½ø/¿ìÍË
 void play_music_argument(std::vector<Song> &songs_list,int index,int play_argument);
 
-//å¿«è¿›/å¿«é€€æŒ‡æ•°è½¬æ¢
+//¿ì½ø/¿ìÍËÖ¸Êı×ª»»
 int change_argument(std::vector<Song> &songs_list,int index,int x);
 #endif
