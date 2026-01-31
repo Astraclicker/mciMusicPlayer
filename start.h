@@ -5,7 +5,7 @@
 #include "view/drewSetting.h"
 #include "service/def.h"
 #include <iostream>
-
+#include "view/drawPlayList.h"
 #include "function/playMusic.h"
 using std::cout;
 using std::endl;
@@ -14,6 +14,8 @@ void start() {
     condition = statu::main;
     play_statu = playStatu::play;
     play_mode = PlayMode::Sequence;
+    defalt_playlist.reload(songs_list);// 播放列表测试使用
+
     while (true) {
         switch (condition) {
             case statu::main:
@@ -76,9 +78,18 @@ void start() {
                             play_mode = PlayMode::Sequence;
                             break;
                     }
-
-
                 }
+                if (msg.x > bg_playlist_x && msg.x < bg_playlist_x +  bg_playlist_W &&
+                    msg.y > bg_playlist_y && msg.y < bg_playlist_y + bg_playlist_H) {
+                    if (msg.message == WM_MOUSEWHEEL) {
+                        defalt_playlist.update_song_buttons(msg.wheel);
+                    }
+                    if (msg.message == WM_LBUTTONDOWN) {
+                        int index = defalt_playlist.is_clisk_button(msg.x,msg.y);
+                        cout<<index<<endl;
+                    }
+                }
+
                 break;
 
 

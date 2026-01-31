@@ -98,8 +98,8 @@ void drawMain() {
             break;
 
     }
-    
-    draw_play_list(songs_list);
+
+    defalt_playlist.draw();
 
     FlushBatchDraw();
     EndBatchDraw();
