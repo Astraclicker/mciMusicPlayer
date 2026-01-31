@@ -110,7 +110,7 @@ void start() {
                     if (sliderX > 550) sliderX = 550;
 
                     // 计算新音量
-                    int newVolume = (sliderX - 350) / 2;
+                    int newVolume = (sliderX - 350) *100/ 200;
                     if (newVolume != volume) {
                         // 设置新音量
                         setVloume(newVolume);
