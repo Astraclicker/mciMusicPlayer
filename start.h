@@ -20,12 +20,12 @@ void start() {
         switch (condition) {
             case statu::main:
                 flushmessage();
-                drawMain();
+                drawMain();//打印主菜单 初始化按钮 鼠标悬停改变按钮样式
                 getmessage(&msg);
                 //单击设置
                 if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
                     cout<<"设置"<<endl;
-                    condition = statu::setting;
+                    condition = statu::setting;//改变状态器 为设置界面
                     flushmessage(EX_MOUSE);
                 }
 
@@ -33,12 +33,12 @@ void start() {
                 if (msg.message == WM_LBUTTONDOWN && button_pause.checkButton(msg.x, msg.y)) {
                     cout<<"播放暂停"<<endl;
                     switch (play_statu) {
-                        case playStatu::play:
-                            play_music(songs_list,&index,playStatu::play);
-                            play_statu = playStatu::pause;
+                        case playStatu::play://播放
+                            play_music(songs_list,&index,playStatu::play);//传入当前音乐检索 状态运行
+                            play_statu = playStatu::pause;  //将状态改为暂停
                             break;
-                        case playStatu::pause:
-                            play_music(songs_list,&index,playStatu::pause);
+                        case playStatu::pause://暂停
+                            play_music(songs_list,&index,playStatu::pause);//同理
                             play_statu = playStatu::play;
                             break;
                     }
@@ -47,6 +47,8 @@ void start() {
 
                 //单击回退
                 if (msg.message == WM_LBUTTONDOWN && button_backward.checkButton(msg.x, msg.y)) {
+
+
                     cout<<"回退"<<endl;
                 }
 
@@ -107,6 +109,20 @@ void start() {
                     if (spectrum_setting.checkButton(msg.x,msg.y)) {
                         system("start sources/cava/cava.exe");
                     }
+                    if (vol.checkButton(msg.x,msg.y)) {
+                        switch (vol_flag) {//根据值 改变play_mode的状态
+                            case true:
+                                setVloume(0);
+                                sliderX = 350;
+                                vol_flag=false;
+                                break;
+                            case false:
+                                setVloume(50);
+                                sliderX = 400;
+                                vol_flag=true;
+                                break;
+                        }
+                    }
                     if (msg.x >= 350 && msg.x <= 550 &&
                         msg.y >= 350 && msg.y <= 355) {
                         dragging = true;
@@ -117,7 +133,8 @@ void start() {
                 }else if (msg.message == WM_MOUSEMOVE&&dragging) {
                     // 拖动滑块
                     sliderX = msg.x;
-                    if (sliderX < 350) sliderX = 350;
+                    vol_flag=true;
+                    if (sliderX < 350) sliderX = 350,vol_flag=false;
                     if (sliderX > 550) sliderX = 550;
 
                     // 计算新音量

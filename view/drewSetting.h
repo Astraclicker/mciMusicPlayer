@@ -11,12 +11,13 @@ button_txt spectrum_setting(190,220,"频谱",base_function_setting,CN);
 button_txt spectrum_setting_on(190,220,"频谱",base_function_setting_on,CN);
 //音量
 button_img vol(300,330,base_vol,"sources/image/audio_modes/btn_volume_on_down.png");
-button_img vol_on(300,330,base_vol_on,"sources/image/audio_modes/btn_volume_on_down.png");
+button_img vol_on(300,330,base_vol_on,"sources/image/audio_modes/btn_mute_down.png");//btn_mute_down
 
 //1.滑块的坐标和点击状态
 std::string deviceName="myaudio";
 int sliderX=470;
-bool dragging = false;
+bool dragging = true;
+bool vol_flag = true;
 //2.MCI音量调节
 void setVloume(int v) {
     //边界处理
@@ -47,12 +48,27 @@ void drawSetting () {
     }else {
         spectrum_setting.drawButton();
     }
-
-    if (vol.checkButton(msg.x,msg.y)) {
-       vol_on.drawButton();
-    }else {
-        vol.drawButton();
+    switch (vol_flag) {//根据值 改变play_mode的状态
+        case true:
+            if (vol_on.checkButton(msg.x,msg.y)) {
+                vol_on.drawButton();
+            }else {
+                vol.drawButton();
+            }
+            break;
+        case false:
+            if (vol.checkButton(msg.x,msg.y)) {
+                vol.drawButton();
+            }else {
+                vol_on.drawButton();
+            }
+            break;
     }
+    // if (vol.checkButton(msg.x,msg.y)) {
+    //    vol_on.drawButton();
+    // }else {
+    //     vol.drawButton();
+    // }
     //画出音乐音量条
     //负责人：凉雨
     outtextxy(200,340,"音量:");
