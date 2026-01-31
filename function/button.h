@@ -46,6 +46,8 @@ public:
     button_txt(int x,int y,std::string text,const button & b_obj,const txt &t_obj);
     void drawButton();
     bool checkButton(int x,int y);
+    int get_y();
+    void set_y(int new_y);
 };
 //内部填充图片的按钮
 class button_img :public button{
