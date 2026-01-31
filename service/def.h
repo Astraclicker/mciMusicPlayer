@@ -65,3 +65,4 @@ inline int bg_playlist_y = 164;
 inline int bg_playlist_W = 316;
 inline int bg_playlist_H = 465;
 inline int song_buttons_H = 30;
+

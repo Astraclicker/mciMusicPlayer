@@ -9,6 +9,9 @@
 button_img button_setting(24, 23, base_function, "sources/image/files_ui/btn_settings_down.png");
 button_img button_setting_on(24, 23, base_function, "sources/image/files_ui/btn_settings_hover.png");
 //播放
+button_img button_play (607,720,base_function,"sources/image/control/btn_play_norm.png");
+button_img button_play_on (607,720,base_function,"sources/image/control/btn_play_hover.png");
+//暂停
 button_img button_pause(607,720, base_function, "sources/image/control/btn_pause_norm.png");
 button_img button_pause_on(607,720, base_function, "sources/image/control/btn_pause_hover.png");
 //回退
@@ -44,12 +47,22 @@ void drawMain() {
         button_setting.drawButton();
     }
 
-    if (button_pause.checkButton(msg.x, msg.y)) {
-        button_pause_on.drawButton();
-    } else {
-        button_pause.drawButton();
+    switch (play_statu) {
+        case playStatu::pause :
+            if (button_pause.checkButton(msg.x, msg.y)) {
+                button_pause_on.drawButton();
+            } else {
+                button_pause.drawButton();
+            }
+            break;
+        case playStatu::play :
+            if (button_play.checkButton(msg.x, msg.y)) {
+                button_play_on.drawButton();
+            } else {
+                button_play.drawButton();
+            }
+            break;
     }
-
     if (button_backward.checkButton(msg.x, msg.y)) {
         button_backward_on.drawButton();
     } else {

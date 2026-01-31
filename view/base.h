@@ -11,6 +11,7 @@ inline button base_function_setting(50,70,0x808080,button_style::roundrect);
 inline button base_vol(40,40,0x808080,button_style::roundrect);
 inline button base_vol_on(40,40,WHITE,button_style::roundrect);
 inline button base_function_setting_on(50,70,WHITE,button_style::roundrect);
+inline button base_setting (length_window-length_window/4,width_window-width_window/4,0x808080,button_style::roundrect);
 //构建文本类
 inline txt CN(0, 0, 0xd4a74c, "FZCuYuan-M03");
 inline std::vector<button_txt*> song_buttons;

@@ -9,8 +9,11 @@
 #define MCIMUSICPLAYER_PLAYMUSIC_H
 #include "../service/def.h"
 #include <vector>
-//播放/暂停音乐
-void play_music (std::vector<Song> &songs_list,int *index,playStatu play_statu);
+//暂停/播放控件
+void control_music (playStatu);
+
+//播放音乐
+void play_music (std::vector<Song> &songs_list,int *index);
 
 //播放下一曲/上一曲
 void play_NextMusic(std::vector<Song> &songs_list,int *index,PlayMode play_mode);

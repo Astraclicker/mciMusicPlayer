@@ -12,6 +12,6 @@ class Song {
     public:
     int song_index;
     std::string song_name;
-
+    int song_time;
 };
 #endif //MCIMUSICPLAYER_SONG_H

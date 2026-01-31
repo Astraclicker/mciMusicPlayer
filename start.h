@@ -7,73 +7,73 @@
 #include <iostream>
 #include "view/drawPlayList.h"
 #include "function/playMusic.h"
+#include "service/loadfile.h"
 using std::cout;
 using std::endl;
+
 void start() {
     initgraph(width_window, length_window);
     condition = statu::main;
     play_statu = playStatu::play;
     play_mode = PlayMode::Sequence;
-    defalt_playlist.reload(songs_list);// 播放列表测试使用
+    load_file(music_path, songs_list);
+    defalt_playlist.reload(songs_list); // 播放列表测试使用
 
     while (true) {
         switch (condition) {
             case statu::main:
                 flushmessage();
-                drawMain();//打印主菜单 初始化按钮 鼠标悬停改变按钮样式
+                drawMain(); //打印主菜单 初始化按钮 鼠标悬停改变按钮样式
                 getmessage(&msg);
                 //单击设置
                 if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
-                    cout<<"设置"<<endl;
-                    condition = statu::setting;//改变状态器 为设置界面
+                    cout << "设置" << endl;
+                    condition = statu::setting; //改变状态器 为设置界面
                     flushmessage(EX_MOUSE);
                 }
 
                 //单击暂停/播放
                 if (msg.message == WM_LBUTTONDOWN && button_pause.checkButton(msg.x, msg.y)) {
-                    cout<<"播放暂停"<<endl;
+                    cout << "播放暂停" << endl;
                     switch (play_statu) {
-                        case playStatu::play://播放
-                            play_music(songs_list,&index,playStatu::play);//传入当前音乐检索 状态运行
-                            play_statu = playStatu::pause;  //将状态改为暂停
+                        case playStatu::play: //播放
+                            control_music(playStatu::pause);
+                            play_statu = playStatu::pause; //将状态改为暂停
                             break;
-                        case playStatu::pause://暂停
-                            play_music(songs_list,&index,playStatu::pause);//同理
+                        case playStatu::pause: //暂停
+                            control_music(playStatu::play);
                             play_statu = playStatu::play;
                             break;
                     }
-
                 }
 
                 //单击回退
                 if (msg.message == WM_LBUTTONDOWN && button_backward.checkButton(msg.x, msg.y)) {
-
-
-                    cout<<"回退"<<endl;
+                    cout << "回退" << endl;
                 }
 
                 //单击快进
-                if (msg.message == WM_LBUTTONDOWN && button_forward.checkButton(msg.x,msg.y)) {
-                    cout<<"快进"<<endl;
+                if (msg.message == WM_LBUTTONDOWN && button_forward.checkButton(msg.x, msg.y)) {
+                    cout << "快进" << endl;
                 }
 
                 //单击上一曲
-                if (msg.message == WM_LBUTTONDOWN && button_previous.checkButton(msg.x,msg.y)) {
-                    cout<<"上一曲"<<endl;
+                if (msg.message == WM_LBUTTONDOWN && button_previous.checkButton(msg.x, msg.y)) {
+                    cout << "上一曲" << endl;
                 }
 
                 //单击下一曲
-                if (msg.message == WM_LBUTTONDOWN && button_next.checkButton(msg.x,msg.y)) {
-                    cout<<"下一曲"<<endl;
+                if (msg.message == WM_LBUTTONDOWN && button_next.checkButton(msg.x, msg.y)) {
+                    cout << "下一曲" << endl;
                 }
 
                 //单击播放模式切换
-                if (msg.message == WM_LBUTTONDOWN && button_all_on.checkButton(msg.x,msg.y)) {
+                if (msg.message == WM_LBUTTONDOWN && button_all_on.checkButton(msg.x, msg.y)) {
                     switch (play_mode) {
                         case PlayMode::Random:
                             play_mode = PlayMode::Sing_Loop;
                             break;
-                        case PlayMode::Sequence :
+                        case PlayMode::Sequence:
                             play_mode = PlayMode::Random;
                             break;
                         case PlayMode::Sing_Loop:
@@ -81,14 +81,14 @@ void start() {
                             break;
                     }
                 }
-                if (msg.x > bg_playlist_x && msg.x < bg_playlist_x +  bg_playlist_W &&
+                if (msg.x > bg_playlist_x && msg.x < bg_playlist_x + bg_playlist_W &&
                     msg.y > bg_playlist_y && msg.y < bg_playlist_y + bg_playlist_H) {
                     if (msg.message == WM_MOUSEWHEEL) {
                         defalt_playlist.update_song_buttons(msg.wheel);
                     }
                     if (msg.message == WM_LBUTTONDOWN) {
-                        int index = defalt_playlist.is_clisk_button(msg.x,msg.y);
-                        cout<<index<<endl;
+                        int index = defalt_playlist.is_clisk_button(msg.x, msg.y);
+                        cout << index << endl;
                     }
                 }
 
@@ -99,27 +99,27 @@ void start() {
 
                 drawSetting();
                 getmessage(&msg);
-
                 if (msg.message == WM_LBUTTONDOWN) {
-                    cout<<msg.x<<"||"<<msg.y<<endl;
+                    cout << msg.x << "||" << msg.y << endl;
 
-                    if (exit_setting.checkButton(msg.x,msg.y)) {
+                    if (exit_setting.checkButton(msg.x, msg.y)) {
                         condition = statu::main;
                     }
-                    if (spectrum_setting.checkButton(msg.x,msg.y)) {
+                    if (spectrum_setting.checkButton(msg.x, msg.y)) {
                         system("start sources/cava/cava.exe");
                     }
-                    if (vol.checkButton(msg.x,msg.y)) {
-                        switch (vol_flag) {//根据值 改变play_mode的状态
+                    if (volOn.checkButton(msg.x, msg.y)) {
+                        switch (vol_flag) {
+                            //根据值 改变play_mode的状态
                             case true:
                                 setVloume(0);
                                 sliderX = 350;
-                                vol_flag=false;
+                                vol_flag = false;
                                 break;
                             case false:
                                 setVloume(50);
                                 sliderX = 400;
-                                vol_flag=true;
+                                vol_flag = true;
                                 break;
                         }
                     }
@@ -127,29 +127,30 @@ void start() {
                         msg.y >= 350 && msg.y <= 355) {
                         dragging = true;
                     }
-                }
-                else if (msg.message == WM_LBUTTONUP) {
-                    dragging=false;
-                }else if (msg.message == WM_MOUSEMOVE&&dragging) {
+                } else if (msg.message == WM_LBUTTONUP) {
+                    dragging = false;
+                } else if (msg.message == WM_MOUSEMOVE && dragging) {
                     // 拖动滑块
                     sliderX = msg.x;
-                    vol_flag=true;
-                    if (sliderX < 350) sliderX = 350,vol_flag=false;
+                    vol_flag = true;
+                    if (sliderX < 350) sliderX = 350, vol_flag = false;
                     if (sliderX > 550) sliderX = 550;
 
                     // 计算新音量
-                    int newVolume = (sliderX - 350) *100/ 200;
+                    int newVolume = (sliderX - 350) * 100 / 200;
                     if (newVolume != volume) {
                         // 设置新音量
                         setVloume(newVolume);
                     }
                 }
+                if (!setting.checkButton(msg.x, msg.y)) {
+                    if (msg.message == WM_LBUTTONDOWN) {
+                        condition = statu::main;
+                    }
+                }
                 flushmessage();
                 break;
-
-
         }
     }
-
 }
 #endif
