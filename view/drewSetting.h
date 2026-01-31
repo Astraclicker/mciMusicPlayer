@@ -14,6 +14,7 @@ button_img vol(300,330,base_vol,"sources/image/audio_modes/btn_volume_on_down.pn
 button_img vol_on(300,330,base_vol_on,"sources/image/audio_modes/btn_volume_on_down.png");
 
 //1.滑块的坐标和点击状态
+std::string deviceName="myaudio";
 int sliderX=470;
 bool dragging = false;
 //2.MCI音量调节
@@ -24,7 +25,7 @@ void setVloume(int v) {
     volume=v;
     //设置音量
     char cmd[100];
-    sprintf(cmd, "setaudio myaudio volume to %d", v * 10);
+    sprintf(cmd, "setaudio %s volume to %d",deviceName.c_str() ,v * 10);
     mciSendString(cmd, NULL, 0, NULL);
 }
 

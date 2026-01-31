@@ -1,17 +1,19 @@
 #include "start.h"
 #include "service/StoW.h"
+#include "view/drewSetting.h"
 int main() {
 
-    //mciä½¿ç”¨ç¤ºä¾‹
+    //mciÊ¹ÓÃÊ¾Àı
 
-    //å£°æ˜éŸ³ä¹è·¯å¾„
-    std::string music_address =music_path+"ã¡ã£ã¡ã‚ƒãªç§.mp3";
+    //ÉùÃ÷ÒôÀÖÂ·¾¶
+    std::string music_address =music_path+"¤Á¤Ã¤Á¤ã¤ÊË½.mp3";
+    std::string cmd = "open \"" + music_address + "\" alias " + deviceName;
+    mciSendString(cmd.c_str(), NULL, 0, NULL);
+    //ÉùÃ÷²¥·ÅÃüÁî£¨Ö»ÒªÔÚÒôÀÖÂ·¾¶Ç°¼ÓÒ»¸öplay ¾ÍĞĞ×¢Òâ£¬×¢Òâ£¬×¢Òâ£¬ÕâÀïµÄplayºóÓĞÒ»¸ö¿Õ¸ñ£¬Ò»¶¨Òª¼Ó£¡£¡£¡£©
+    std::string play_command = "play "+deviceName;
 
-    //å£°æ˜æ’­æ”¾å‘½ä»¤ï¼ˆåªè¦åœ¨éŸ³ä¹è·¯å¾„å‰åŠ ä¸€ä¸ªplay å°±è¡Œæ³¨æ„ï¼Œæ³¨æ„ï¼Œæ³¨æ„ï¼Œè¿™é‡Œçš„playåæœ‰ä¸€ä¸ªç©ºæ ¼ï¼Œä¸€å®šè¦åŠ ï¼ï¼ï¼ï¼‰
-    std::string play_command = "play "+music_address;
-
-    //ç”¨mciSendStringW()å‡½æ•°ï¼Œç¬¬ä¸€ä¸ªå‚æ•°å†™StoW(æ’­æ”¾å‘½ä»¤).c_str()
-    mciSendStringW(StoW(play_command).c_str(),NULL,0,NULL);
+    //ÓÃmciSendStringW()º¯Êı£¬µÚÒ»¸ö²ÎÊıĞ´StoW(²¥·ÅÃüÁî).c_str()
+    mciSendString(play_command.c_str(),NULL,0,NULL);
 
     start();
     return 0;
