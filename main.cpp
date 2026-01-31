@@ -1,6 +1,7 @@
 #include "start.h"
 #include "view/drewSetting.h"
 int main() {
+
     //ÉùÃ÷ÒôÀÖÂ·¾¶
     std::string music_address =music_path+"¤Á¤Ã¤Á¤ã¤ÊË½.mp3";
     std::string cmd = "open \"" + music_address + "\" alias " + deviceName;
