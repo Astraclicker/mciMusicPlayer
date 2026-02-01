@@ -14,7 +14,7 @@ using std::endl;
 void start() {
     initgraph(width_window, length_window);
     condition = statu::main;
-    play_statu = playStatu::pause;
+    play_statu = playStatu::play;
     play_mode = PlayMode::Sequence;
     load_file(music_path, songs_list);
     defalt_playlist.reload(songs_list); // 播放列表测试使用
@@ -36,16 +36,6 @@ void start() {
                 if (msg.message == WM_LBUTTONDOWN && button_pause.checkButton(msg.x, msg.y)) {
                     cout << "播放暂停" << endl;
                     control_music(play_statu);
-                    // switch (play_statu) {
-                    //     case playStatu::play: //播放
-                    //         control_music(play_statu);
-                    //
-                    //         break;
-                    //     case playStatu::pause: //暂停
-                    //         control_music(play_statu);
-                    //
-                    //         break;
-                    // }
                 }
 
                 //单击回退
