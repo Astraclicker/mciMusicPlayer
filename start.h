@@ -96,11 +96,11 @@ void start() {
                         {
                             unsigned long currentLClickTime = GetTickCount();
                             if (currentLClickTime - lastLClickTime < 500) {
-                                int index = my_play_list_controller.handle_click(msg.x, msg.y, false);
-                                if (index != -1) {
-                                    std::string path = my_play_list_controller.get_current_song_path(index);
+                                // L_click_index是song对象里面存储的index
+                                int L_click_index = my_play_list_controller.handle_click(msg.x, msg.y, false);
+                                if (L_click_index != -1) {
                                     // 播放歌曲可以在这里调用获取到的音乐路径播放歌曲
-                                    cout << "双击左键播放：" << path << endl;
+                                   play_music(L_click_index);
                                 }
                                 lastLClickTime = 0;
                             } else {
@@ -113,9 +113,13 @@ void start() {
                         {
                             unsigned long currentRClickTime = GetTickCount();
                             if (currentRClickTime - lastRClickTime < 500) {
-                                int index = my_play_list_controller.handle_click(msg.x, msg.y, true);
-                                std::string path = my_play_list_controller.get_current_song_path(index);
-                                cout << "双击右键将" << path << "从播放列表中移除出去" << endl;
+                                int R_click_index = my_play_list_controller.handle_click(msg.x, msg.y, true);
+                                int current_playlist_index = my_play_list_controller.get_current_playlist_index();
+                                if (current_playlist_index == 1) {
+                                    if (R_click_index >= 0 && R_click_index < songs_list.size()) {
+                                        songs_list.erase(songs_list.begin() + R_click_index);
+                                    }
+                                }
                                 lastRClickTime = 0;
                             } else {
                                 lastRClickTime = currentRClickTime;

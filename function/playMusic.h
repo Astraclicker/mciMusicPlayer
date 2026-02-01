@@ -15,7 +15,7 @@ void control_music (playStatu& status);
 
 void play_music (int newindex);
 
-//播放下一曲/上一曲
+// //播放下一曲/上一曲
 void play_NextMusic();
 void play_PreviousMusic();
 
