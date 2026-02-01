@@ -28,17 +28,17 @@ void load_file(std::string songs_address,std::vector<Song> &songs_list) {
         std::string temp = entry.path().string();
         std::string back = temp.substr(temp.size() - 3);
         if (back == name1 || back == name2) {
-            std::string name = temp.substr(music_path.size(), temp.size() - music_path.size());
+            std::string name = temp.substr(music_path.size(), temp.size() - music_path.size() - back.size()-1);
             char length[64];
-            std::string cmd = "status "+songs_address+STRtoANSI(name)+" length";
+            std::string cmd = "status "+songs_address+STRtoANSI(name)+"."+STRtoANSI(back)+" length";
             mciSendString(cmd.c_str(), length, sizeof(length), NULL);
             int total_ms = atoi(length);
-            songs_list.push_back({n,STRtoANSI(name),total_ms});
+            songs_list.push_back({n,STRtoANSI(name),songs_address+STRtoANSI(name)+"."+STRtoANSI(back),total_ms});
             n++;
         }
     }
     //¥Ú”°≤‚ ‘
     for (auto i : songs_list) {
-        std::cout<<i.song_index<<"||"<<i.song_name<<"||"<<i.song_time<<std::endl;
+        std::cout<<i.song_index<<"||"<<i.song_name<<"||"<<i.song_address<<"||"<<i.song_time<<std::endl;
     }
 }
