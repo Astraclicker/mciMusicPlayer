@@ -49,17 +49,17 @@ void drawMain() {
 
     switch (play_statu) {
         case playStatu::pause :
-            if (button_pause.checkButton(msg.x, msg.y)) {
-                button_pause_on.drawButton();
-            } else {
-                button_pause.drawButton();
-            }
-            break;
-        case playStatu::play :
             if (button_play.checkButton(msg.x, msg.y)) {
                 button_play_on.drawButton();
             } else {
                 button_play.drawButton();
+            }
+            break;
+        case playStatu::play :
+            if (button_pause.checkButton(msg.x, msg.y)) {
+                button_pause_on.drawButton();
+            } else {
+                button_pause.drawButton();
             }
             break;
     }
