@@ -47,7 +47,9 @@ public:
     void drawButton();
     bool checkButton(int x,int y);
     int get_y();
+    int get_x();
     void set_y(int new_y);
+    void set_x(int new_x);
 };
 //内部填充图片的按钮
 class button_img :public button{
