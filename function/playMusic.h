@@ -13,12 +13,11 @@
 
 void control_music (playStatu& status);
 
-//播放音乐
-void play_music (std::vector<Song> &songs_list,int *index);
+void play_music (int newindex);
 
 //播放下一曲/上一曲
-void play_NextMusic(std::vector<Song> &songs_list,int *index,PlayMode play_mode);
-
+void play_NextMusic();
+void play_PreviousMusic();
 
 //快进/快退
 void play_music_argument(std::vector<Song> &songs_list,int index,int play_argument);
