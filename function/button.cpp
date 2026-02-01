@@ -106,6 +106,12 @@ bool button_txt::checkButton(int x, int y) {
     return false;
 }
 
+int button_txt::get_y() {
+    return y;
+}
+void button_txt::set_y(int new_y) {
+    this->y = new_y;
+}
 
 //构造图片按钮
 button_img::button_img(int x, int y, int length, int width, int color, button_style b_style,

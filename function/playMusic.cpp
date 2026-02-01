@@ -1,7 +1,17 @@
 #include "playMusic.h"
-//播放/暂停音乐
-void play_music (std::vector<Song> &songs_list,int *index,playStatu play_statu) {
 
+//暂停/播放控件
+void control_music (playStatu) {
+    switch (play_statu) {
+        case playStatu::pause:
+            break;
+        case playStatu::play :
+            break;
+    }
+}
+
+//播放音乐
+void play_music (std::vector<Song> &songs_list,int *index) {
 }
 
 //播放下一曲/上一曲
