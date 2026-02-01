@@ -52,11 +52,13 @@ void start() {
 
                 //单击上一曲
                 if (msg.message == WM_LBUTTONDOWN && button_previous.checkButton(msg.x, msg.y)) {
+                    play_PreviousMusic();
                     cout << "上一曲" << endl;
                 }
 
                 //单击下一曲
                 if (msg.message == WM_LBUTTONDOWN && button_next.checkButton(msg.x, msg.y)) {
+                    play_NextMusic();
                     cout << "下一曲" << endl;
                 }
 

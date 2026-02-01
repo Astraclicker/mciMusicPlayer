@@ -35,7 +35,7 @@ int main() {
 // songs_list.push_back({39, "起风了 - 买辣椒也用券", "./music/起风了.mp3", 0});
 // songs_list.push_back({40, "遇见 - 孙燕姿", "./music/遇见.mp3", 0});
     //声明音乐路径
-    std::string music_address =music_path+"ちっちゃな私.mp3";
+    std::string music_address =music_path+"always online.mp3";
 
     //声明打开命令
     std::string open_command = "open \"" + music_address + "\" alias " + deviceName;
