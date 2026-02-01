@@ -122,6 +122,12 @@ void playlist::draw() {
     setlinecolor(last_line);
 }
 
+int playlist::get_songs_list_index(int clicked_song_index) {
+    return playlist_songs[clicked_song_index].song.song_index;
+}
+
+
+
 int playlist::is_click_button(int x, int y) {
     if (x < bg_playlist_x || x > bg_playlist_x + bg_playlist_W ||
         y < bg_playlist_y || y > bg_playlist_y + bg_playlist_H) {
@@ -133,22 +139,22 @@ int playlist::is_click_button(int x, int y) {
     return -1;
 }
 
-void playlist::delete_song_from_current_playlist(int index) {
-    if (index < 0 || index >= playlist_songs.size()) return;
+void playlist::delete_song_from_current_playlist(int current_song_index) {
+    if (current_song_index < 0 || current_song_index >= playlist_songs.size()) return;
 
-    int current_y = playlist_songs[index].playlist_button->get_y();
-    delete playlist_songs[index].playlist_button;
-    playlist_songs.erase(playlist_songs.begin() + index);
+    int current_y = playlist_songs[current_song_index].playlist_button->get_y();
+    delete playlist_songs[current_song_index].playlist_button;
+    playlist_songs.erase(playlist_songs.begin() + current_song_index);
     
-    for (int i = index; i < playlist_songs.size(); i++) {
+    for (int i = current_song_index; i < playlist_songs.size(); i++) {
         playlist_songs[i].playlist_button->set_y(current_y);
         current_y += song_button_H + song_button_gap;
     }
 }
 
-std::string playlist::get_song_address(int index) {
-    if (index >= 0 && index < playlist_songs.size()) {
-        return playlist_songs[index].song.song_address;
+std::string playlist::get_song_address(int current_song_index) {
+    if (current_song_index >= 0 && current_song_index < playlist_songs.size()) {
+        return playlist_songs[current_song_index].song.song_address;
     }
     return "";
 }
@@ -303,9 +309,10 @@ int play_list_controller::handle_click(int x, int y, bool is_right_click) {
                 if (is_right_click) {
                     cout << "Removing song " << song_idx << " from list " << current_playlist_index << endl;
                     current_list->delete_song_from_current_playlist(song_idx);
-                    return -1;
-                } else {
                     return song_idx;
+                }else {
+                    // 双击左键返回song里面的index
+                    return current_list->get_songs_list_index(song_idx);
                 }
             }
         }
@@ -365,10 +372,10 @@ void play_list_controller::draw_all() {
     DeleteObject(hRgn);
 }
 
-std::string play_list_controller::get_current_song_path(int index) {
+std::string play_list_controller::get_current_song_path(int current_song_index) {
     if (current_playlist_index > 0 && current_playlist_index < tabs.size()) {
         if (tabs[current_playlist_index].list_obj) {
-            return tabs[current_playlist_index].list_obj->get_song_address(index);
+            return tabs[current_playlist_index].list_obj->get_song_address(current_song_index);
         }
     }
     return "";

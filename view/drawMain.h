@@ -3,7 +3,7 @@
 #include <easyx.h>
 #include "base.h"
 #include "drawPlayList.h"
-
+#include "drawAlbum.h"
 
 //设置
 button_img button_setting(24, 23, base_function, "sources/image/files_ui/btn_settings_down.png");
@@ -117,7 +117,7 @@ void drawMain() {
     // 否则会被空白遮罩遮住
     my_play_list_controller.draw_all();
 
-
+    drawAlbum(songs_list,index);
     FlushBatchDraw();
     EndBatchDraw();
 }
