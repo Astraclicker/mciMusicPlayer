@@ -1,12 +1,16 @@
 #include "playMusic.h"
-
+#include <windows.h>
 //ÔÝÍ£/²¥·Å¿Ø¼þ
-void control_music (playStatu) {
-    switch (play_statu) {
-        case playStatu::pause:
-            break;
-        case playStatu::play :
-            break;
+void control_music (playStatu&status) {
+    if (status == playStatu::pause) {
+        // ÔÝÍ£ -> ²¥·Å
+        mciSendString("play myaudio", NULL, 0, NULL);
+        status = playStatu::play;
+    }
+    else { // status == PlayStatus::play
+        // ²¥·Å -> ÔÝÍ£
+        mciSendString("pause myaudio", NULL, 0, NULL);
+        status = playStatu::pause;
     }
 }
 

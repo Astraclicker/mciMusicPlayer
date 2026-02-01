@@ -10,7 +10,8 @@
 #include "../service/def.h"
 #include <vector>
 //ÔİÍ£/²¥·Å¿Ø¼ş
-void control_music (playStatu);
+
+void control_music (playStatu& status);
 
 //²¥·ÅÒôÀÖ
 void play_music (std::vector<Song> &songs_list,int *index);
