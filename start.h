@@ -17,8 +17,10 @@ void start() {
     play_statu = playStatu::play;
     play_mode = PlayMode::Sequence;
     load_file(music_path, songs_list);
-    defalt_playlist.reload(songs_list); // 播放列表测试使用
+    my_play_list_controller.reload_current_list(songs_list);
 
+     unsigned long lastLClickTime = 0; // 左键
+     unsigned long lastRClickTime = 0; // 右键
     while (true) {
         switch (condition) {
             case statu::main:
@@ -74,17 +76,48 @@ void start() {
                             break;
                     }
                 }
-                if (msg.x > bg_playlist_x && msg.x < bg_playlist_x + bg_playlist_W &&
-                    msg.y > bg_playlist_y && msg.y < bg_playlist_y + bg_playlist_H) {
-                    if (msg.message == WM_MOUSEWHEEL) {
-                        defalt_playlist.update_song_buttons(msg.wheel);
-                    }
-                    if (msg.message == WM_LBUTTONDOWN) {
-                        int index = defalt_playlist.is_clisk_button(msg.x, msg.y);
-                        cout << index << endl;
+                if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
+                    condition = statu::setting;
+                    flushmessage(EX_MOUSE);
+                }
+                if (my_play_list_controller.is_mouse_in_list_area(msg.x, msg.y)) {
+                    switch (msg.message) {
+                        case WM_MOUSEWHEEL:
+                            my_play_list_controller.handle_wheel(msg.wheel, msg.x, msg.y);
+                            break;
+
+                        case WM_LBUTTONDOWN:
+                        {
+                            unsigned long currentLClickTime = GetTickCount();
+                            if (currentLClickTime - lastLClickTime < 500) {
+                                int index = my_play_list_controller.handle_click(msg.x, msg.y, false);
+                                if (index != -1) {
+                                    std::string path = my_play_list_controller.get_current_song_path(index);
+                                    // 播放歌曲可以在这里调用获取到的音乐路径播放歌曲
+                                    cout << "双击左键播放：" << path << endl;
+                                }
+                                lastLClickTime = 0;
+                            } else {
+                                lastLClickTime = currentLClickTime;
+                                my_play_list_controller.handle_click(msg.x, msg.y, false);
+                            }
+                        }
+                        break;
+                        case WM_RBUTTONDOWN:
+                        {
+                            unsigned long currentRClickTime = GetTickCount();
+                            if (currentRClickTime - lastRClickTime < 500) {
+                                int index = my_play_list_controller.handle_click(msg.x, msg.y, true);
+                                std::string path = my_play_list_controller.get_current_song_path(index);
+                                cout << "双击右键将" << path << "从播放列表中移除出去" << endl;
+                                lastRClickTime = 0;
+                            } else {
+                                lastRClickTime = currentRClickTime;
+                            }
+                        }
+                        break;
                     }
                 }
-
                 break;
 
 

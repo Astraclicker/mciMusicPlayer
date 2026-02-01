@@ -109,8 +109,14 @@ bool button_txt::checkButton(int x, int y) {
 int button_txt::get_y() {
     return y;
 }
+int button_txt::get_x() {
+    return x;
+}
 void button_txt::set_y(int new_y) {
     this->y = new_y;
+}
+void button_txt::set_x(int new_x) {
+    this->x = new_x;
 }
 
 //构造图片按钮
