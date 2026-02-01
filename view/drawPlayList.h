@@ -37,10 +37,12 @@ public:
     int is_click_button(int x, int y);
 
     // 根据传入的索引值从当前播放列表移除该歌曲
-    void delete_song_from_current_playlist(int index);
+    void delete_song_from_current_playlist(int current_song_index);
 
     // 根据获取到的索引值，返回对应歌曲所在地址
-    std::string get_song_address(int index);
+    std::string get_song_address(int current_song_index);
+
+
 
     // 内部辅助函数，在类体里面实现默认为视作内联函数，方便在内部反复使用
     // 用于判断playlist_songs是否为空，如果为空，调用该函数的函数应执行相应保护措施避免程序崩溃
@@ -48,6 +50,9 @@ public:
 
     // 绘制该播放列表
     void draw();
+
+    // 获取当前歌曲的在全局歌单区域的index
+    int get_songs_list_index(int clicked_song_index);
 
     // 获取播放列表坐标的相关参数，方便点击范围的判定
     int get_bg_playlist_x() const { return bg_playlist_x; }
@@ -115,7 +120,7 @@ public:
     void draw_all();
 
     // 根据得到的索引值返回歌曲路径
-    std::string get_current_song_path(int index);
+    std::string get_current_song_path(int current_song_index);
 
     // 内部辅助函数，在类体里面实现默认为视作内联函数，方便在内部反复使用
     // 用于获取当前播放列表的索引，方便对当前播放列表进行相应操作
@@ -125,6 +130,8 @@ public:
     // 不属于则返回false，属于返回true
     // 在start.h中调用，实现判断
     bool is_mouse_in_list_area(int x, int y) const;
+
+    int get_current_playlist_index() const { return current_playlist_index; }
 
 private:
     // 添加播放列表
