@@ -4,7 +4,7 @@
 int main() {
 
     //声明音乐路径
-    std::string music_address =music_path+"ちっちゃな私.mp3";
+    std::string music_address =music_path+"always online.mp3";
 
     //声明打开命令
     std::string open_command = "open \"" + music_address + "\" alias " + deviceName;
