@@ -19,6 +19,12 @@ void start() {
     load_file(music_path, songs_list);
     my_play_list_controller.reload_current_list(songs_list);
 
+    //加载并播放第一首歌
+    std::string open_command = "open \"" + songs_list[0].song_address + "\" alias " + deviceName;
+    mciSendString(open_command.c_str(), NULL, 0, NULL);
+    std::string play_command = "play "+deviceName;
+    mciSendString(play_command.c_str(),NULL,0,NULL);
+
      unsigned long lastLClickTime = 0; // 左键
      unsigned long lastRClickTime = 0; // 右键
     while (true) {
@@ -138,12 +144,12 @@ void start() {
                         switch (vol_flag) {
                             //根据值 改变play_mode的状态
                             case true:
-                                setVloume(0);
+                                setVolume(0);
                                 sliderX = 350;
                                 vol_flag = false;
                                 break;
                             case false:
-                                setVloume(50);
+                                setVolume(50);
                                 sliderX = 400;
                                 vol_flag = true;
                                 break;
@@ -166,7 +172,7 @@ void start() {
                     int newVolume = (sliderX - 350) * 100 / 200;
                     if (newVolume != volume) {
                         // 设置新音量
-                        setVloume(newVolume);
+                        setVolume(newVolume);
                     }
                 }
                 if (!setting.checkButton(msg.x, msg.y)) {
