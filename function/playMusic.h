@@ -18,10 +18,16 @@ void play_music (int newindex);
 // //播放下一曲/上一曲
 void play_NextMusic();
 void play_PreviousMusic();
-
+//播放结束判断，下一首自动播放
+void checkAndPlayNext();
 //快进/快退
-void play_music_argument(std::vector<Song> &songs_list,int index,int play_argument);
+void fastForward(int milliseconds= 10000);
+void fastBackward(int milliseconds=10000);
 
-//快进/快退指数转换
-int change_argument(std::vector<Song> &songs_list,int index,int x);
+//简易进度条
+float getProgress() ;
+void drawSimpleProgressBar(int x, int y, int width, int height, float progress) ;
+
+void clickProgressBarToSeek(int mouseX) ;
+
 #endif

@@ -1,4 +1,6 @@
+#include "drawMain.h"
 #include "drewSetting.h"
+
 void setVolume(int v) {
     //边界处理
     if (v < 0) v = 0;
@@ -46,6 +48,7 @@ void drawSetting() {
      *画出音乐音量条
      *负责人：凉雨
     */
+    sliderX=volume*2+350;
     outtextxy(200, 340, "音量:");
     // 绘制音量滑块轨道
     rectangle(350, 350, 550, 355);
