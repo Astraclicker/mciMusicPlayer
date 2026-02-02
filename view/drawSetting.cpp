@@ -1,10 +1,10 @@
 #include "drewSetting.h"
 void setVolume(int v) {
-    //è¾¹ç•Œå¤„ç†
+    //±ß½ç´¦Àí
     if (v < 0) v = 0;
     if (v > 100) v = 100;
     volume = v;
-    //è®¾ç½®éŸ³é‡
+    //ÉèÖÃÒôÁ¿
     char cmd[100];
     sprintf(cmd, "setaudio %s volume to %d", deviceName.c_str(), v * 10);
     mciSendString(cmd, NULL, 0, NULL);
@@ -26,7 +26,7 @@ void drawSetting() {
         spectrum_setting.drawButton();
     }
     switch (vol_flag) {
-        //æ ¹æ®å€¼ æ”¹å˜play_modeçš„çŠ¶æ€
+        //¸ù¾İÖµ ¸Ä±äplay_modeµÄ×´Ì¬
         case true:
             if (volOn.checkButton(msg.x, msg.y)) {
                 volOn_on.drawButton();
@@ -43,22 +43,22 @@ void drawSetting() {
             break;
     }
     /*
-     *ç”»å‡ºéŸ³ä¹éŸ³é‡æ¡
-     *è´Ÿè´£äººï¼šå‡‰é›¨
+     *»­³öÒôÀÖÒôÁ¿Ìõ
+     *¸ºÔğÈË£ºÁ¹Óê
     */
-    outtextxy(200, 340, "éŸ³é‡:");
-    // ç»˜åˆ¶éŸ³é‡æ»‘å—è½¨é“
+    outtextxy(200, 340, "ÒôÁ¿:");
+    // »æÖÆÒôÁ¿»¬¿é¹ìµÀ
     rectangle(350, 350, 550, 355);
 
-    // ç»˜åˆ¶å¡«å……éƒ¨åˆ†ï¼ˆè“è‰²ï¼‰
+    // »æÖÆÌî³ä²¿·Ö£¨À¶É«£©
     setfillcolor(RGB(38, 120, 255));
     fillrectangle(350, 350, sliderX, 355);
 
-    // ç»˜åˆ¶æ»‘å—
-    // ç”»ç™½è‰²å†…åœ†
+    // »æÖÆ»¬¿é
+    // »­°×É«ÄÚÔ²
     setfillcolor(WHITE);
     solidcircle(sliderX, 352.5, 8);
-    // æ˜¾ç¤ºéŸ³é‡æ•°å€¼
+    // ÏÔÊ¾ÒôÁ¿ÊıÖµ
     char volText[20];
     sprintf(volText, "%d%%", volume);
     outtextxy(560, 335, volText);

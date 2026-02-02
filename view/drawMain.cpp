@@ -3,7 +3,7 @@
 void drawMain() {
     BeginBatchDraw();
     loadimage(NULL, bk_img.c_str());
-    //ç”»å‡ºæŒ‰é’®
+    //»­³ö°´Å¥
     if (button_setting.checkButton(msg.x, msg.y)) {
         button_setting_on.drawButton();
     } else {
@@ -74,9 +74,9 @@ void drawMain() {
             break;
     }
     drawAlbum(songs_list,index);
-    // è¯¥å‡½æ•°æœ‰ç©ºç™½é®ç½©ï¼Œæ·»åŠ æ­Œæ›²ï¼Œæ·»åŠ ç›®å½•ï¼Œè¿›åº¦æ¡ï¼Œæ­Œè¯æ‰“å°ä»¥åŠåç»­å¦‚æœä¼šç§»åŠ¨åˆ°ä¸»ç•Œé¢çš„éŸ³é‡æ¡
-    // éƒ½è¯·åœ¨åé¢ç»˜åˆ¶
-    // å¦åˆ™ä¼šè¢«ç©ºç™½é®ç½©é®ä½
+    // ¸Ãº¯ÊıÓĞ¿Õ°×ÕÚÕÖ£¬Ìí¼Ó¸èÇú£¬Ìí¼ÓÄ¿Â¼£¬½ø¶ÈÌõ£¬¸è´Ê´òÓ¡ÒÔ¼°ºóĞøÈç¹û»áÒÆ¶¯µ½Ö÷½çÃæµÄÒôÁ¿Ìõ
+    // ¶¼ÇëÔÚºóÃæ»æÖÆ
+    // ·ñÔò»á±»¿Õ°×ÕÚÕÖÕÚ×¡
     my_play_list_controller.draw_all();
     FlushBatchDraw();
     EndBatchDraw();
