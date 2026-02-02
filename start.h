@@ -108,12 +108,12 @@ void start() {
                             unsigned long currentRClickTime = GetTickCount();
                             if (currentRClickTime - lastRClickTime < 500) {
                                 int R_click_index = my_play_list_controller.handle_click(msg.x, msg.y, true);
-                                int current_playlist_index = my_play_list_controller.get_current_playlist_index();
-                                if (current_playlist_index == 1) {
-                                    if (R_click_index >= 0 && R_click_index < songs_list.size()) {
-                                        songs_list.erase(songs_list.begin() + R_click_index);
-                                    }
-                                }
+                                // int current_playlist_index = my_play_list_controller.get_current_playlist_index();
+                                // if (current_playlist_index == 1) {
+                                //     if (R_click_index >= 0 && R_click_index < songs_list.size()) {
+                                //         songs_list.erase(songs_list.begin() + R_click_index);
+                                //     }
+                                // }
                                 lastRClickTime = 0;
                             } else {
                                 lastRClickTime = currentRClickTime;

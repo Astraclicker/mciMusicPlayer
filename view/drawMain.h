@@ -117,7 +117,7 @@ void drawMain() {
     // 否则会被空白遮罩遮住
     my_play_list_controller.draw_all();
 
-    drawAlbum(songs_list,index);
+    drawAlbum(current_song_index);
     FlushBatchDraw();
     EndBatchDraw();
 }
