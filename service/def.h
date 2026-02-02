@@ -55,7 +55,7 @@ inline int n = 0;
 inline int current_song_index = 0;
 
 //快进/快退指数
-inline  int play_argument = 5000;
+inline  int play_argument = 10000;
 
 //音量大小
 inline int volume = 60;

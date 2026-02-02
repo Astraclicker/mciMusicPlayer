@@ -41,4 +41,6 @@ inline button_img button_open_index_on(100,25,43,96,WHITE,button_style::roundrec
 inline button_img button_open_file(240,25,43,96,WHITE,button_style::roundrect,"sources/image/files_ui/btn_add_file_norm.png");
 inline button_img button_open_file_on(240,25,43,96,WHITE,button_style::roundrect,"sources/image/files_ui/btn_add_file_hover.png");
 //画出主界面
+inline int VolumeX=1120;
+inline bool dragging2 = false;
 void drawMain();

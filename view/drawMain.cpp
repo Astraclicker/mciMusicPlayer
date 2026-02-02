@@ -1,5 +1,6 @@
 #include "drawMain.h"
 #include "drawAlbum.h"
+#include "../function/playMusic.h"
 void drawMain() {
     BeginBatchDraw();
     loadimage(NULL, bk_img.c_str());
@@ -88,6 +89,29 @@ void drawMain() {
     // 都请在后面绘制
     // 否则会被空白遮罩遮住
     my_play_list_controller.draw_all();
+
+    // 获取当前进度
+    float progress = getProgress();
+    // 绘制进度条
+    drawSimpleProgressBar(0, 650, 1280, 10, progress);
+
+    VolumeX=volume*2+1000;
+    // 绘制音量滑块轨道
+    rectangle(1000, 725, 1200, 730);
+
+    // 绘制填充部分（蓝色）
+    setfillcolor(RGB(38, 120, 255));
+    fillrectangle(1000, 725, VolumeX, 730);
+
+    // 绘制滑块
+    // 画白色内圆
+    setfillcolor(0x808080);
+    solidcircle(VolumeX, 727.5, 8);
+    // 显示音量数值
+    char volText[20];
+    sprintf(volText, "%d%%", volume);
+    outtextxy(1220, 720, volText);
+
     FlushBatchDraw();
     EndBatchDraw();
 }
