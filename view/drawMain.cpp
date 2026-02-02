@@ -73,7 +73,7 @@ void drawMain() {
             }
             break;
     }
-    drawAlbum(songs_list,index);
+    drawAlbum(current_song_index);
     // 该函数有空白遮罩，添加歌曲，添加目录，进度条，歌词打印以及后续如果会移动到主界面的音量条
     // 都请在后面绘制
     // 否则会被空白遮罩遮住
