@@ -312,7 +312,7 @@ int play_list_controller::handle_click(int x, int y, bool is_right_click) {
                     return song_idx;
                 }else {
                     // 双击左键返回song里面的index
-                    return current_list->get_songs_list_index(song_idx);
+                    return song_idx;
                 }
             }
         }

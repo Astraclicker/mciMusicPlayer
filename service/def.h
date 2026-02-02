@@ -51,7 +51,7 @@ inline std::vector<Song>songs_list;
 
 
 //当前播放音乐的编号
-inline int index = 0;
+inline int current_song_index = 0;
 
 //快进/快退指数
 inline  int play_argument = 5000;
