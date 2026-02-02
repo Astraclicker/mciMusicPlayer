@@ -1,17 +1,18 @@
 #include "drawAlbum.h"
 #include <easyx.h>
+#include "drawPlayList.h"
 
-void drawAlbum (std::vector<Song> &songs_list,int index) {
-    //°²È«¼ì²é
-    if (songs_list.empty()) {
+
+void drawAlbum (int index) {
+    //??????
+    if (my_play_list_controller.get_current_playlist_size() == 0) {
          return;
     }
-    if (index<0||index>songs_list.size()) {
+    if (index<0||index>my_play_list_controller.get_current_playlist_size()) {
         return;
     }
-    Song& CurrentSong = songs_list[index];
-    std::string CurrentPath = music_path + CurrentSong.song_name + ".jpg";
-    //std::string CurrentPath = music_path + "¤Á¤Ã¤Á¤ã¤ÊË½" + ".jpg";
+    std::string CurrentPath = music_path + my_play_list_controller.get_current_song_name() + ".jpg";
+    //std::string CurrentPath = music_path + "?????????" + ".jpg";
     IMAGE cover_img;
     loadimage(&cover_img, CurrentPath.c_str(), width_album, length_album);
     putimage(41, 114, &cover_img);

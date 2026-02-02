@@ -1,8 +1,8 @@
 /*
- *¹¦ÄÜ£º
- *»­³ö×¨¼­·âÃæ
- *¸ºÔðÈË£º
- *ÈþÊ°
+ *ï¿½ï¿½ï¿½Ü£ï¿½
+ *ï¿½ï¿½ï¿½ï¿½×¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ *ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½
+ *ï¿½ï¿½Ê°
  */
 
 #ifndef MCIMUSICPLAYER_DRAWALBUM_H
@@ -10,6 +10,6 @@
 #include "../service/def.h"
 
 
-void drawAlbum (std::vector<Song> &songs_list,int index);
+void drawAlbum (int index);
 
 #endif
