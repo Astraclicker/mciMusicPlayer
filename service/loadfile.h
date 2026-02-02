@@ -9,6 +9,8 @@
 #include "Song.h"
 #include <string>
 #include <vector>
+#include "tinyfiledialogs.h"
 std::string STRtoANSI(const std::string& str);
-void load_file(std::string songs_address,std::vector<Song> &songs_list);
+void load_file(std::string music_address,std::vector<Song> &songs_list);
+void load_simple_file(std::vector<Song> &songs_list);
 #endif

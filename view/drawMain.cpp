@@ -73,6 +73,16 @@ void drawMain() {
             }
             break;
     }
+    if (button_open_file.checkButton(msg.x,msg.y)) {
+        button_open_file_on.drawButton();
+    }else {
+        button_open_file.drawButton();
+    }
+    if (button_open_index.checkButton(msg.x,msg.y)) {
+        button_open_index_on.drawButton();
+    }else {
+        button_open_index.drawButton();
+    }
     drawAlbum(current_song_index);
     // 该函数有空白遮罩，添加歌曲，添加目录，进度条，歌词打印以及后续如果会移动到主界面的音量条
     // 都请在后面绘制

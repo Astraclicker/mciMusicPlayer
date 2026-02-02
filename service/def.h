@@ -15,7 +15,7 @@ constexpr int width_album = 450;
 constexpr int length_album= 450;
 
 //音乐路径
-inline std::string music_path = "sources/music/";
+inline std::string music_path = "sources/music";
 
 //背景图片
 inline std::string bk_img = "sources/image/bk.png";
@@ -47,7 +47,8 @@ inline PlayMode play_mode;
 
 //播放列表
 inline std::vector<Song>songs_list;
-
+//开始的编号
+inline int n = 0;
 
 
 //当前播放音乐的编号

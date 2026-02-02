@@ -4,7 +4,7 @@ project(mciMusicPlayer)
 
 set(CMAKE_CXX_STANDARD 20)
 
-file(GLOB_RECURSE SERVICE "service/*.cpp" "service/*.h")
+file(GLOB_RECURSE SERVICE "service/*.cpp" "service/*.h" "service/*.c")
 file(GLOB_RECURSE FUNCTION "function/*.cpp" "function/*.h")
 file(GLOB_RECURSE VIEW "view/*.cpp" "view/*.h")
 #GLOB_RECURSE 根目录也能搜索

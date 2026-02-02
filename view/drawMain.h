@@ -5,7 +5,7 @@
 
 
 //设置
-inline button_img button_setting(24, 23, base_function, "sources/image/files_ui/btn_settings_down.png");
+inline button_img button_setting(24, 23, base_function, "sources/image/files_ui/btn_settings_norm.png");
 inline button_img button_setting_on(24, 23, base_function, "sources/image/files_ui/btn_settings_hover.png");
 //播放
 inline button_img button_play (607,720,base_function,"sources/image/control/btn_play_norm.png");
@@ -26,13 +26,19 @@ inline button_img button_next_on(716,720, base_function, "sources/image/control/
 inline button_img button_previous(521,720, base_function, "sources/image/control/btn_prev_norm.png");
 inline button_img button_previous_on(521,720, base_function, "sources/image/control/btn_prev_hover.png");
 //顺序播放
-inline button_img button_all(369,720,base_function,"sources/image/audio_modes/btn_loop_all_down.png");
+inline button_img button_all(369,720,base_function,"sources/image/audio_modes/btn_loop_all_norm.png");
 inline button_img button_all_on(369,720,base_function,"sources/image/audio_modes/btn_loop_all_hover.png");
 //单曲循环
-inline button_img button_all_one(369,720,base_function,"sources/image/audio_modes/btn_loop_one_down.png");
+inline button_img button_all_one(369,720,base_function,"sources/image/audio_modes/btn_loop_one_norm.png");
 inline button_img button_all_one_on(369,720,base_function,"sources/image/audio_modes/btn_loop_one_hover.png");
 //随机播放
-inline button_img button_random(369,720,base_function,"sources/image/audio_modes/btn_shuffle_down.png");
+inline button_img button_random(369,720,base_function,"sources/image/audio_modes/btn_shuffle_norm.png");
 inline button_img button_random_on(369,720,base_function,"sources/image/audio_modes/btn_shuffle_hover.png");
+//打开文件夹
+inline button_img button_open_index(100,25,43,96,WHITE,button_style::roundrect,"sources/image/files_ui/btn_add_folder_norm.png");
+inline button_img button_open_index_on(100,25,43,96,WHITE,button_style::roundrect,"sources/image/files_ui/btn_add_folder_hover.png");
+//打开文件
+inline button_img button_open_file(240,25,43,96,WHITE,button_style::roundrect,"sources/image/files_ui/btn_add_file_norm.png");
+inline button_img button_open_file_on(240,25,43,96,WHITE,button_style::roundrect,"sources/image/files_ui/btn_add_file_hover.png");
 //画出主界面
 void drawMain();

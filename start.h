@@ -22,11 +22,11 @@ void start() {
     //加载并播放第一首歌
     std::string open_command = "open \"" + songs_list[0].song_address + "\" alias " + deviceName;
     mciSendString(open_command.c_str(), NULL, 0, NULL);
-    std::string play_command = "play "+deviceName;
-    mciSendString(play_command.c_str(),NULL,0,NULL);
+    std::string play_command = "play " + deviceName;
+    mciSendString(play_command.c_str(),NULL, 0,NULL);
 
-     unsigned long lastLClickTime = 0; // 左键
-     unsigned long lastRClickTime = 0; // 右键
+    unsigned long lastLClickTime = 0; // 左键
+    unsigned long lastRClickTime = 0; // 右键
     while (true) {
         switch (condition) {
             case statu::main:
@@ -82,6 +82,20 @@ void start() {
                             break;
                     }
                 }
+                //单击打开目录
+
+                if (msg.message == WM_LBUTTONDOWN && button_open_index.checkButton(msg.x, msg.y)) {
+                    cout<<"打开目录"<<endl;
+                    std::vector<Song>temp_song_list;
+                    load_file(tinyfd_selectFolderDialog("选择文件夹", nullptr), temp_song_list);
+                    my_play_list_controller.reload_current_list(temp_song_list);
+                }
+                //单击打开文件
+                if (msg.message == WM_LBUTTONDOWN && button_open_file.checkButton(msg.x, msg.y)) {
+                    load_simple_file();
+
+                }
+                //单击设置
                 if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
                     condition = statu::setting;
                     flushmessage(EX_MOUSE);
@@ -92,15 +106,14 @@ void start() {
                             my_play_list_controller.handle_wheel(msg.wheel, msg.x, msg.y);
                             break;
 
-                        case WM_LBUTTONDOWN:
-                        {
+                        case WM_LBUTTONDOWN: {
                             unsigned long currentLClickTime = GetTickCount();
                             if (currentLClickTime - lastLClickTime < 500) {
                                 // L_click_index是song对象里面存储的index
                                 int L_click_index = my_play_list_controller.handle_click(msg.x, msg.y, false);
                                 if (L_click_index != -1) {
                                     // 播放歌曲可以在这里调用获取到的音乐路径播放歌曲
-                                   play_music(L_click_index);
+                                    play_music(L_click_index);
                                 }
                                 lastLClickTime = 0;
                             } else {
@@ -109,8 +122,7 @@ void start() {
                             }
                         }
                         break;
-                        case WM_RBUTTONDOWN:
-                        {
+                        case WM_RBUTTONDOWN: {
                             unsigned long currentRClickTime = GetTickCount();
                             if (currentRClickTime - lastRClickTime < 500) {
                                 int R_click_index = my_play_list_controller.handle_click(msg.x, msg.y, true);

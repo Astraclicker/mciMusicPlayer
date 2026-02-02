@@ -54,6 +54,7 @@ public:
 
     int get_playlist_size(){return playlist_songs.size();}
 
+    int get_song_time(int current_song_index){return playlist_songs[current_song_index].song.song_time;}
     std::string get_song_name(int current_song_index) const{return playlist_songs[current_song_index].song.song_name;}
 
     // 获取播放列表坐标的相关参数，方便点击范围的判定
@@ -139,6 +140,7 @@ public:
 
     std::string get_current_song_name() const{return tabs[current_playlist_index].list_obj->get_song_name(current_song_index);}
 
+    int get_current_song_time()const {return tabs[current_playlist_index].list_obj->get_song_time(current_song_index);}
 private:
     // 添加播放列表
     void add_playlist_tab();
