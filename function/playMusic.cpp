@@ -2,15 +2,16 @@
 #include <windows.h>
 #include "../view/drawPlayList.h"
 #include "../view/drewSetting.h"
-//ÔÝÍ£/²¥·Å¿Ø¼þ
+#include "../view/drawLyrics.h"
+//ï¿½ï¿½Í£/ï¿½ï¿½ï¿½Å¿Ø¼ï¿½
 void control_music (playStatu&status) {
     if (status == playStatu::pause) {
-        // ÔÝÍ£ -> ²¥·Å
+        // ï¿½ï¿½Í£ -> ï¿½ï¿½ï¿½ï¿½
         mciSendString("play myaudio", NULL, 0, NULL);
         status = playStatu::play;
     }
     else { // status == PlayStatus::play
-        // ²¥·Å -> ÔÝÍ£
+        // ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½Í£
         mciSendString("stop myaudio", NULL, 0, NULL);
         status = playStatu::pause;
     }
@@ -19,30 +20,31 @@ void control_music (playStatu&status) {
 void play_music (int newindex) {
     if (newindex < 0 || newindex >= my_play_list_controller.get_current_playlist_size()) return;
     current_song_index = newindex;
-    // Í£Ö¹µ±Ç°²¥·Å
+    // Í£Ö¹ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
     mciSendString("close myaudio", NULL, 0, NULL);
 
-    // ´ò¿ªÐÂ¸èÇú
+    // ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½
     std::string cmd = "open \"" + my_play_list_controller.get_current_song_path(current_song_index) + "\" alias myaudio";
     mciSendString(cmd.c_str(), NULL, 0, NULL);
 
-    // ²¥·Å
+    // ï¿½ï¿½ï¿½ï¿½
     mciSendString("play myaudio", NULL, 0, NULL);
     play_statu = playStatu::play;
     setVolume(volume);
+    loadLyrics();
 }
 
-//²¥·ÅÏÂÒ»Çú/ÉÏÒ»Çú
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½/ï¿½ï¿½Ò»ï¿½ï¿½
 void play_NextMusic() {
     switch (play_mode) {
         case PlayMode::Sequence:
             current_song_index = current_song_index + 1;
             if (current_song_index >= my_play_list_controller.get_current_playlist_size()) {
-                current_song_index = 0;  // Ñ­»·µ½µÚÒ»Ê×
+                current_song_index = 0;  // Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
             }
             break;
         case PlayMode::Sing_Loop:
-            //index=index²»±ä
+            //index=indexï¿½ï¿½ï¿½ï¿½
             break;
         case PlayMode::Random:
             current_song_index=rand() % my_play_list_controller.get_current_playlist_size() ;
@@ -56,11 +58,11 @@ void play_PreviousMusic() {
         case PlayMode::Sequence:
             current_song_index=current_song_index - 1;
             if (current_song_index < 0) {
-                current_song_index = my_play_list_controller.get_current_playlist_size() - 1;  // Ñ­»·µ½×îºóÒ»Ê×
+                current_song_index = my_play_list_controller.get_current_playlist_size() - 1;  // Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
             }
             break;
         case PlayMode::Sing_Loop:
-            //index=index²»±ä
+            //index=indexï¿½ï¿½ï¿½ï¿½
             break;
         case PlayMode::Random:
             current_song_index=rand() % my_play_list_controller.get_current_playlist_size() ;
@@ -69,7 +71,7 @@ void play_PreviousMusic() {
     play_music(current_song_index);
 }
 
-//²¥·Å½áÊøÅÐ¶Ï£¬ÏÂÒ»Ê××Ô¶¯²¥·Å
+//ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
 void checkAndPlayNext() {
     static bool wasPlaying = false;
     char status[256];
@@ -84,91 +86,91 @@ void checkAndPlayNext() {
         play_NextMusic();
     }
 }
-//¿ì½ø/¿ìÍË
+//ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½
 void fastForward(int milliseconds) {
     char cmd[256];
     char positionStr[64];
 
-    // 1. »ñÈ¡µ±Ç°Î»ÖÃ
+    // 1. ï¿½ï¿½È¡ï¿½ï¿½Ç°Î»ï¿½ï¿½
     mciSendString("status myaudio position", positionStr, sizeof(positionStr), 0);
     long currentPos = atol(positionStr);
 
-    // 2. »ñÈ¡Ã½Ìå×Ü³¤¶È£¨·ÀÖ¹³¬³ö·¶Î§£©
+    // 2. ï¿½ï¿½È¡Ã½ï¿½ï¿½ï¿½Ü³ï¿½ï¿½È£ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½
     long totalLength = my_play_list_controller.get_current_song_time();
 
-    // 3. ¼ÆËãÐÂÎ»ÖÃ
+    // 3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     long newPos = currentPos + milliseconds;
     if (newPos > totalLength) {
-        newPos = totalLength; // ²»³¬¹ý×Ü³¤¶È
+        newPos = totalLength; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½
     }
 
-    // 4. Ìø×ªµ½ÐÂÎ»ÖÃ
+    // 4. ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     sprintf(cmd, "seek myaudio to %ld", newPos);
     mciSendString(cmd, NULL, 0, NULL);
 
-    // 5. ¼ÌÐø²¥·Å
+    // 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     mciSendString("play myaudio", NULL, 0, NULL);
 }
 void fastBackward(int milliseconds) {
     char cmd[256];
     char positionStr[64];
 
-    // 1. »ñÈ¡µ±Ç°Î»ÖÃ
+    // 1. ï¿½ï¿½È¡ï¿½ï¿½Ç°Î»ï¿½ï¿½
     mciSendString("status myaudio position", positionStr, sizeof(positionStr), 0);
     long currentPos = atol(positionStr);
 
-    // 2. ¼ÆËãÐÂÎ»ÖÃ£¨²»Ð¡ÓÚ0£©
+    // 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½0ï¿½ï¿½
     long newPos = currentPos - milliseconds;
     if (newPos < 0) {
         newPos = 0;
     }
 
-    // 3. Ìø×ªµ½ÐÂÎ»ÖÃ
+    // 3. ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     sprintf(cmd, "seek myaudio to %ld", newPos);
     mciSendString(cmd, NULL, 0, NULL);
 
-    // 4. ¼ÌÐø²¥·Å
+    // 4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     mciSendString("play myaudio", NULL, 0, NULL);
 }
 
-//¼òÒ×½ø¶ÈÌõ
+//ï¿½ï¿½ï¿½×½ï¿½ï¿½ï¿½ï¿½ï¿½
 float getProgress() {
     char posStr[64];
 
-    // »ñÈ¡µ±Ç°Î»ÖÃ
+    // ï¿½ï¿½È¡ï¿½ï¿½Ç°Î»ï¿½ï¿½
     mciSendString("status myaudio position", posStr, sizeof(posStr), 0);
     long currentPos = atol(posStr);
 
-    // »ñÈ¡×Ü³¤¶È
+    // ï¿½ï¿½È¡ï¿½Ü³ï¿½ï¿½ï¿½
     long totalLen = my_play_list_controller.get_current_song_time();
 
-    // ¼ÆËã½ø¶È
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (totalLen > 0) {
         return (float)currentPos / totalLen;
     }
     return 0.0f;
 }
 void drawSimpleProgressBar(int x, int y, int width, int height, float progress) {
-    // 1. »æÖÆ±³¾°£¨»ÒÉ«£©
+    // 1. ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½
     setfillcolor(LIGHTGRAY);
     fillrectangle(x, y, x + width, y + height);
 
-    // 2. »æÖÆ½ø¶È£¨À¶É«£©
+    // 2. ï¿½ï¿½ï¿½Æ½ï¿½ï¿½È£ï¿½ï¿½ï¿½É«ï¿½ï¿½
     if (progress > 0) {
         int progressWidth = (int)(width * progress);
         setfillcolor(RGB(38, 120, 255));
         fillrectangle(x, y, x + progressWidth, y + height);
     }
 
-    // 3. »æÖÆ±ß¿ò
+    // 3. ï¿½ï¿½ï¿½Æ±ß¿ï¿½
     rectangle(x, y, x + width, y + height);
-    // 4. »æÖÆÍÏ×§Ð¡Ô²È¦
+    // 4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×§Ð¡Ô²È¦
     if (progress > 0) {
         int circleX = x + (int)(width * progress);
         int circleY = y + height / 2;
-        int circleRadius = 12;  // ¹Ì¶¨´óÐ¡
+        int circleRadius = 12;  // ï¿½Ì¶ï¿½ï¿½ï¿½Ð¡
 
-        // ÍâÈ¦£¨ÉîÉ«±ß¿ò£©
+        // ï¿½ï¿½È¦ï¿½ï¿½ï¿½ï¿½É«ï¿½ß¿ï¿½
         setlinecolor(RGB(20, 70, 180));
         setfillcolor(WHITE);
         fillellipse(circleX - circleRadius, circleY - circleRadius,
@@ -178,23 +180,23 @@ void drawSimpleProgressBar(int x, int y, int width, int height, float progress) 
 }
 
 void clickProgressBarToSeek(int mouseX) {
-    // 1. ¼ÆËãµã»÷Î»ÖÃ¶ÔÓ¦µÄ½ø¶È (0.0 ~ 1.0)
+    // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã¶ï¿½Ó¦ï¿½Ä½ï¿½ï¿½ï¿½ (0.0 ~ 1.0)
     float progress = (float)mouseX / 1280.0f;
     if (progress < 0) progress = 0;
     if (progress > 1) progress = 1;
 
-    // 2. »ñÈ¡ÒôÆµ×Ü³¤¶È
+    // 2. ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½Ü³ï¿½ï¿½ï¿½
     long totalTime = my_play_list_controller.get_current_song_time();
 
-    // 3. ¼ÆËãÄ¿±êÊ±¼ä
+    // 3. ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ê±ï¿½ï¿½
     long targetTime = (long)(totalTime * progress);
 
-    // 4. Ö±½ÓÌø×ª£¨Ò»¾ä»°¸ã¶¨£©
+    // 4. Ö±ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ò»ï¿½ä»°ï¿½ã¶¨ï¿½ï¿½
     char cmd[128];
     sprintf(cmd, "seek myaudio to %ld", targetTime);
     mciSendString(cmd, NULL, 0, NULL);
 
-    // 5. ¼ÌÐø²¥·Å
+    // 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     mciSendString("play myaudio", NULL, 0, NULL);
     play_statu=playStatu::play;
 }

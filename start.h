@@ -10,6 +10,7 @@
 #include "service/loadfile.h"
 #include "service/congfig.h"
 
+#include "view/drawLyrics.h"
 using std::cout;
 using std::endl;
 
