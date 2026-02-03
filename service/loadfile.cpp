@@ -34,16 +34,17 @@ void load_file(std::string music_address,std::vector<Song> &songs_list) {
         if (back == name1 || back == name2) {
             std::string name = temp.substr(music_address.size()+1, temp.size() - music_address.size() - back.size() -2);
             char length[64];
-            std::string cmd = "status " + music_address +"/"+ STRtoANSI(name) + "." + STRtoANSI(back) + " length";
-            mciSendString(cmd.c_str(), length, sizeof(length), NULL);
+            std::string cmd = "open \"" + music_address +"/"+ STRtoANSI(name) + "." + STRtoANSI(back) + "\"  alias myaudio";
+            mciSendString(cmd.c_str(), NULL, 0, NULL);
+            mciSendString("status myaudio length", length, sizeof(length), NULL);
             int total_ms = atoi(length);
-            songs_list.push_back({n, STRtoANSI(name), music_address +"/"+STRtoANSI(name) + "." + STRtoANSI(back), total_ms});
+            songs_list.push_back({n, STRtoANSI(name),STRtoANSI(music_address), music_address +"/"+STRtoANSI(name) + "." + STRtoANSI(back), total_ms});
             n++;
         }
     }
     //¥Ú”°≤‚ ‘
     for (auto i: songs_list) {
-        std::cout << i.song_index << "||" << i.song_name << "||" << i.song_address << "||" << i.song_time << std::endl;
+        std::cout << i.song_index << "||" << i.song_name << "||"<<i.song_root<<"||"<< i.song_address << "||" << i.song_time << std::endl;
     }
 }
 
@@ -88,11 +89,13 @@ void load_simple_file(std::vector<Song> &songs_list) {
                     j++;
                 }
                 std::string name = address.substr(address.size()-j+1,address.size());
+                std::string root = address.substr(0,address.size()-j);
                 char length[64];
-                std::string cmd ="status " + address+" length";
-                mciSendString(cmd.c_str(), length, sizeof(length), NULL);
+                std::string cmd = "open \"" +address+ "\"  alias myaudio";
+                mciSendString(cmd.c_str(), NULL, 0, NULL);
+                mciSendString("status myaudio length", length, sizeof(length), NULL);
                 int total_ms = atoi(length);
-                songs_list.push_back({n,name.erase(name.size()-4,4),address,total_ms});
+                songs_list.push_back({n,name.erase(name.size()-4,4),root,address,total_ms});
                 n++;
                 temp.erase(0,i+1);
                 break;
@@ -101,6 +104,6 @@ void load_simple_file(std::vector<Song> &songs_list) {
     }
     //¥Ú”°≤‚ ‘
     for (auto i: songs_list) {
-        std::cout << i.song_index << "||" << i.song_name << "||" << i.song_address << "||" << i.song_time << std::endl;
+        std::cout << i.song_index << "||" << i.song_name << "||"<<i.song_root<<"||"<< i.song_address << "||" << i.song_time << std::endl;
     }
 }
