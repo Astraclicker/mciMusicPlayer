@@ -45,8 +45,6 @@ inline statu condition;
 inline playStatu play_statu;
 inline PlayMode play_mode;
 
-//播放列表
-inline std::vector<Song>songs_list;
 //开始的编号
 inline int n = 0;
 
@@ -60,3 +58,10 @@ inline  int play_argument = 10000;
 //音量大小
 inline int volume = 60;
 
+//歌词
+struct lrc {
+    long long time;
+    std::string title;
+};
+inline std::vector<lrc>lrc_list;
+inline std::string text;//lrc文件里每句带时间完整歌词

@@ -10,6 +10,7 @@
 #include "service/loadfile.h"
 #include "service/congfig.h"
 
+#include "view/drawLyrics.h"
 using std::cout;
 using std::endl;
 
@@ -19,20 +20,11 @@ void start() {
     play_statu = playStatu::pause;
     play_mode = PlayMode::Sequence;
     load_config();
-    // load_file(music_path, songs_list);
-    // my_play_list_controller.reload_current_list(songs_list);
     bool progressDragging = false;
-    //
-    // //加载并播放第一首歌
-    // std::string open_command = "open \"" + songs_list[0].song_address + "\" alias " + deviceName;
-    // mciSendString(open_command.c_str(), NULL, 0, NULL);
-    // std::string play_command = "play " + deviceName;
-    // mciSendString(play_command.c_str(),NULL, 0,NULL);
 
     unsigned long lastLClickTime = 0; // 左键
     unsigned long lastRClickTime = 0; // 右键
     while (true) {
-        DWORD start_time = GetTickCount();
         switch (condition) {
             case statu::main:
                 flushmessage();
@@ -45,15 +37,20 @@ void start() {
                             msg.y >= 650 && msg.y <= 660) {
                             // 假设进度条高度5像素
                             progressDragging = true;
-                        }
+                            }
                         if (msg.x >= 1000 && msg.x <= 1280 &&
                             msg.y >= 725 && msg.y <= 730) {
                             dragging2 = true;
-                        }
+                            }
                     } else if (msg.message == WM_LBUTTONUP) {
                         progressDragging = false;
                         dragging2 = false;
                     } else if (msg.message == WM_MOUSEMOVE) {
+                        // 0x8000 是掩码，用来检测按键当前是否被按下
+                        if (!(GetAsyncKeyState(VK_LBUTTON) & 0x8000)) {
+                            progressDragging = false;
+                            dragging2 = false;
+                        }
                         // 拖动进度条 - 直接调用跳转函数
                         if (progressDragging) {
                             clickProgressBarToSeek(msg.x);
@@ -152,11 +149,6 @@ void start() {
                         my_play_list_controller.load_current_list(temp_song_list);
                         save_config();
                     }
-                    //单击设置
-                    if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
-                        condition = statu::setting;
-                        flushmessage(EX_MOUSE);
-                    }
                     if (my_play_list_controller.is_mouse_in_list_area(msg.x, msg.y)) {
                         switch (msg.message) {
                             case WM_MOUSEWHEEL:
@@ -178,36 +170,30 @@ void start() {
                                     my_play_list_controller.handle_click(msg.x, msg.y, false);
                                 }
                             }
-                            break;
+                                break;
                             case WM_RBUTTONDOWN: {
                                 unsigned long currentRClickTime = GetTickCount();
                                 if (currentRClickTime - lastRClickTime < 500) {
                                     int R_click_index = my_play_list_controller.handle_click(msg.x, msg.y, true);
                                     save_config();
-                                    // int current_playlist_index = my_play_list_controller.get_current_playlist_index();
-                                    // if (current_playlist_index == 1) {
-                                    //     if (R_click_index >= 0 && R_click_index < songs_list.size()) {
-                                    //         songs_list.erase(songs_list.begin() + R_click_index);
-                                    //     }
-                                    // }
                                     lastRClickTime = 0;
                                 } else {
                                     lastRClickTime = currentRClickTime;
                                 }
                             }
-                            break;
+                                break;
                         }
                     }
                     if (play_statu == playStatu::play) {
                         checkAndPlayNext();
                     }
-                    break;
+                }
+                break;
 
+            case statu::setting:
 
-                case statu::setting:
-
-                    drawSetting();
-                    if (peekmessage(&msg,EX_MOUSE)) {
+                drawSetting();
+                if (peekmessage(&msg,EX_MOUSE)) {
                         if (msg.message == WM_LBUTTONDOWN) {
                             cout << msg.x << "||" << msg.y << endl;
 
@@ -258,17 +244,11 @@ void start() {
                             }
                         }
                     }
-                    if (play_statu == playStatu::play) {
-                        checkAndPlayNext();
-                    }
-                    flushmessage();
-                    break;
+                if (play_statu == playStatu::play) {
+                    checkAndPlayNext();
                 }
-        }
-        DWORD end_time = GetTickCount();
-        DWORD deltat_time = end_time - start_time;
-        if (deltat_time < 1000 / 144) {
-            Sleep(1000 / 144 - deltat_time);
+                flushmessage();
+                break;
         }
     }
 

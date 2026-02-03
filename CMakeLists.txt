@@ -12,6 +12,8 @@ add_executable(mciMusicPlayer main.cpp
         ${SERVICE}
         ${FUNCTION}
         ${VIEW}
+        view/drawLyrics.h
+        view/drawLyrics.cpp
 )
 
 target_link_libraries(mciMusicPlayer libeasyx.a winmm.lib)

@@ -1,5 +1,7 @@
 #include "drawMain.h"
 #include "drawAlbum.h"
+#include "drawLyrics.h"
+
 #include "../function/playMusic.h"
 void drawMain() {
     BeginBatchDraw();
@@ -88,6 +90,7 @@ void drawMain() {
     }else {
         button_open_index.drawButton();
     }
+    drawLyrics(current_song_index);
     drawAlbum(current_song_index);
     // 该函数有空白遮罩，添加歌曲，添加目录，进度条，歌词打印以及后续如果会移动到主界面的音量条
     // 都请在后面绘制
