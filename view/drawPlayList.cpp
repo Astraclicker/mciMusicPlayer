@@ -59,6 +59,33 @@ void playlist::reload(const std::vector<Song> &songs_list_data) {
     }
 }
 
+// 添加播放列表
+void playlist::load(const std::vector<Song> &songs_list_data) {
+
+    int current_y = bg_playlist_y + 10;
+
+    if (!playlist_songs.empty()) {
+        auto& last_item = playlist_songs.back();
+        current_y = bg_playlist_y + 10 + (playlist_songs.size() * (song_button_H + song_button_gap));
+    }
+    for (const auto &song_data : songs_list_data) {
+        button_txt *new_btn = new button_txt(
+            bg_playlist_x + 5, current_y,
+            song_data.song_name, 30,
+            bg_playlist_W - 10,
+            RGB(130, 185, 255),
+            button_style::roundrect, songFont
+        );
+
+        playlist_song new_item;
+        new_item.song = song_data;
+        new_item.playlist_button = new_btn;
+        playlist_songs.push_back(new_item);
+
+        current_y += song_button_H + song_button_gap;
+    }
+}
+
 void playlist::add_song(const Song &song) {
     int new_y = bg_playlist_y + 10;
     if (!playlist_songs.empty()) {
@@ -216,6 +243,13 @@ void play_list_controller::reload_current_list(const std::vector<Song> &global_d
     if (tabs[current_playlist_index].list_obj) {
         tabs[current_playlist_index].list_obj->reload(global_data);
         cout << "Loaded " << global_data.size() << " songs into Tab " << current_playlist_index << endl;
+    }
+}
+
+void play_list_controller::load_current_list(const std::vector<Song> &global_data) {
+    if (tabs[current_playlist_index].list_obj) {
+        tabs[current_playlist_index].list_obj->load(global_data);
+        cout << "Added " << global_data.size() << " songs into Tab " << current_playlist_index << endl;
     }
 }
 
@@ -383,4 +417,13 @@ std::string play_list_controller::get_current_song_path(int current_song_index) 
 
 bool play_list_controller::is_mouse_in_list_area(int x, int y) const {
     return (x >= ctrl_x && x <= ctrl_x + ctrl_w && y >= ctrl_y && y <= ctrl_y + 520 + 40);
+}
+
+int play_list_controller::get_current_song_time()const {
+    if (tabs[current_playlist_index].list_obj->is_empty()) {
+        mciSendString("stop myaudio", NULL, 0, NULL);
+        play_statu = playStatu::pause;
+        return 0;
+    }
+    return tabs[current_playlist_index].list_obj->get_song_time(current_song_index);
 }

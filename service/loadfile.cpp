@@ -47,7 +47,7 @@ void load_file(std::string music_address,std::vector<Song> &songs_list) {
     }
 }
 
-void load_simple_file(std::vector<Song> songs_list) {
+void load_simple_file(std::vector<Song> &songs_list) {
     // 定义文件过滤器
     const char *filterPatterns[] = {
         "*.mp3",

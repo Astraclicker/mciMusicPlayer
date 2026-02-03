@@ -25,6 +25,9 @@ public:
     // 重载整个播放列表
     void reload(const std::vector<Song> &songs_list_data);
 
+    // 添加播放列表
+    void load(const std::vector<Song> &songs_list_data);
+
     // 添加歌曲到播放列表
     void add_song(const Song &song);
 
@@ -99,6 +102,8 @@ public:
     // 适配当前的歌曲列表加载模式，可以直接重载整播放列表
     void reload_current_list(const std::vector<Song> &global_data);
 
+    void load_current_list(const std::vector<Song> &global_data);
+
     // 将选中歌曲添加到当前播放列表
     // 若后续可以让用户直接添加指定歌曲，则在获取到相应歌曲信息后
     // 实例化一Song对象并直接调用该函数添加到当前播放列表
@@ -140,7 +145,7 @@ public:
 
     std::string get_current_song_name() const{return tabs[current_playlist_index].list_obj->get_song_name(current_song_index);}
 
-    int get_current_song_time()const {return tabs[current_playlist_index].list_obj->get_song_time(current_song_index);}
+    int get_current_song_time()const ;
 private:
     // 添加播放列表
     void add_playlist_tab();
