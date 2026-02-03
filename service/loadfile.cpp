@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <filesystem>
 #include <iostream>
-
+#include <easyx.h>
 #include "def.h"
 namespace fs = std::filesystem;
 
@@ -47,7 +47,7 @@ void load_file(std::string music_address,std::vector<Song> &songs_list) {
     }
 }
 
-void load_simple_file() {
+void load_simple_file(std::vector<Song> songs_list) {
     // 定义文件过滤器
     const char *filterPatterns[] = {
         "*.mp3",
@@ -63,10 +63,13 @@ void load_simple_file() {
         filterDescription,
         1
     );
+    if (!filePath) {
+        MessageBox(GetHWnd(), _T("然而你没有选择任何东西"), _T("callio"), MB_OK);
+        return;
+    }
     //对其颗粒度
-    std::string a = STRtoANSI(filePath);
+    std::string a = filePath;
     std::string temp = a+"|";
-
     //降噪
     for (auto &str : temp) {
         if (str == '\\') {
@@ -89,7 +92,8 @@ void load_simple_file() {
                 std::string cmd ="status " + address+" length";
                 mciSendString(cmd.c_str(), length, sizeof(length), NULL);
                 int total_ms = atoi(length);
-                songs_list.push_back({n,STRtoANSI(name),STRtoANSI(address),total_ms});
+                songs_list.push_back({n,name.erase(name.size()-4,4),address,total_ms});
+                n++;
                 temp.erase(0,i+1);
                 break;
             }

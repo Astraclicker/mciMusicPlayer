@@ -39,19 +39,18 @@ void start() {
                     if (msg.message == WM_LBUTTONDOWN) {
                         // 检查是否点击了进度条区域
                         if (msg.x >= 0 && msg.x <= 1280 &&
-                            msg.y >= 650 && msg.y <= 660) {  // 假设进度条高度5像素
+                            msg.y >= 650 && msg.y <= 660) {
+                            // 假设进度条高度5像素
                             progressDragging = true;
-                            }
+                        }
                         if (msg.x >= 1000 && msg.x <= 1280 &&
                             msg.y >= 725 && msg.y <= 730) {
                             dragging2 = true;
-                            }
-                    }
-                    else if (msg.message == WM_LBUTTONUP) {
+                        }
+                    } else if (msg.message == WM_LBUTTONUP) {
                         progressDragging = false;
                         dragging2 = false;
-                    }
-                    else if (msg.message == WM_MOUSEMOVE  ) {
+                    } else if (msg.message == WM_MOUSEMOVE) {
                         // 拖动进度条 - 直接调用跳转函数
                         if (progressDragging) {
                             clickProgressBarToSeek(msg.x);
@@ -64,7 +63,7 @@ void start() {
                             if (VolumeX > 1200) VolumeX = 1200;
 
                             // 计算新音量
-                            int newVolume = (VolumeX - 1000)  / 2;
+                            int newVolume = (VolumeX - 1000) / 2;
                             if (newVolume != volume) {
                                 // 设置新音量
                                 setVolume(newVolume);
@@ -72,10 +71,9 @@ void start() {
                         }
                     }
                     //点击跳转
-                    if (msg.message==WM_LBUTTONDOWN&&msg.y>=650&&msg.y<=660) {
+                    if (msg.message == WM_LBUTTONDOWN && msg.y >= 650 && msg.y <= 660) {
                         clickProgressBarToSeek(msg.x);
                     }
-
 
 
                     //单击设置
@@ -132,15 +130,20 @@ void start() {
                     //单击打开目录
 
                     if (msg.message == WM_LBUTTONDOWN && button_open_index.checkButton(msg.x, msg.y)) {
-                        cout<<"打开目录"<<endl;
-                        std::vector<Song>temp_song_list;
-                        load_file(tinyfd_selectFolderDialog("选择文件夹", nullptr), temp_song_list);
+                        cout << "打开目录" << endl;
+                        std::vector<Song> temp_song_list;
+                        const char *folderPath = tinyfd_selectFolderDialog("选择文件夹", NULL);
+                        if (folderPath) {
+                            load_file(folderPath, temp_song_list);
+                        } else {
+                            MessageBox(GetHWnd(), _T("然而你没有选择任何东西"), _T("callio"), MB_OK);
+                        }
+
                         my_play_list_controller.reload_current_list(temp_song_list);
                     }
                     //单击打开文件
                     if (msg.message == WM_LBUTTONDOWN && button_open_file.checkButton(msg.x, msg.y)) {
-                        //load_simple_file();
-
+                        load_simple_file(songs_list);
                     }
                     //单击设置
                     if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
@@ -168,7 +171,7 @@ void start() {
                                     my_play_list_controller.handle_click(msg.x, msg.y, false);
                                 }
                             }
-                                break;
+                            break;
                             case WM_RBUTTONDOWN: {
                                 unsigned long currentRClickTime = GetTickCount();
                                 if (currentRClickTime - lastRClickTime < 500) {
@@ -184,16 +187,16 @@ void start() {
                                     lastRClickTime = currentRClickTime;
                                 }
                             }
-                                break;
+                            break;
                         }
                     }
-                    if (play_statu==playStatu::play) {
+                    if (play_statu == playStatu::play) {
                         checkAndPlayNext();
                     }
                     break;
 
 
-                    case statu::setting:
+                case statu::setting:
 
                     drawSetting();
                     if (peekmessage(&msg,EX_MOUSE)) {
@@ -224,7 +227,7 @@ void start() {
                             if (msg.x >= 350 && msg.x <= 550 &&
                                 msg.y >= 350 && msg.y <= 355) {
                                 dragging = true;
-                                }
+                            }
                         } else if (msg.message == WM_LBUTTONUP) {
                             dragging = false;
                         } else if (msg.message == WM_MOUSEMOVE && dragging) {
@@ -247,7 +250,7 @@ void start() {
                             }
                         }
                     }
-                    if (play_statu==playStatu::play) {
+                    if (play_statu == playStatu::play) {
                         checkAndPlayNext();
                     }
                     flushmessage();
