@@ -15,7 +15,7 @@ long long getCurrenTime() {
 }
 void loadLyrics() {
     lrc_list.clear();
-    std::string CurrentPath = music_path + "/"+ my_play_list_controller.get_current_song_name() + ".lrc";
+    std::string CurrentPath = my_play_list_controller.get_current_song_root() + "/"+ my_play_list_controller.get_current_song_name() + ".lrc";
 
     std::ifstream lrc_file(CurrentPath);
     while (std::getline(lrc_file,text)) {
