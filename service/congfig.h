@@ -1,7 +1,3 @@
-//
-// Created by Rei on 2026/2/3.
-//
-
 #ifndef MCIMUSICPLAYER_CONGFIG_H
 #define MCIMUSICPLAYER_CONGFIG_H
 

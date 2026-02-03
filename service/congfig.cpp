@@ -1,7 +1,3 @@
-//
-// Created by Rei on 2026/2/3.
-//
-
 #include "congfig.h"
 #include <iostream>
 #include <fstream>

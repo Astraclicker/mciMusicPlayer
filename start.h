@@ -19,15 +19,7 @@ void start() {
     play_statu = playStatu::pause;
     play_mode = PlayMode::Sequence;
     load_config();
-    // load_file(music_path, songs_list);
-    // my_play_list_controller.reload_current_list(songs_list);
     bool progressDragging = false;
-    //
-    // //加载并播放第一首歌
-    // std::string open_command = "open \"" + songs_list[0].song_address + "\" alias " + deviceName;
-    // mciSendString(open_command.c_str(), NULL, 0, NULL);
-    // std::string play_command = "play " + deviceName;
-    // mciSendString(play_command.c_str(),NULL, 0,NULL);
 
     unsigned long lastLClickTime = 0; // 左键
     unsigned long lastRClickTime = 0; // 右键
@@ -37,7 +29,6 @@ void start() {
             case statu::main:
                 flushmessage();
                 drawMain(); //打印主菜单 初始化按钮 鼠标悬停改变按钮样式
-
                 if (peekmessage(&msg,EX_MOUSE)) {
                     // 进度条拖拽
                     if (msg.message == WM_LBUTTONDOWN) {
@@ -185,12 +176,6 @@ void start() {
                                 if (currentRClickTime - lastRClickTime < 500) {
                                     int R_click_index = my_play_list_controller.handle_click(msg.x, msg.y, true);
                                     save_config();
-                                    // int current_playlist_index = my_play_list_controller.get_current_playlist_index();
-                                    // if (current_playlist_index == 1) {
-                                    //     if (R_click_index >= 0 && R_click_index < songs_list.size()) {
-                                    //         songs_list.erase(songs_list.begin() + R_click_index);
-                                    //     }
-                                    // }
                                     lastRClickTime = 0;
                                 } else {
                                     lastRClickTime = currentRClickTime;
