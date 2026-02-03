@@ -37,15 +37,20 @@ void start() {
                             msg.y >= 650 && msg.y <= 660) {
                             // 假设进度条高度5像素
                             progressDragging = true;
-                        }
+                            }
                         if (msg.x >= 1000 && msg.x <= 1280 &&
                             msg.y >= 725 && msg.y <= 730) {
                             dragging2 = true;
-                        }
+                            }
                     } else if (msg.message == WM_LBUTTONUP) {
                         progressDragging = false;
                         dragging2 = false;
                     } else if (msg.message == WM_MOUSEMOVE) {
+                        // 0x8000 是掩码，用来检测按键当前是否被按下
+                        if (!(GetAsyncKeyState(VK_LBUTTON) & 0x8000)) {
+                            progressDragging = false;
+                            dragging2 = false;
+                        }
                         // 拖动进度条 - 直接调用跳转函数
                         if (progressDragging) {
                             clickProgressBarToSeek(msg.x);
@@ -144,11 +149,6 @@ void start() {
                         my_play_list_controller.load_current_list(temp_song_list);
                         save_config();
                     }
-                    //单击设置
-                    if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
-                        condition = statu::setting;
-                        flushmessage(EX_MOUSE);
-                    }
                     if (my_play_list_controller.is_mouse_in_list_area(msg.x, msg.y)) {
                         switch (msg.message) {
                             case WM_MOUSEWHEEL:
@@ -170,7 +170,7 @@ void start() {
                                     my_play_list_controller.handle_click(msg.x, msg.y, false);
                                 }
                             }
-                            break;
+                                break;
                             case WM_RBUTTONDOWN: {
                                 unsigned long currentRClickTime = GetTickCount();
                                 if (currentRClickTime - lastRClickTime < 500) {
@@ -181,19 +181,19 @@ void start() {
                                     lastRClickTime = currentRClickTime;
                                 }
                             }
-                            break;
+                                break;
                         }
                     }
                     if (play_statu == playStatu::play) {
                         checkAndPlayNext();
                     }
-                    break;
+                }
+                break;
 
+            case statu::setting:
 
-                case statu::setting:
-
-                    drawSetting();
-                    if (peekmessage(&msg,EX_MOUSE)) {
+                drawSetting();
+                if (peekmessage(&msg,EX_MOUSE)) {
                         if (msg.message == WM_LBUTTONDOWN) {
                             cout << msg.x << "||" << msg.y << endl;
 
@@ -244,13 +244,13 @@ void start() {
                             }
                         }
                     }
-                    if (play_statu == playStatu::play) {
-                        checkAndPlayNext();
-                    }
-                    flushmessage();
-                    break;
+                if (play_statu == playStatu::play) {
+                    checkAndPlayNext();
                 }
+                flushmessage();
+                break;
         }
+
         DWORD end_time = GetTickCount();
         DWORD deltat_time = end_time - start_time;
         if (deltat_time < 1000 / 144) {
