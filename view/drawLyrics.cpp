@@ -15,11 +15,11 @@ long long getCurrenTime() {
 }
 void loadLyrics() {
     lrc_list.clear();
-    std::string CurrentPath = music_path + "/"+ my_play_list_controller.get_current_song_name() + ".lrc";
+    std::string CurrentPath = my_play_list_controller.get_current_song_root() + "/"+ my_play_list_controller.get_current_song_name() + ".lrc";
 
     std::ifstream lrc_file(CurrentPath);
     while (std::getline(lrc_file,text)) {
-        //½âÎöÃ¿Ò»ÐÐ¸è´Ê
+        //ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½Ð¸ï¿½ï¿½
         int pos = text.find(']');
         std::string temp = text.substr(pos+1);
         std::string word = STRtoANSI(temp);
@@ -32,7 +32,7 @@ void loadLyrics() {
             int third = std::stoi(third_str);
             long long total_time;
             total_time = minute*60*1000 + second*1000 + third*10;
-            lrc one_lrc;//Ò»ÐÐ¸è´ÊµÄ½á¹¹Ìå
+            lrc one_lrc;//Ò»ï¿½Ð¸ï¿½ÊµÄ½á¹¹ï¿½ï¿½
             one_lrc.time = total_time;
             one_lrc.title = word;
             lrc_list.push_back(one_lrc);
@@ -53,7 +53,7 @@ void drawLyrics(int index) {
         current_index = i;
     }
 
-    //»æÖÆÂß¼­
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
     int center_x= 520;
     int center_y= 317;
     int range = 4;
@@ -65,10 +65,10 @@ void drawLyrics(int index) {
             int draw_y = center_y + (num*height);
             if (num == 0) {
                 settextcolor(RGB(30,144,255));
-                settextstyle(35,0,"Î¢ÈíÑÅºÚ");
+                settextstyle(35,0,"Î¢ï¿½ï¿½ï¿½Åºï¿½");
             }else {
                 settextcolor(RGB(200, 200, 200));
-                settextstyle(20,0,"Î¢ÈíÑÅºÚ");
+                settextstyle(20,0,"Î¢ï¿½ï¿½ï¿½Åºï¿½");
             }
             setlinecolor(RGB(30,144,255));
             setlinestyle(PS_SOLID,2);
