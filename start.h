@@ -37,7 +37,6 @@ void start() {
             case statu::main:
                 flushmessage();
                 drawMain(); //打印主菜单 初始化按钮 鼠标悬停改变按钮样式
-
                 if (peekmessage(&msg,EX_MOUSE)) {
                     // 进度条拖拽
                     if (msg.message == WM_LBUTTONDOWN) {

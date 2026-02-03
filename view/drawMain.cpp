@@ -4,6 +4,10 @@
 void drawMain() {
     BeginBatchDraw();
     loadimage(NULL, bk_img.c_str());
+
+    IMAGE bilibili;
+    loadimage(&bilibili,"sources/image/bilibili.png");
+    putimage(-5,642,&bilibili);
     //»­³ö°´Å¥
     if (button_setting.checkButton(msg.x, msg.y)) {
         button_setting_on.drawButton();
