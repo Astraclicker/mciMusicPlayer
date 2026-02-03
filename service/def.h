@@ -45,8 +45,8 @@ inline statu condition;
 inline playStatu play_statu;
 inline PlayMode play_mode;
 
-//播放列表
-inline std::vector<Song>songs_list;
+// //播放列表
+// inline std::vector<Song>songs_list;
 //开始的编号
 inline int n = 0;
 

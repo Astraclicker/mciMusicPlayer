@@ -34,6 +34,7 @@ void load_file(std::string music_address,std::vector<Song> &songs_list) {
         if (back == name1 || back == name2) {
             std::string name = temp.substr(music_address.size()+1, temp.size() - music_address.size() - back.size() -2);
             char length[64];
+            mciSendString("close myaudio", NULL, 0, NULL);
             std::string cmd = "open \"" + music_address +"/"+ STRtoANSI(name) + "." + STRtoANSI(back) + "\"  alias myaudio";
             mciSendString(cmd.c_str(), NULL, 0, NULL);
             mciSendString("status myaudio length", length, sizeof(length), NULL);
@@ -48,7 +49,7 @@ void load_file(std::string music_address,std::vector<Song> &songs_list) {
     }
 }
 
-void load_simple_file(std::vector<Song> songs_list) {
+void load_simple_file(std::vector<Song> &songs_list) {
     // 定义文件过滤器
     const char *filterPatterns[] = {
         "*.mp3",
@@ -91,6 +92,7 @@ void load_simple_file(std::vector<Song> songs_list) {
                 std::string name = address.substr(address.size()-j+1,address.size());
                 std::string root = address.substr(0,address.size()-j);
                 char length[64];
+                mciSendString("close myaudio", NULL, 0, NULL);
                 std::string cmd = "open \"" +address+ "\"  alias myaudio";
                 mciSendString(cmd.c_str(), NULL, 0, NULL);
                 mciSendString("status myaudio length", length, sizeof(length), NULL);

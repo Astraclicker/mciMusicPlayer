@@ -10,6 +10,7 @@
 #include <vector>
 #include <string>
 #include "../function/button.h"
+#include "../service/congfig.h"
 
 
 struct playlist_song {
@@ -22,8 +23,14 @@ public:
     playlist();
     ~playlist();
 
+    friend bool save_config();
+    friend bool load_config();
+
     // 重载整个播放列表
     void reload(const std::vector<Song> &songs_list_data);
+
+    // 添加播放列表
+    void load(const std::vector<Song> &songs_list_data);
 
     // 添加歌曲到播放列表
     void add_song(const Song &song);
@@ -56,6 +63,7 @@ public:
 
     int get_song_time(int current_song_index){return playlist_songs[current_song_index].song.song_time;}
     std::string get_song_name(int current_song_index) const{return playlist_songs[current_song_index].song.song_name;}
+    std::string get_song_root(int current_song_index) const{return playlist_songs[current_song_index].song.song_root;}
 
     // 获取播放列表坐标的相关参数，方便点击范围的判定
     int get_bg_playlist_x() const { return bg_playlist_x; }
@@ -95,9 +103,14 @@ public:
     play_list_controller();
     ~play_list_controller();
 
+    friend bool save_config();
+    friend bool load_config();
+
     // 安全地重载当前选中的列表数据
     // 适配当前的歌曲列表加载模式，可以直接重载整播放列表
     void reload_current_list(const std::vector<Song> &global_data);
+
+    void load_current_list(const std::vector<Song> &global_data);
 
     // 将选中歌曲添加到当前播放列表
     // 若后续可以让用户直接添加指定歌曲，则在获取到相应歌曲信息后
@@ -140,13 +153,17 @@ public:
 
     std::string get_current_song_name() const{return tabs[current_playlist_index].list_obj->get_song_name(current_song_index);}
 
-    int get_current_song_time()const {return tabs[current_playlist_index].list_obj->get_song_time(current_song_index);}
+    std::string get_current_song_root() const{return tabs[current_playlist_index].list_obj->get_song_root(current_song_index);};
+
+    int get_current_song_time()const ;
 private:
     // 添加播放列表
     void add_playlist_tab();
 
     // 删除播放列表
     void delete_playlist_tab(int index);
+
+    void delete_playlist_tab_for_load_config(int index);
 
     // 根据点击到的播放列表控制器的索引
     // 通过修改当前播放列表的索引，实现播放列表的切换

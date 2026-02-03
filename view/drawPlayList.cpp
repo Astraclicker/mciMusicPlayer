@@ -59,6 +59,33 @@ void playlist::reload(const std::vector<Song> &songs_list_data) {
     }
 }
 
+// ÃÌº”≤•∑≈¡–±Ì
+void playlist::load(const std::vector<Song> &songs_list_data) {
+
+    int current_y = bg_playlist_y + 10;
+
+    if (!playlist_songs.empty()) {
+        auto& last_item = playlist_songs.back();
+        current_y = bg_playlist_y + 10 + (playlist_songs.size() * (song_button_H + song_button_gap));
+    }
+    for (const auto &song_data : songs_list_data) {
+        button_txt *new_btn = new button_txt(
+            bg_playlist_x + 5, current_y,
+            song_data.song_name, 30,
+            bg_playlist_W - 10,
+            RGB(130, 185, 255),
+            button_style::roundrect, songFont
+        );
+
+        playlist_song new_item;
+        new_item.song = song_data;
+        new_item.playlist_button = new_btn;
+        playlist_songs.push_back(new_item);
+
+        current_y += song_button_H + song_button_gap;
+    }
+}
+
 void playlist::add_song(const Song &song) {
     int new_y = bg_playlist_y + 10;
     if (!playlist_songs.empty()) {
@@ -185,7 +212,7 @@ play_list_controller::play_list_controller() : tabFont(22, 8, 0x333333, "Œ¢»Ì—≈∫
 
     delete tabs[1].tab_button;
     tabs[1].tab_button = new button_txt(
-        ctrl_x + 5 + 30 + 2, ctrl_y + 5, "ƒ¨»œ¡–±Ì",
+        ctrl_x + 5 + 30 + 2, ctrl_y + 5, "∏Ëµ•1",
         tab_btn_h, tab_btn_w, RGB(130, 185, 255), button_style::roundrect, tabFont
     );
 }
@@ -219,6 +246,13 @@ void play_list_controller::reload_current_list(const std::vector<Song> &global_d
     }
 }
 
+void play_list_controller::load_current_list(const std::vector<Song> &global_data) {
+    if (tabs[current_playlist_index].list_obj) {
+        tabs[current_playlist_index].list_obj->load(global_data);
+        cout << "Added " << global_data.size() << " songs into Tab " << current_playlist_index << endl;
+    }
+}
+
 void play_list_controller::add_playlist_tab() {
     int new_x = ctrl_x + 5;
     if (!tabs.empty()) {
@@ -241,6 +275,31 @@ void play_list_controller::add_playlist_tab() {
 }
 
 void play_list_controller::delete_playlist_tab(int index) {
+    // ≤ª‘ –Ì…æ≥˝≤•∑≈¡–±Ì
+    if (index <= 1 || index >= tabs.size()) return;
+
+    int current_x = tabs[index].tab_button->get_x();
+
+    delete tabs[index].tab_button;
+    delete tabs[index].list_obj;
+    tabs.erase(tabs.begin() + index);
+
+    if (current_playlist_index == index) {
+        current_playlist_index = index - 1;
+        if (current_playlist_index < 1 && tabs.size() > 1) current_playlist_index = 1;
+    }
+    else if (current_playlist_index > index) {
+        current_playlist_index--;
+    }
+
+    for (int i = index; i < tabs.size(); i++) {
+        tabs[i].tab_button->set_x(current_x);
+        current_x += tab_btn_w + 2;
+    }
+}
+
+void play_list_controller::delete_playlist_tab_for_load_config(int index) {
+    // ≤ª‘ –Ì…æ≥˝≤•∑≈¡–±Ì
     if (index <= 0 || index >= tabs.size()) return;
 
     int current_x = tabs[index].tab_button->get_x();
@@ -293,6 +352,7 @@ int play_list_controller::handle_click(int x, int y, bool is_right_click) {
                     if (i == 0) {
                         cout << "Add new playlist" << endl;
                         add_playlist_tab();
+                        save_config();
                     } else {
                         switch_tab(i);
                     }
@@ -321,33 +381,36 @@ int play_list_controller::handle_click(int x, int y, bool is_right_click) {
 }
 
 void play_list_controller::handle_wheel(int wheel_move, int mouse_x, int mouse_y) {
+
     if (mouse_y >= ctrl_y && mouse_y <= ctrl_y + ctrl_h) {
-        if (tabs.empty()) return;
-        int speed = wheel_move / 120 * 20;
-        if (speed == 0) return;
+
         int first_x = tabs.front().tab_button->get_x();
-        int last_w = (tabs.size() == 1) ? 30 : tab_btn_w;
         int last_x = tabs.back().tab_button->get_x();
-        int list_right = last_x + last_w;
+        int last_w = (tabs.size() == 1) ? 30 : tab_btn_w; //
+
         int view_left = ctrl_x + 5;
         int view_right = ctrl_x + ctrl_w - 5;
+        int content_width = (last_x + last_w) - first_x;
         int view_width = view_right - view_left;
 
-        if (list_right - first_x <= view_width) return;
-        if (speed > 0) {
-            if (first_x + speed > view_left) {
-                speed = view_left - first_x;
+        if (content_width <= view_width) {
+            // ∆´≤Ó£¨“™∆´≤Ó≤≈◊ˆ∏ƒ±‰
+            int fix = view_left - first_x;
+            if (fix != 0) {
+                for (auto &t : tabs) t.tab_button->set_x(t.tab_button->get_x() + fix);
             }
+            return;
         }
-        else if (speed < 0) {
-            if (list_right + speed < view_right) {
-                speed = view_right - list_right;
-            }
-        }
+        int speed = wheel_move / 120 * 20;
         if (speed == 0) return;
-        for (auto &t : tabs) {
-            t.tab_button->set_x(t.tab_button->get_x() + speed);
+        // ±ﬂΩÁœﬁ÷∆ (Clamping)
+        if (speed > 0 && first_x + speed > view_left) speed = view_left - first_x;     // ◊Û±ﬂΩÁœﬁ÷∆
+        else if (speed < 0 && (last_x + last_w) + speed < view_right) speed = view_right - (last_x + last_w); // ”“±ﬂΩÁœﬁ÷∆
+        // ”¶”√“∆∂Ø
+        if (speed != 0) {
+            for (auto &t : tabs) t.tab_button->set_x(t.tab_button->get_x() + speed);
         }
+
     }
     else if (current_playlist_index > 0 && current_playlist_index < tabs.size()) {
         if (tabs[current_playlist_index].list_obj) {
@@ -383,4 +446,13 @@ std::string play_list_controller::get_current_song_path(int current_song_index) 
 
 bool play_list_controller::is_mouse_in_list_area(int x, int y) const {
     return (x >= ctrl_x && x <= ctrl_x + ctrl_w && y >= ctrl_y && y <= ctrl_y + 520 + 40);
+}
+
+int play_list_controller::get_current_song_time()const {
+    if (tabs[current_playlist_index].list_obj->is_empty()) {
+        mciSendString("stop myaudio", NULL, 0, NULL);
+        play_statu = playStatu::pause;
+        return 0;
+    }
+    return tabs[current_playlist_index].list_obj->get_song_time(current_song_index);
 }

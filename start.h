@@ -8,27 +8,31 @@
 #include "view/drawPlayList.h"
 #include "function/playMusic.h"
 #include "service/loadfile.h"
+#include "service/congfig.h"
+
 using std::cout;
 using std::endl;
 
 void start() {
     initgraph(width_window, length_window);
     condition = statu::main;
-    play_statu = playStatu::play;
+    play_statu = playStatu::pause;
     play_mode = PlayMode::Sequence;
-    load_file(music_path, songs_list);
-    my_play_list_controller.reload_current_list(songs_list);
+    load_config();
+    // load_file(music_path, songs_list);
+    // my_play_list_controller.reload_current_list(songs_list);
     bool progressDragging = false;
-
-    //加载并播放第一首歌
-    std::string open_command = "open \"" + songs_list[0].song_address + "\" alias " + deviceName;
-    mciSendString(open_command.c_str(), NULL, 0, NULL);
-    std::string play_command = "play " + deviceName;
-    mciSendString(play_command.c_str(),NULL, 0,NULL);
+    //
+    // //加载并播放第一首歌
+    // std::string open_command = "open \"" + songs_list[0].song_address + "\" alias " + deviceName;
+    // mciSendString(open_command.c_str(), NULL, 0, NULL);
+    // std::string play_command = "play " + deviceName;
+    // mciSendString(play_command.c_str(),NULL, 0,NULL);
 
     unsigned long lastLClickTime = 0; // 左键
     unsigned long lastRClickTime = 0; // 右键
     while (true) {
+        DWORD start_time = GetTickCount();
         switch (condition) {
             case statu::main:
                 flushmessage();
@@ -139,11 +143,15 @@ void start() {
                             MessageBox(GetHWnd(), _T("然而你没有选择任何东西"), _T("callio"), MB_OK);
                         }
 
-                        my_play_list_controller.reload_current_list(temp_song_list);
+                        my_play_list_controller.load_current_list(temp_song_list);
+                        save_config();
                     }
                     //单击打开文件
                     if (msg.message == WM_LBUTTONDOWN && button_open_file.checkButton(msg.x, msg.y)) {
-                        load_simple_file(songs_list);
+                        std::vector<Song> temp_song_list;
+                        load_simple_file(temp_song_list);
+                        my_play_list_controller.load_current_list(temp_song_list);
+                        save_config();
                     }
                     //单击设置
                     if (msg.message == WM_LBUTTONDOWN && button_setting.checkButton(msg.x, msg.y)) {
@@ -176,6 +184,7 @@ void start() {
                                 unsigned long currentRClickTime = GetTickCount();
                                 if (currentRClickTime - lastRClickTime < 500) {
                                     int R_click_index = my_play_list_controller.handle_click(msg.x, msg.y, true);
+                                    save_config();
                                     // int current_playlist_index = my_play_list_controller.get_current_playlist_index();
                                     // if (current_playlist_index == 1) {
                                     //     if (R_click_index >= 0 && R_click_index < songs_list.size()) {
@@ -257,6 +266,12 @@ void start() {
                     break;
                 }
         }
+        DWORD end_time = GetTickCount();
+        DWORD deltat_time = end_time - start_time;
+        if (deltat_time < 1000 / 144) {
+            Sleep(1000 / 144 - deltat_time);
+        }
     }
+
 }
 #endif
