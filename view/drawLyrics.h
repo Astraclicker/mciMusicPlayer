@@ -1,0 +1,20 @@
+//
+// Created by 21031 on 2026/2/2.
+//
+
+#ifndef MCIMUSICPLAYER_DRAWLYRICS_H
+#define MCIMUSICPLAYER_DRAWLYRICS_H
+#include "../service/def.h"
+
+
+//获取当前毫秒数
+long long getCurrenTime();
+
+//解析歌词
+void loadLyrics();
+
+//绘制歌词
+void drawLyrics(int index);
+
+
+#endif //MCIMUSICPLAYER_DRAWLYRICS_H
