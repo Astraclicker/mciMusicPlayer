@@ -24,7 +24,6 @@ void start() {
     unsigned long lastLClickTime = 0; // ×ó¼ü
     unsigned long lastRClickTime = 0; // ÓÒ¼ü
     while (true) {
-        DWORD start_time = GetTickCount();
         switch (condition) {
             case statu::main:
                 flushmessage();
@@ -249,12 +248,6 @@ void start() {
                 }
                 flushmessage();
                 break;
-        }
-
-        DWORD end_time = GetTickCount();
-        DWORD deltat_time = end_time - start_time;
-        if (deltat_time < 1000 / 144) {
-            Sleep(1000 / 144 - deltat_time);
         }
     }
 
