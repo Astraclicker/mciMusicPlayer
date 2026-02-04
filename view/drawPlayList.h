@@ -62,7 +62,9 @@ public:
     int get_playlist_size(){return playlist_songs.size();}
 
     int get_song_time(int current_song_index){return playlist_songs[current_song_index].song.song_time;}
-    std::string get_song_name(int current_song_index) const{return playlist_songs[current_song_index].song.song_name;}
+    std::string get_song_name(int current_song_index) const {
+        return playlist_songs[current_song_index].song.song_name;
+    }
     std::string get_song_root(int current_song_index) const{return playlist_songs[current_song_index].song.song_root;}
 
     // ��ȡ�����б��������ز�������������Χ���ж�
@@ -151,7 +153,12 @@ public:
 
     int get_current_playlist_size() const{return tabs[current_playlist_index].list_obj->get_playlist_size();}
 
-    std::string get_current_song_name() const{return tabs[current_playlist_index].list_obj->get_song_name(current_song_index);}
+    std::string get_current_song_name() const {
+        if (tabs[current_playlist_index].list_obj->is_empty()) {
+            return "";
+        }
+        return tabs[current_playlist_index].list_obj->get_song_name(current_song_index);
+    }
 
     std::string get_current_song_root() const{return tabs[current_playlist_index].list_obj->get_song_root(current_song_index);};
 
