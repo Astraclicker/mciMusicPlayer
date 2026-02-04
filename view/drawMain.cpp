@@ -10,7 +10,6 @@ void drawMain() {
     IMAGE bilibili;
     loadimage(&bilibili,"sources/image/bilibili.png");
     putimage(-5,642,&bilibili);
-    //������ť
     if (button_setting.checkButton(msg.x, msg.y)) {
         button_setting_on.drawButton();
     } else {
@@ -93,29 +92,15 @@ void drawMain() {
     drawInformation();
     drawLyrics(current_song_index);
     drawAlbum(current_song_index);
-    // �ú����пհ����֣���Ӹ��������Ŀ¼������������ʴ�ӡ�Լ�����������ƶ����������������
-    // �����ں������
-    // ����ᱻ�հ�������ס
     my_play_list_controller.draw_all();
-
-    // ��ȡ��ǰ����
     float progress = getProgress();
-    // ���ƽ�����
     drawSimpleProgressBar(0, 650, 1280, 10, progress);
-
     VolumeX=volume*2+1000;
-    // ��������������
     rectangle(1000, 725, 1200, 730);
-
-    // ������䲿�֣���ɫ��
     setfillcolor(RGB(38, 120, 255));
     fillrectangle(1000, 725, VolumeX, 730);
-
-    // ���ƻ���
-    // ����ɫ��Բ
     setfillcolor(0x808080);
     solidcircle(VolumeX, 727.5, 8);
-    // ��ʾ������ֵ
     char volText[20];
     sprintf(volText, "%d%%", volume);
     outtextxy(1220, 720, volText);
