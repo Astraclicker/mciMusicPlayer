@@ -80,6 +80,7 @@ void drawLyrics(int index) {
         }
     }
 }
+//绘制歌曲名和歌手
 void drawInformation() {
     std::string artist_song = my_play_list_controller.get_current_song_name();
     int pos = artist_song.find('-');
