@@ -54,7 +54,7 @@ void drawLyrics(int index) {
     }
 
     //�����߼�
-    int center_x= 520;
+    int center_x= 421;
     int center_y= 317;
     int range = 4;
     int height = 40;
@@ -65,17 +65,31 @@ void drawLyrics(int index) {
             int draw_y = center_y + (num*height);
             if (num == 0) {
                 settextcolor(RGB(30,144,255));
-                settextstyle(35,0,"΢���ź�");
+                settextstyle(20,0,"΢���ź�");
             }else {
                 settextcolor(RGB(200, 200, 200));
-                settextstyle(20,0,"΢���ź�");
+                settextstyle(15,0,"΢���ź�");
             }
-            setlinecolor(RGB(30,144,255));
+            setlinecolor(RGB(128,128,128));
             setlinestyle(PS_SOLID,2);
-            rectangle(510,114,935,564);
+            line(405,114,405,554);
+            // rectangle(510,114,935,564);
             setlinecolor(WHITE);
             setlinestyle(PS_SOLID,1);
             outtextxy(center_x,draw_y,lrc_list[real_index].title.c_str());
         }
     }
+}
+void drawInformation() {
+    std::string artist_song = my_play_list_controller.get_current_song_name();
+    int pos = artist_song.find('-');
+    std::string artist = artist_song.substr(0,pos);
+    std::string song_name = artist_song.substr(pos+1);
+    settextcolor(BLACK);
+    settextstyle(25,0,"微软雅黑");
+    outtextxy(31,504,artist.c_str());
+    settextcolor(RGB(128,128,128));
+    settextstyle(20,0,"微软雅黑");
+    outtextxy(31,534,song_name.c_str());
+
 }
