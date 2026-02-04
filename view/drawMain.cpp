@@ -10,7 +10,7 @@ void drawMain() {
     IMAGE bilibili;
     loadimage(&bilibili,"sources/image/bilibili.png");
     putimage(-5,642,&bilibili);
-    //»­³ö°´Å¥
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
     if (button_setting.checkButton(msg.x, msg.y)) {
         button_setting_on.drawButton();
     } else {
@@ -90,31 +90,32 @@ void drawMain() {
     }else {
         button_open_index.drawButton();
     }
+    drawInformation();
     drawLyrics(current_song_index);
     drawAlbum(current_song_index);
-    // ¸Ãº¯ÊýÓÐ¿Õ°×ÕÚÕÖ£¬Ìí¼Ó¸èÇú£¬Ìí¼ÓÄ¿Â¼£¬½ø¶ÈÌõ£¬¸è´Ê´òÓ¡ÒÔ¼°ºóÐøÈç¹û»áÒÆ¶¯µ½Ö÷½çÃæµÄÒôÁ¿Ìõ
-    // ¶¼ÇëÔÚºóÃæ»æÖÆ
-    // ·ñÔò»á±»¿Õ°×ÕÚÕÖÕÚ×¡
+    // ï¿½Ãºï¿½ï¿½ï¿½ï¿½Ð¿Õ°ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê´ï¿½Ó¡ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½á±»ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¡
     my_play_list_controller.draw_all();
 
-    // »ñÈ¡µ±Ç°½ø¶È
+    // ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
     float progress = getProgress();
-    // »æÖÆ½ø¶ÈÌõ
+    // ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½
     drawSimpleProgressBar(0, 650, 1280, 10, progress);
 
     VolumeX=volume*2+1000;
-    // »æÖÆÒôÁ¿»¬¿é¹ìµÀ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     rectangle(1000, 725, 1200, 730);
 
-    // »æÖÆÌî³ä²¿·Ö£¨À¶É«£©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä²¿ï¿½Ö£ï¿½ï¿½ï¿½É«ï¿½ï¿½
     setfillcolor(RGB(38, 120, 255));
     fillrectangle(1000, 725, VolumeX, 730);
 
-    // »æÖÆ»¬¿é
-    // »­°×É«ÄÚÔ²
+    // ï¿½ï¿½ï¿½Æ»ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½Ô²
     setfillcolor(0x808080);
     solidcircle(VolumeX, 727.5, 8);
-    // ÏÔÊ¾ÒôÁ¿ÊýÖµ
+    // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
     char volText[20];
     sprintf(volText, "%d%%", volume);
     outtextxy(1220, 720, volText);

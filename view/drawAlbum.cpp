@@ -15,5 +15,5 @@ void drawAlbum (int index) {
     //std::string CurrentPath = music_path + "?????????" + ".jpg";
     IMAGE cover_img;
     loadimage(&cover_img, CurrentPath.c_str(), width_album, length_album);
-    putimage(31, 114, &cover_img);
+    putimage(26, 114, &cover_img);
 }

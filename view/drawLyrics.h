@@ -16,5 +16,7 @@ void loadLyrics();
 //绘制歌词
 void drawLyrics(int index);
 
+//展示歌曲信息
+void drawInformation();
 
 #endif //MCIMUSICPLAYER_DRAWLYRICS_H

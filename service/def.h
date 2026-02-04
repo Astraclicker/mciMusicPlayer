@@ -11,8 +11,8 @@ constexpr int width_window =1280;
 constexpr int  length_window= 800;
 
 //专辑封面大小
-constexpr int width_album = 450;
-constexpr int length_album= 450;
+constexpr int width_album = 350;
+constexpr int length_album= 350;
 
 //音乐路径
 inline std::string music_path = "sources/music";

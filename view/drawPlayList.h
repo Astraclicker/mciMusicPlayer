@@ -1,7 +1,7 @@
 /*
- * ¹¦ÄÜ£º
- * ²¥·ÅÁÐ±íµÄºËÐÄ¿ØÖÆÆ÷Óë»æÖÆ¶¨Òå
- * ¸ºÔðÈË£ºÏÖÊµµÄÑÓÐø
+ * ï¿½ï¿½ï¿½Ü£ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Äºï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 #ifndef MCIMUSICPLAYER_DRAWPLAYLIST_H
 #define MCIMUSICPLAYER_DRAWPLAYLIST_H
@@ -26,37 +26,37 @@ public:
     friend bool save_config();
     friend bool load_config();
 
-    // ÖØÔØÕû¸ö²¥·ÅÁÐ±í
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void reload(const std::vector<Song> &songs_list_data);
 
-    // Ìí¼Ó²¥·ÅÁÐ±í
+    // ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void load(const std::vector<Song> &songs_list_data);
 
-    // Ìí¼Ó¸èÇúµ½²¥·ÅÁÐ±í
+    // ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void add_song(const Song &song);
 
-    // ½»»¥Âß¼­
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
     void update_song_buttons_y(int wheel_move);
 
-    // ¼ì²âÊÇµã»÷ÄÄÊ×¸èÇú
-    // ²¢·µ»Øµã»÷µÄ¸èÇúË÷Òý
-    // Èç¹ûÃ»ÓÐµã»÷µ½£¨ÖÐ¼äµÄ¿Õ°×ÇøÓò£©Ôò·µ»Ø-1
+    // ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½Ã»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½Ä¿Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½-1
     int is_click_button(int x, int y);
 
-    // ¸ù¾Ý´«ÈëµÄË÷ÒýÖµ´Óµ±Ç°²¥·ÅÁÐ±íÒÆ³ý¸Ã¸èÇú
+    // ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Óµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Æ³ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½
     void delete_song_from_current_playlist(int current_song_index);
 
-    // ¸ù¾Ý»ñÈ¡µ½µÄË÷ÒýÖµ£¬·µ»Ø¶ÔÓ¦¸èÇúËùÔÚµØÖ·
+    // ï¿½ï¿½ï¿½Ý»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ö·
     std::string get_song_address(int current_song_index);
 
-    // ÄÚ²¿¸¨Öúº¯Êý£¬ÔÚÀàÌåÀïÃæÊµÏÖÄ¬ÈÏÎªÊÓ×÷ÄÚÁªº¯Êý£¬·½±ãÔÚÄÚ²¿·´¸´Ê¹ÓÃ
-    // ÓÃÓÚÅÐ¶Ïplaylist_songsÊÇ·ñÎª¿Õ£¬Èç¹ûÎª¿Õ£¬µ÷ÓÃ¸Ãº¯ÊýµÄº¯ÊýÓ¦Ö´ÐÐÏàÓ¦±£»¤´ëÊ©±ÜÃâ³ÌÐò±ÀÀ£
+    // ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½playlist_songsï¿½Ç·ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½Ã¸Ãºï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½Ó¦Ö´ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     bool is_empty() const { return playlist_songs.empty(); }
 
-    // »æÖÆ¸Ã²¥·ÅÁÐ±í
+    // ï¿½ï¿½ï¿½Æ¸Ã²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void draw();
 
-    // »ñÈ¡µ±Ç°¸èÇúµÄÔÚÈ«¾Ö¸èµ¥ÇøÓòµÄindex
+    // ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½Ö¸èµ¥ï¿½ï¿½ï¿½ï¿½ï¿½index
     int get_songs_list_index(int clicked_song_index);
 
     int get_playlist_size(){return playlist_songs.size();}
@@ -65,36 +65,36 @@ public:
     std::string get_song_name(int current_song_index) const{return playlist_songs[current_song_index].song.song_name;}
     std::string get_song_root(int current_song_index) const{return playlist_songs[current_song_index].song.song_root;}
 
-    // »ñÈ¡²¥·ÅÁÐ±í×ø±êµÄÏà¹Ø²ÎÊý£¬·½±ãµã»÷·¶Î§µÄÅÐ¶¨
+    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½Ð¶ï¿½
     int get_bg_playlist_x() const { return bg_playlist_x; }
     int get_bg_playlist_y() const { return bg_playlist_y; }
     int get_bg_playlist_W() const { return bg_playlist_W; }
     int get_bg_playlist_H() const { return bg_playlist_H; }
 
 private:
-    // ²¥·ÅÁÐ±í±³¾°°´Å¥
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
     button_color* bg_button;
-    // ²¥·ÅÁÐ±í°´Å¥×ÖÌå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½
     txt songFont;
-    // µ±Ç°²¥·ÅÁÐ±íµÄ¸èÇúÈÝÆ÷
+    // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     std::vector<playlist_song> playlist_songs;
 
-    // ²¥·ÅÁÐ±íÎ»ÖÃÐÅÏ¢
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ï¢
     int bg_playlist_x, bg_playlist_y;
     int bg_playlist_W, bg_playlist_H;
-    // ¸èÇú°´Å¥µÄ¸ß¶ÈºÍ¼äÏ¶
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½Ä¸ß¶ÈºÍ¼ï¿½Ï¶
     int song_button_H, song_button_gap;
 };
 
 // ==========================================
-// ²¥·ÅÁÐ±í×Ü¿ØÖÆÆ÷ (¸ºÔð¹ÜÀí¶à¸ö±êÇ©Ò³)
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©Ò³)
 // ==========================================
 struct PlaylistTab {
 
-    // ±êÇ©°´Å¥ (Èç"Ä¬ÈÏÁÐ±í")
+    // ï¿½ï¿½Ç©ï¿½ï¿½Å¥ (ï¿½ï¿½"Ä¬ï¿½ï¿½ï¿½Ð±ï¿½")
     button_txt* tab_button;
 
-    // ¶ÔÓ¦µÄ²¥·ÅÁÐ±íÊµÌå
+    // ï¿½ï¿½Ó¦ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Êµï¿½ï¿½
     playlist* list_obj;
 };
 
@@ -106,45 +106,45 @@ public:
     friend bool save_config();
     friend bool load_config();
 
-    // °²È«µØÖØÔØµ±Ç°Ñ¡ÖÐµÄÁÐ±íÊý¾Ý
-    // ÊÊÅäµ±Ç°µÄ¸èÇúÁÐ±í¼ÓÔØÄ£Ê½£¬¿ÉÒÔÖ±½ÓÖØÔØÕû²¥·ÅÁÐ±í
+    // ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½Ç°Ñ¡ï¿½Ðµï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½äµ±Ç°ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void reload_current_list(const std::vector<Song> &global_data);
 
     void load_current_list(const std::vector<Song> &global_data);
 
-    // ½«Ñ¡ÖÐ¸èÇúÌí¼Óµ½µ±Ç°²¥·ÅÁÐ±í
-    // ÈôºóÐø¿ÉÒÔÈÃÓÃ»§Ö±½ÓÌí¼ÓÖ¸¶¨¸èÇú£¬ÔòÔÚ»ñÈ¡µ½ÏàÓ¦¸èÇúÐÅÏ¢ºó
-    // ÊµÀý»¯Ò»Song¶ÔÏó²¢Ö±½Óµ÷ÓÃ¸Ãº¯ÊýÌí¼Óµ½µ±Ç°²¥·ÅÁÐ±í
+    // ï¿½ï¿½Ñ¡ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
+    // Êµï¿½ï¿½ï¿½ï¿½Ò»Songï¿½ï¿½ï¿½ï¿½Ö±ï¿½Óµï¿½ï¿½Ã¸Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void add_song_to_current_list(const Song& new_song) const;
 
-    // ´¦ÀíÊó±êµã»÷ÏûÏ¢
-    // ´«ÈëÊó±êÏûÏ¢µÄx,yÖµ
-    // ÔÚÍâ²¿ÏÈÅÐ¶ÏÊÇ·ñÎªÓÒ¼üµã»÷
-    // Èç¹ûÎª×ó¼üµã»÷´«Èëfalse
-    // Èç¹ûÎªÓÒ¼üµã»÷´«Èëtrue
-    // Í¬Ê±ÔÚÄÚ²¿ÅÐ¶ÏÊÇÔÚÉÏ·½µÄ²¥·ÅÁÐ±í¿ØÖÆÆ÷ÇøÓò£¬»¹ÊÇ²¥·ÅÁÐ±íÇøÓò
-    // ÔÚ²¥·ÅÁÐ±íÄÚ£¬Ë«»÷Êó±ê×ó¼ü»òÕßÓÒ¼ü·µ»Ø¸èÇúË÷Òý
-    // Èç¹ûÎªÓÒ¼ü»áÖ´ÐÐdelete_song_button´Óµ±Ç°²¥·ÅÁÐ±íÖÐÒÆ³ý¸Ã¸èÇú
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½x,yÖµ
+    // ï¿½ï¿½ï¿½â²¿ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Îªï¿½Ò¼ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½false
+    // ï¿½ï¿½ï¿½Îªï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½true
+    // Í¬Ê±ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬»ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ú£ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½Îªï¿½Ò¼ï¿½ï¿½ï¿½Ö´ï¿½ï¿½delete_song_buttonï¿½Óµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½
     int handle_click(int x, int y, bool is_right_click = false);
 
-    // ´¦ÀíÊó±ê¹öÂÖÏûÏ¢
-    // ´«ÈëÊó±êÏûÏ¢µÄx,yÖµÓëÊó±ê¹öÂÖÏûÏ¢
-    // Í¬Ê±ÔÚÄÚ²¿ÅÐ¶ÏÊÇÔÚÉÏ·½µÄ²¥·ÅÁÐ±í¿ØÖÆÆ÷ÇøÓò£¬»¹ÊÇ²¥·ÅÁÐ±íÇøÓò£¬²¢Ö´ÐÐÏàÓ¦º¯Êý£¬½øÐÐ²Ù×÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½x,yÖµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+    // Í¬Ê±ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬»ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ò£¬²ï¿½Ö´ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
     void handle_wheel(int wheel_move, int mouse_x, int mouse_y);
 
-    // Ö±½Ódrawmain.hÖÐµ÷ÓÃ¸Ãº¯Êý£¬¿ÉÒÔÖ±½Ó»æÖÆ³ö²¥·ÅÁÐ±íºÍÉÏ·½¿ØÖÆÆ÷
+    // Ö±ï¿½ï¿½drawmain.hï¿½Ðµï¿½ï¿½Ã¸Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó»ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void draw_all();
 
-    // ¸ù¾ÝµÃµ½µÄË÷ÒýÖµ·µ»Ø¸èÇúÂ·¾¶
+    // ï¿½ï¿½ï¿½ÝµÃµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     std::string get_current_song_path(int current_song_index);
 
-    // ÄÚ²¿¸¨Öúº¯Êý£¬ÔÚÀàÌåÀïÃæÊµÏÖÄ¬ÈÏÎªÊÓ×÷ÄÚÁªº¯Êý£¬·½±ãÔÚÄÚ²¿·´¸´Ê¹ÓÃ
-    // ÓÃÓÚ»ñÈ¡µ±Ç°²¥·ÅÁÐ±íµÄË÷Òý£¬·½±ã¶Ôµ±Ç°²¥·ÅÁÐ±í½øÐÐÏàÓ¦²Ù×÷
+    // ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
+    // ï¿½ï¿½ï¿½Ú»ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½
     int get_current_tab_index() const { return current_playlist_index; }
 
-    // ¸ù¾Ý»ñÈ¡µ½µÄÊó±êÏûÏ¢£¬ÅÐ¶ÏÊÇ·ñÔÚ²¥·ÅÁÐ±íÇøµÄ¹ÜÏ½ÄÚ
-    // ²»ÊôÓÚÔò·µ»Øfalse£¬ÊôÓÚ·µ»Øtrue
-    // ÔÚstart.hÖÐµ÷ÓÃ£¬ÊµÏÖÅÐ¶Ï
+    // ï¿½ï¿½ï¿½Ý»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ï½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½falseï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½true
+    // ï¿½ï¿½start.hï¿½Ðµï¿½ï¿½Ã£ï¿½Êµï¿½ï¿½ï¿½Ð¶ï¿½
     bool is_mouse_in_list_area(int x, int y) const;
 
     int get_current_playlist_index() const { return current_playlist_index; }
@@ -157,30 +157,30 @@ public:
 
     int get_current_song_time()const ;
 private:
-    // Ìí¼Ó²¥·ÅÁÐ±í
+    // ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void add_playlist_tab();
 
-    // É¾³ý²¥·ÅÁÐ±í
+    // É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
     void delete_playlist_tab(int index);
 
     void delete_playlist_tab_for_load_config(int index);
 
-    // ¸ù¾Ýµã»÷µ½µÄ²¥·ÅÁÐ±í¿ØÖÆÆ÷µÄË÷Òý
-    // Í¨¹ýÐÞ¸Äµ±Ç°²¥·ÅÁÐ±íµÄË÷Òý£¬ÊµÏÖ²¥·ÅÁÐ±íµÄÇÐ»»
+    // ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // Í¨ï¿½ï¿½ï¿½Þ¸Äµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö²ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ð»ï¿½
     void switch_tab(int index);
 
-    // ²¥·ÅÁÐ±í×Ü¿ØÖÆÆ÷µÄÈÝÆ÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     std::vector<PlaylistTab> tabs;
 
-    // µ±Ç°²¥·ÅÁÐ±íµÄË÷Òý
+    // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int current_playlist_index;
-    // ²¥·ÅÁÐ±í×Ü¿ØÖÆÆ÷±³¾°°´Å¥
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
     button_color* bg_button;
-    // ²¥·ÅÁÐ±í×Ü¿ØÖÆÆ÷±³¾°°´Å¥µÄ×ø±êºÍ¿í¸ß
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½
     int ctrl_x, ctrl_y, ctrl_w, ctrl_h;
-    // ²¥·ÅÁÐ±í×Ü¿ØÖÆÆ÷¿íºÍ¸ß
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½
     int tab_btn_w, tab_btn_h;
-    // ²¥·ÅÁÐ±í×Ü¿ØÖÆÆ÷°´Å¥×ÖÌå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½
     txt tabFont;
 };
 
