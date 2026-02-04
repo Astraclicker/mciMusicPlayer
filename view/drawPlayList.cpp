@@ -355,6 +355,7 @@ int play_list_controller::handle_click(int x, int y, bool is_right_click) {
                         save_config();
                     } else {
                         switch_tab(i);
+                        save_config();
                     }
                 }
                 return -1;
@@ -450,8 +451,6 @@ bool play_list_controller::is_mouse_in_list_area(int x, int y) const {
 
 int play_list_controller::get_current_song_time()const {
     if (tabs[current_playlist_index].list_obj->is_empty()) {
-        mciSendString("stop myaudio", NULL, 0, NULL);
-        play_statu = playStatu::pause;
         return 0;
     }
     return tabs[current_playlist_index].list_obj->get_song_time(current_song_index);
