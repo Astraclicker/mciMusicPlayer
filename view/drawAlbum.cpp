@@ -4,7 +4,7 @@
 
 
 void drawAlbum (int index) {
-    //??????
+    //°²È«¼ì²é
     if (my_play_list_controller.get_current_playlist_size() == 0) {
          return;
     }
@@ -12,7 +12,7 @@ void drawAlbum (int index) {
         return;
     }
     std::string CurrentPath = my_play_list_controller.get_current_song_root() +"/"+my_play_list_controller.get_current_song_name() + ".jpg";
-    //std::string CurrentPath = music_path + "?????????" + ".jpg";
+
     IMAGE cover_img;
     loadimage(&cover_img, CurrentPath.c_str(), width_album, length_album);
     putimage(26, 114, &cover_img);
