@@ -3,38 +3,39 @@
 #include "../view/drawPlayList.h"
 #include "../view/drewSetting.h"
 #include "../view/drawLyrics.h"
-//��ͣ/���ſؼ�
+//暂停、播放控件
 void control_music (playStatu&status) {
     if (status == playStatu::pause) {
-        // ��ͣ -> ����
+        //暂停->播放
         mciSendString("play myaudio", NULL, 0, NULL);
         status = playStatu::play;
     }
     else { // status == PlayStatus::play
-        // ���� -> ��ͣ
+        //播放->暂停
         mciSendString("stop myaudio", NULL, 0, NULL);
         status = playStatu::pause;
     }
 }
 
+//播放音乐
 void play_music (int newindex) {
     if (newindex < 0 || newindex >= my_play_list_controller.get_current_playlist_size()) return;
     current_song_index = newindex;
-    // ֹͣ��ǰ����
+    //停止当前播放
     mciSendString("close myaudio", NULL, 0, NULL);
 
-    // ���¸���
+    //打开行歌曲
     std::string cmd = "open \"" + my_play_list_controller.get_current_song_path(current_song_index) + "\" alias myaudio";
     mciSendString(cmd.c_str(), NULL, 0, NULL);
 
-    // ����
+    //播放
     mciSendString("play myaudio", NULL, 0, NULL);
     play_statu = playStatu::play;
     setVolume(volume);
     loadLyrics();
 }
 
-//������һ��/��һ��
+//播放下一首
 void play_NextMusic() {
     switch (play_mode) {
         case PlayMode::Sequence:
@@ -53,6 +54,7 @@ void play_NextMusic() {
     play_music(current_song_index);
 }
 
+//播放上一首
 void play_PreviousMusic() {
     switch (play_mode) {
         case PlayMode::Sequence:
@@ -71,7 +73,7 @@ void play_PreviousMusic() {
     play_music(current_song_index);
 }
 
-//���Ž����жϣ���һ���Զ�����
+//判断播放结束,实现下一首自动播放
 void checkAndPlayNext() {
     static bool wasPlaying = false;
     char status[256];
@@ -86,62 +88,62 @@ void checkAndPlayNext() {
         play_NextMusic();
     }
 }
-//���/����
+//快进
 void fastForward(int milliseconds) {
     char cmd[256];
     char positionStr[64];
 
-    // 1. ��ȡ��ǰλ��
+    // 1.获取当前位置
     mciSendString("status myaudio position", positionStr, sizeof(positionStr), 0);
     long currentPos = atol(positionStr);
 
-    // 2. ��ȡý���ܳ��ȣ���ֹ������Χ��
+    // 2.获取歌曲总长度
     long totalLength = my_play_list_controller.get_current_song_time();
 
-    // 3. ������λ��
+    // 3.计算新位置
     long newPos = currentPos + milliseconds;
     if (newPos > totalLength) {
-        newPos = totalLength; // �������ܳ���
+        newPos = totalLength; //不超过总长度
     }
 
-    // 4. ��ת����λ��
+    // 4.跳转到新的位置
     sprintf(cmd, "seek myaudio to %ld", newPos);
     mciSendString(cmd, NULL, 0, NULL);
 
-    // 5. ��������
+    // 5. 继续播放
     mciSendString("play myaudio", NULL, 0, NULL);
 }
 void fastBackward(int milliseconds) {
     char cmd[256];
     char positionStr[64];
 
-    // 1. ��ȡ��ǰλ��
+    // 1. 获取当前位置
     mciSendString("status myaudio position", positionStr, sizeof(positionStr), 0);
     long currentPos = atol(positionStr);
 
-    // 2. ������λ�ã���С��0��
+    // 2. 获取总长度
     long newPos = currentPos - milliseconds;
     if (newPos < 0) {
         newPos = 0;
     }
 
-    // 3. ��ת����λ��
+    // 3.跳转到新位置
     sprintf(cmd, "seek myaudio to %ld", newPos);
     mciSendString(cmd, NULL, 0, NULL);
 
-    // 4. ��������
+    // 4.继续播放
     mciSendString("play myaudio", NULL, 0, NULL);
 }
 
-//���׽�����
+// 进度条
 float getProgress() {
     char posStr[64];
 
-    // ��ȡ��ǰλ��
+    // 获取当前位置
     mciSendString("status myaudio position", posStr, sizeof(posStr), 0);
     long currentPos = atol(posStr);
 
-    // ��ȡ�ܳ���
+    // 获取总长度
     long totalLen = my_play_list_controller.get_current_song_time();
 
     // �������
