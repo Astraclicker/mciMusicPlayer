@@ -32,7 +32,8 @@ enum class button_style {
 //主界面状态
 enum class statu {
     main,
-    setting
+    setting,
+    developer
 };
 
 //当前播放状态

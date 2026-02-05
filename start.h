@@ -9,7 +9,7 @@
 #include "function/playMusic.h"
 #include "service/loadfile.h"
 #include "service/congfig.h"
-
+#include "view/drawDeveloper.h"
 #include "view/drawLyrics.h"
 using std::cout;
 using std::endl;
@@ -151,6 +151,13 @@ void start() {
                         my_play_list_controller.load_current_list(temp_song_list);
                         save_config();
                     }
+                    //单击制作人员表
+                    if (msg.message == WM_LBUTTONDOWN && msg.x>0 && msg.x<310 && msg.y>660 && msg.y<length_window) {
+                        cout<<"制作人员表"<<endl;
+                        condition = statu::developer;
+                        flushmessage(EX_MOUSE);
+                        break;
+                    }
                     if (my_play_list_controller.is_mouse_in_list_area(msg.x, msg.y)) {
                         switch (msg.message) {
                             case WM_MOUSEWHEEL:
@@ -250,6 +257,16 @@ void start() {
                     checkAndPlayNext();
                 }
                 flushmessage();
+                break;
+            case statu::developer :
+                drawDeveloper();
+               if (peekmessage(&msg,EX_MOUSE)) {
+                   if (!developer.checkButton(msg.x, msg.y)&&msg.message == WM_LBUTTONDOWN) {
+                           condition = statu::main;
+                   }
+                   flushmessage(EX_MOUSE);
+               }
+
                 break;
         }
         //敏感肌电脑请注释
