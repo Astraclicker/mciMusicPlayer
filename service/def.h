@@ -32,7 +32,8 @@ enum class button_style {
 //主界面状态
 enum class statu {
     main,
-    setting
+    setting,
+    developer
 };
 
 //当前播放状态
@@ -64,4 +65,5 @@ struct lrc {
     std::string title;
 };
 inline std::vector<lrc>lrc_list;
+inline std::vector<std::string>lrc_texts;
 inline std::string text;//lrc文件里每句带时间完整歌词
