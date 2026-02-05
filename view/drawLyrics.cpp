@@ -24,7 +24,7 @@ void loadLyrics() {
         std::string temp = text.substr(pos+1);
         std::string word = STRtoANSI(temp);//转换
         int x=0;
-      if(word.length() >= 40) {//中文站两个字符
+      if(word.length() >= 40) {//中文占两个字符
             x=find_frist(word,word.length()/2);
             if (x==word.length()/2) {
                 x=find_frist(word,0);
