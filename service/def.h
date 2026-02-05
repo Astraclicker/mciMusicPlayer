@@ -65,4 +65,5 @@ struct lrc {
     std::string title;
 };
 inline std::vector<lrc>lrc_list;
+inline std::vector<std::string>lrc_texts;
 inline std::string text;//lrc文件里每句带时间完整歌词

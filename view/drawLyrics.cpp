@@ -22,7 +22,22 @@ void loadLyrics() {
         //����ÿһ�и��
         int pos = text.find(']');
         std::string temp = text.substr(pos+1);
-        std::string word = STRtoANSI(temp);
+        std::string word = STRtoANSI(temp);//转换
+        int x=0;
+      if(word.length() >= 40) {//中文站两个字符
+            x=find_frist(word,word.length()/2);
+            if (x==word.length()/2) {
+                x=find_frist(word,0);
+                lrc_texts.push_back(word.substr(0,x));
+            }else {
+                lrc_texts.push_back(word.substr(0,x));
+            }
+
+
+
+        }
+        if (x!=0)lrc_texts.push_back(word.substr(x+1,word.length()));
+        else lrc_texts.push_back(word);
         try {
             std::string min_str= text.substr(1,2);
             int minute = std::stoi(min_str);
@@ -33,9 +48,15 @@ void loadLyrics() {
             long long total_time;
             total_time = minute*60*1000 + second*1000 + third*10;
             lrc one_lrc;//һ�и�ʵĽṹ��
-            one_lrc.time = total_time;
-            one_lrc.title = word;
-            lrc_list.push_back(one_lrc);
+
+            for (int i=0;i<lrc_texts.size();i++) {
+                one_lrc.time = total_time;
+                one_lrc.title = lrc_texts[i];//赋值文本
+
+                lrc_list.push_back(one_lrc);
+            }
+
+           lrc_texts.clear();
         }catch (...) {
             continue;
         }
