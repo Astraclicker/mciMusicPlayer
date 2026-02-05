@@ -41,11 +41,11 @@ void play_NextMusic() {
         case PlayMode::Sequence:
             current_song_index = current_song_index + 1;
             if (current_song_index >= my_play_list_controller.get_current_playlist_size()) {
-                current_song_index = 0;  // ѭ������һ��
+                current_song_index = 0;  // 回到第一首歌
             }
             break;
         case PlayMode::Sing_Loop:
-            //index=index����
+            //index=index不变
             break;
         case PlayMode::Random:
             current_song_index=rand() % my_play_list_controller.get_current_playlist_size() ;
@@ -60,11 +60,11 @@ void play_PreviousMusic() {
         case PlayMode::Sequence:
             current_song_index=current_song_index - 1;
             if (current_song_index < 0) {
-                current_song_index = my_play_list_controller.get_current_playlist_size() - 1;  // ѭ�������һ��
+                current_song_index = my_play_list_controller.get_current_playlist_size() - 1;  // 列表最后一首
             }
             break;
         case PlayMode::Sing_Loop:
-            //index=index����
+            //index=index不变
             break;
         case PlayMode::Random:
             current_song_index=rand() % my_play_list_controller.get_current_playlist_size() ;
@@ -146,33 +146,33 @@ float getProgress() {
     // 获取总长度
     long totalLen = my_play_list_controller.get_current_song_time();
 
-    // �������
+    // 计算进度
     if (totalLen > 0) {
         return (float)currentPos / totalLen;
     }
     return 0.0f;
 }
 void drawSimpleProgressBar(int x, int y, int width, int height, float progress) {
-    // 1. ���Ʊ�������ɫ��
+    // 1. 绘制进度条背景
     setfillcolor(LIGHTGRAY);
     fillrectangle(x, y, x + width, y + height);
 
-    // 2. ���ƽ��ȣ���ɫ��
+    // 2. 进度条进度
     if (progress > 0) {
         int progressWidth = (int)(width * progress);
         setfillcolor(RGB(38, 120, 255));
         fillrectangle(x, y, x + progressWidth, y + height);
     }
 
-    // 3. ���Ʊ߿�
+    // 3.进度条边框
     rectangle(x, y, x + width, y + height);
-    // 4. ������קСԲȦ
+    // 4.绘制点击的圆圈
     if (progress > 0) {
         int circleX = x + (int)(width * progress);
         int circleY = y + height / 2;
-        int circleRadius = 12;  // �̶���С
+        int circleRadius = 12;  // 半径
 
-        // ��Ȧ����ɫ�߿�
+        // 圆圈边框
         setlinecolor(RGB(20, 70, 180));
         setfillcolor(WHITE);
         fillellipse(circleX - circleRadius, circleY - circleRadius,
@@ -182,23 +182,23 @@ void drawSimpleProgressBar(int x, int y, int width, int height, float progress) 
 }
 
 void clickProgressBarToSeek(int mouseX) {
-    // 1. ������λ�ö�Ӧ�Ľ��� (0.0 ~ 1.0)
+    // 1. 计算进度占比 (0.0 ~ 1.0)
     float progress = (float)mouseX / 1280.0f;
     if (progress < 0) progress = 0;
     if (progress > 1) progress = 1;
 
-    // 2. ��ȡ��Ƶ�ܳ���
+    // 2. 获取总长度
     long totalTime = my_play_list_controller.get_current_song_time();
 
-    // 3. ����Ŀ��ʱ��
+    // 3.计算新位置
     long targetTime = (long)(totalTime * progress);
 
-    // 4. ֱ����ת��һ�仰�㶨��
+    //跳转到指定位置
     char cmd[128];
     sprintf(cmd, "seek myaudio to %ld", targetTime);
     mciSendString(cmd, NULL, 0, NULL);
 
-    // 5. ��������
+    // 5. 重新播放
     mciSendString("play myaudio", NULL, 0, NULL);
     play_statu=playStatu::play;
 }
