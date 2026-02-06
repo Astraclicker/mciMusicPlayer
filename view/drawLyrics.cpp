@@ -19,12 +19,12 @@ void loadLyrics() {
 
     std::ifstream lrc_file(CurrentPath);
     while (std::getline(lrc_file,text)) {
-        //����ÿһ�и��
+        //从lrc文件读取歌词
         int pos = text.find(']');
         std::string temp = text.substr(pos+1);
         std::string word = STRtoANSI(temp);//转换
         int x=0;
-      if(word.length() >= 40) {//中文站两个字符
+      if(word.length() >= 40) {//中文占两个字符
             x=find_frist(word,word.length()/2);
             if (x==word.length()/2) {
                 x=find_frist(word,0);
@@ -47,7 +47,7 @@ void loadLyrics() {
             int third = std::stoi(third_str);
             long long total_time;
             total_time = minute*60*1000 + second*1000 + third*10;
-            lrc one_lrc;//һ�и�ʵĽṹ��
+            lrc one_lrc;//单行歌词结构体
 
             for (int i=0;i<lrc_texts.size();i++) {
                 one_lrc.time = total_time;
@@ -74,7 +74,7 @@ void drawLyrics(int index) {
         current_index = i;
     }
 
-    //�����߼�
+    //绘制位置参数
     int center_x= 421;
     int center_y= 317;
     int range = 4;
@@ -86,10 +86,10 @@ void drawLyrics(int index) {
             int draw_y = center_y + (num*height);
             if (num == 0) {
                 settextcolor(RGB(30,144,255));
-                settextstyle(20,0,"΢���ź�");
+                settextstyle(20,0,"微软雅黑");
             }else {
                 settextcolor(RGB(200, 200, 200));
-                settextstyle(15,0,"΢���ź�");
+                settextstyle(15,0,"微软雅黑");
             }
             setlinecolor(RGB(128,128,128));
             setlinestyle(PS_SOLID,2);
@@ -101,6 +101,7 @@ void drawLyrics(int index) {
         }
     }
 }
+//绘制歌曲名和歌手
 void drawInformation() {
     std::string artist_song = my_play_list_controller.get_current_song_name();
     int pos = artist_song.find('-');
