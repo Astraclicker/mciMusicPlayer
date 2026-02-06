@@ -1,7 +1,3 @@
-//
-// Created by 21031 on 2026/2/2.
-//
-
 #ifndef MCIMUSICPLAYER_DRAWLYRICS_H
 #define MCIMUSICPLAYER_DRAWLYRICS_H
 #include "../service/def.h"

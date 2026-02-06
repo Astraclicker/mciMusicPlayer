@@ -82,7 +82,7 @@ button_txt::button_txt(int x, int y, std::string text, const button &b_obj, cons
 void button_txt::drawButton() {
     setfillcolor(color);
     switch (b_style) {
-        case  button_style::roundrect: fillroundrect(x, y, x + width, y + length, 10, 10);
+        case button_style::roundrect: fillroundrect(x, y, x + width, y + length, 10, 10);
             break;
         case button_style::ellipse: fillellipse(x, y, x + width, y + length);
             break;
@@ -90,9 +90,9 @@ void button_txt::drawButton() {
     RECT r = {x, y, x + width, y + length};
     setbkmode(TRANSPARENT);
     settextcolor(t_color);
-    if (t_length==0||t_width==0) {
-        t_width = width/static_cast<int>(text.size());
-        t_length = t_width*2;
+    if (t_length == 0 || t_width == 0) {
+        t_width = width / static_cast<int>(text.size());
+        t_length = t_width * 2;
     }
     settextstyle(t_length, t_width, Font_name.c_str());
     drawtext(text.c_str(), &r,DT_CENTER | DT_VCENTER | DT_SINGLELINE);
@@ -109,12 +109,15 @@ bool button_txt::checkButton(int x, int y) {
 int button_txt::get_y() {
     return y;
 }
+
 int button_txt::get_x() {
     return x;
 }
+
 void button_txt::set_y(int new_y) {
     this->y = new_y;
 }
+
 void button_txt::set_x(int new_x) {
     this->x = new_x;
 }

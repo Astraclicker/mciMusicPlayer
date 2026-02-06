@@ -10,6 +10,6 @@
 #include "../service/def.h"
 
 
-void drawAlbum (int index);
+void drawAlbum(int index);
 
 #endif

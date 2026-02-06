@@ -4,12 +4,15 @@
  */
 #pragma once
 #include <string>
+
 class txt {
 public:
     int t_length;
     int t_width;
     int t_color;
     std::string Font_name;
-    txt(int t_length,int t_width,int t_color,std::string Font_name);
+
+    txt(int t_length, int t_width, int t_color, std::string Font_name);
 };
-int find_frist(const std::string str,int i);
+
+int find_frist(const std::string str, int i);

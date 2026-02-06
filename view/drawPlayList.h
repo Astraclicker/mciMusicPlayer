@@ -15,15 +15,17 @@
 
 struct playlist_song {
     Song song;
-    button_txt* playlist_button;
+    button_txt *playlist_button;
 };
 
 class playlist {
 public:
     playlist();
+
     ~playlist();
 
     friend bool save_config();
+
     friend bool load_config();
 
     // 重载整个播放列表
@@ -59,13 +61,17 @@ public:
     // 获取当前歌曲的在全局歌单区域的index
     int get_songs_list_index(int clicked_song_index);
 
-    int get_playlist_size(){return playlist_songs.size();}
+    int get_playlist_size() { return playlist_songs.size(); }
 
-    int get_song_time(int current_song_index){return playlist_songs[current_song_index].song.song_time;}
+    int get_song_time(int current_song_index) { return playlist_songs[current_song_index].song.song_time; }
+
     std::string get_song_name(int current_song_index) const {
         return playlist_songs[current_song_index].song.song_name;
     }
-    std::string get_song_root(int current_song_index) const{return playlist_songs[current_song_index].song.song_root;}
+
+    std::string get_song_root(int current_song_index) const {
+        return playlist_songs[current_song_index].song.song_root;
+    }
 
     // 获取播放列表坐标的相关参数，方便点击范围的判定
     int get_bg_playlist_x() const { return bg_playlist_x; }
@@ -75,7 +81,7 @@ public:
 
 private:
     // 播放列表背景按钮
-    button_color* bg_button;
+    button_color *bg_button;
     // 播放列表按钮字体
     txt songFont;
     // 当前播放列表的歌曲容器
@@ -92,20 +98,21 @@ private:
 // 播放列表总控制器 (负责管理多个标签页)
 // ==========================================
 struct PlaylistTab {
-
     // 标签按钮 (如"默认列表")
-    button_txt* tab_button;
+    button_txt *tab_button;
 
     // 对应的播放列表实体
-    playlist* list_obj;
+    playlist *list_obj;
 };
 
 class play_list_controller {
 public:
     play_list_controller();
+
     ~play_list_controller();
 
     friend bool save_config();
+
     friend bool load_config();
 
     // 安全地重载当前选中的列表数据
@@ -117,7 +124,7 @@ public:
     // 将选中歌曲添加到当前播放列表
     // 若后续可以让用户直接添加指定歌曲，则在获取到相应歌曲信息后
     // 实例化一Song对象并直接调用该函数添加到当前播放列表
-    void add_song_to_current_list(const Song& new_song) const;
+    void add_song_to_current_list(const Song &new_song) const;
 
     // 处理鼠标点击消息
     // 传入鼠标消息的x,y值
@@ -151,7 +158,7 @@ public:
 
     int get_current_playlist_index() const { return current_playlist_index; }
 
-    int get_current_playlist_size() const{return tabs[current_playlist_index].list_obj->get_playlist_size();}
+    int get_current_playlist_size() const { return tabs[current_playlist_index].list_obj->get_playlist_size(); }
 
     std::string get_current_song_name() const {
         if (tabs[current_playlist_index].list_obj->is_empty()) {
@@ -160,9 +167,12 @@ public:
         return tabs[current_playlist_index].list_obj->get_song_name(current_song_index);
     }
 
-    std::string get_current_song_root() const{return tabs[current_playlist_index].list_obj->get_song_root(current_song_index);};
+    std::string get_current_song_root() const {
+        return tabs[current_playlist_index].list_obj->get_song_root(current_song_index);
+    };
 
-    int get_current_song_time()const ;
+    int get_current_song_time() const;
+
 private:
     // 添加播放列表
     void add_playlist_tab();
@@ -182,7 +192,7 @@ private:
     // 当前播放列表的索引
     int current_playlist_index;
     // 播放列表总控制器背景按钮
-    button_color* bg_button;
+    button_color *bg_button;
     // 播放列表总控制器背景按钮的坐标和宽高
     int ctrl_x, ctrl_y, ctrl_w, ctrl_h;
     // 播放列表总控制器宽和高

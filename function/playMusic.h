@@ -11,23 +11,28 @@
 #include <vector>
 //暂停/播放控件
 
-void control_music (playStatu& status);
+void control_music(playStatu &status);
 
-void play_music (int newindex);
+void play_music(int newindex);
 
 // //播放下一曲/上一曲
 void play_NextMusic();
+
 void play_PreviousMusic();
+
 //播放结束判断，下一首自动播放
 void checkAndPlayNext();
+
 //快进/快退
-void fastForward(int milliseconds= 10000);
-void fastBackward(int milliseconds=10000);
+void fastForward(int milliseconds = 10000);
+
+void fastBackward(int milliseconds = 10000);
 
 //简易进度条
-float getProgress() ;
-void drawSimpleProgressBar(int x, int y, int width, int height, float progress) ;
+float getProgress();
 
-void clickProgressBarToSeek(int mouseX) ;
+void drawSimpleProgressBar(int x, int y, int width, int height, float progress);
+
+void clickProgressBarToSeek(int mouseX);
 
 #endif

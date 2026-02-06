@@ -7,12 +7,12 @@
 #include <vector>
 #include "Song.h"
 //窗口大小
-constexpr int width_window =1280;
-constexpr int  length_window= 800;
+constexpr int width_window = 1280;
+constexpr int length_window = 800;
 
 //专辑封面大小
 constexpr int width_album = 350;
-constexpr int length_album= 350;
+constexpr int length_album = 350;
 
 //音乐路径
 inline std::string music_path = "sources/music";
@@ -21,7 +21,7 @@ inline std::string music_path = "sources/music";
 inline std::string bk_img = "sources/image/bk.png";
 
 //播放方式
-enum class PlayMode {Sequence,Sing_Loop,Random};
+enum class PlayMode { Sequence, Sing_Loop, Random };
 
 //按钮形状
 enum class button_style {
@@ -37,10 +37,11 @@ enum class statu {
 };
 
 //当前播放状态
-enum  class playStatu {
+enum class playStatu {
     play,
     pause
 };
+
 //声明状态机
 inline statu condition;
 inline playStatu play_statu;
@@ -54,7 +55,7 @@ inline int n = 0;
 inline int current_song_index = 0;
 
 //快进/快退指数
-inline  int play_argument = 10000;
+inline int play_argument = 10000;
 
 //音量大小
 inline int volume = 60;
@@ -64,6 +65,7 @@ struct lrc {
     long long time;
     std::string title;
 };
-inline std::vector<lrc>lrc_list;
-inline std::vector<std::string>lrc_texts;
-inline std::string text;//lrc文件里每句带时间完整歌词
+
+inline std::vector<lrc> lrc_list;
+inline std::vector<std::string> lrc_texts;
+inline std::string text; //lrc文件里每句带时间完整歌词

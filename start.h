@@ -39,11 +39,11 @@ void start() {
                             msg.y >= 650 && msg.y <= 660) {
                             // 假设进度条高度5像素
                             progressDragging = true;
-                            }
+                        }
                         if (msg.x >= 1000 && msg.x <= 1280 &&
                             msg.y >= 725 && msg.y <= 730) {
                             dragging2 = true;
-                            }
+                        }
                     } else if (msg.message == WM_LBUTTONUP) {
                         progressDragging = false;
                         dragging2 = false;
@@ -152,8 +152,9 @@ void start() {
                         save_config();
                     }
                     //单击制作人员表
-                    if (msg.message == WM_LBUTTONDOWN && msg.x>0 && msg.x<310 && msg.y>660 && msg.y<length_window) {
-                        cout<<"制作人员表"<<endl;
+                    if (msg.message == WM_LBUTTONDOWN && msg.x > 0 && msg.x < 310 && msg.y > 660 && msg.y <
+                        length_window) {
+                        cout << "制作人员表" << endl;
                         condition = statu::developer;
                         flushmessage(EX_MOUSE);
                         break;
@@ -179,7 +180,7 @@ void start() {
                                     my_play_list_controller.handle_click(msg.x, msg.y, false);
                                 }
                             }
-                                break;
+                            break;
                             case WM_RBUTTONDOWN: {
                                 unsigned long currentRClickTime = GetTickCount();
                                 if (currentRClickTime - lastRClickTime < 500) {
@@ -190,7 +191,7 @@ void start() {
                                     lastRClickTime = currentRClickTime;
                                 }
                             }
-                                break;
+                            break;
                         }
                     }
                     if (play_statu == playStatu::play) {
@@ -203,69 +204,69 @@ void start() {
 
                 drawSetting();
                 if (peekmessage(&msg,EX_MOUSE)) {
-                        if (msg.message == WM_LBUTTONDOWN) {
-                            cout << msg.x << "||" << msg.y << endl;
+                    if (msg.message == WM_LBUTTONDOWN) {
+                        cout << msg.x << "||" << msg.y << endl;
 
-                            if (exit_setting.checkButton(msg.x, msg.y)) {
-                                condition = statu::main;
-                            }
-                            if (spectrum_setting.checkButton(msg.x, msg.y)) {
-                                system("start sources/cava/cava.exe");
-                            }
-                            if (volOn.checkButton(msg.x, msg.y)) {
-                                switch (vol_flag) {
-                                    //根据值 改变play_mode的状态
-                                    case true:
-                                        setVolume(0);
-                                        sliderX = 350;
-                                        vol_flag = false;
-                                        break;
-                                    case false:
-                                        setVolume(50);
-                                        sliderX = 400;
-                                        vol_flag = true;
-                                        break;
-                                }
-                            }
-                            if (msg.x >= 350 && msg.x <= 550 &&
-                                msg.y >= 350 && msg.y <= 355) {
-                                dragging = true;
-                            }
-                        } else if (msg.message == WM_LBUTTONUP) {
-                            dragging = false;
-                        } else if (msg.message == WM_MOUSEMOVE && dragging) {
-                            // 拖动滑块
-                            sliderX = msg.x;
-                            vol_flag = true;
-                            if (sliderX < 350) sliderX = 350, vol_flag = false;
-                            if (sliderX > 550) sliderX = 550;
-
-                            // 计算新音量
-                            int newVolume = (sliderX - 350) * 100 / 200;
-                            if (newVolume != volume) {
-                                // 设置新音量
-                                setVolume(newVolume);
+                        if (exit_setting.checkButton(msg.x, msg.y)) {
+                            condition = statu::main;
+                        }
+                        if (spectrum_setting.checkButton(msg.x, msg.y)) {
+                            system("start sources/cava/cava.exe");
+                        }
+                        if (volOn.checkButton(msg.x, msg.y)) {
+                            switch (vol_flag) {
+                                //根据值 改变play_mode的状态
+                                case true:
+                                    setVolume(0);
+                                    sliderX = 350;
+                                    vol_flag = false;
+                                    break;
+                                case false:
+                                    setVolume(50);
+                                    sliderX = 400;
+                                    vol_flag = true;
+                                    break;
                             }
                         }
-                        if (!setting.checkButton(msg.x, msg.y)) {
-                            if (msg.message == WM_LBUTTONDOWN) {
-                                condition = statu::main;
-                            }
+                        if (msg.x >= 350 && msg.x <= 550 &&
+                            msg.y >= 350 && msg.y <= 355) {
+                            dragging = true;
+                        }
+                    } else if (msg.message == WM_LBUTTONUP) {
+                        dragging = false;
+                    } else if (msg.message == WM_MOUSEMOVE && dragging) {
+                        // 拖动滑块
+                        sliderX = msg.x;
+                        vol_flag = true;
+                        if (sliderX < 350) sliderX = 350, vol_flag = false;
+                        if (sliderX > 550) sliderX = 550;
+
+                        // 计算新音量
+                        int newVolume = (sliderX - 350) * 100 / 200;
+                        if (newVolume != volume) {
+                            // 设置新音量
+                            setVolume(newVolume);
                         }
                     }
+                    if (!setting.checkButton(msg.x, msg.y)) {
+                        if (msg.message == WM_LBUTTONDOWN) {
+                            condition = statu::main;
+                        }
+                    }
+                }
                 if (play_statu == playStatu::play) {
                     checkAndPlayNext();
                 }
                 flushmessage();
                 break;
-            case statu::developer :
+            case statu::developer:
                 drawDeveloper();
-               if (peekmessage(&msg,EX_MOUSE)) {
-                   if (!developer.checkButton(msg.x, msg.y)&&msg.message == WM_LBUTTONDOWN) {
-                           condition = statu::main;
-                   }
-                   flushmessage(EX_MOUSE);
-               }
+                if (peekmessage(&msg,EX_MOUSE)) {
+                    if (!developer.checkButton(msg.x, msg.y) && msg.message == WM_LBUTTONDOWN) {
+                        condition = statu::main;
+                    }
+                    flushmessage(EX_MOUSE);
+                }
 
                 break;
         }
@@ -276,6 +277,5 @@ void start() {
         //     Sleep(1000 / 240 - deltat_time);
         // }
     }
-
 }
 #endif

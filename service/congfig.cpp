@@ -13,15 +13,15 @@ using std::string;
 using std::vector;
 
 
-void writeString(ofstream& file, const string& str) {
+void writeString(ofstream &file, const string &str) {
     size_t len = str.size();
-    file.write((char*)&len, sizeof(size_t));
+    file.write((char *) &len, sizeof(size_t));
     if (len > 0) file.write(str.c_str(), len);
 }
 
-void readString(ifstream& file, string& str) {
+void readString(ifstream &file, string &str) {
     size_t len;
-    file.read((char*)&len, sizeof(size_t));
+    file.read((char *) &len, sizeof(size_t));
     if (len > 0) {
         str.resize(len);
         file.read(&str[0], len);
@@ -37,37 +37,36 @@ bool save_config() {
     if (!file) return false;
     // 保存当前所在的播放列是哪里
     int current_idx = my_play_list_controller.current_playlist_index;
-    file.write((char*)&current_idx, sizeof(int));
+    file.write((char *) &current_idx, sizeof(int));
     // 保存播放列表个数
     size_t playlist_count = my_play_list_controller.tabs.size() - 1;
     if (my_play_list_controller.tabs.size() == 0) playlist_count = 0;
-    file.write((char*)&playlist_count, sizeof(size_t));
+    file.write((char *) &playlist_count, sizeof(size_t));
 
     // 遍历 tabs 挨个保存每个播放列表的相关信息
     for (size_t i = 1; i < my_play_list_controller.tabs.size(); i++) {
-        playlist* pl = my_play_list_controller.tabs[i].list_obj;
+        playlist *pl = my_play_list_controller.tabs[i].list_obj;
         // 如果播放列表为空就存个0进去
         if (!pl) {
             size_t zero = 0;
-            file.write((char*)&zero, sizeof(size_t));
+            file.write((char *) &zero, sizeof(size_t));
             continue;
         }
 
         // 保存该播放列表的歌曲数量
         size_t song_count = pl->playlist_songs.size();
-        file.write((char*)&song_count, sizeof(size_t));
+        file.write((char *) &song_count, sizeof(size_t));
 
         // 遍历保存每首歌
-        for (const auto& item : pl->playlist_songs) {
-            const Song& s = item.song;
+        for (const auto &item: pl->playlist_songs) {
+            const Song &s = item.song;
 
             // 存基本类型
-            file.write((char*)&s.song_index, sizeof(int));
-            file.write((char*)&s.song_time, sizeof(int));
+            file.write((char *) &s.song_index, sizeof(int));
+            file.write((char *) &s.song_time, sizeof(int));
             writeString(file, s.song_name);
             writeString(file, s.song_root);
             writeString(file, s.song_address);
-
         }
     }
 
@@ -87,10 +86,10 @@ bool load_config() {
     }
 
     int saved_current_index = 1;
-    file.read((char*)&saved_current_index, sizeof(int));
+    file.read((char *) &saved_current_index, sizeof(int));
 
     size_t playlist_count = 0;
-    file.read((char*)&playlist_count, sizeof(size_t));
+    file.read((char *) &playlist_count, sizeof(size_t));
 
     // 清理旧歌单
     // 从后往前删，保留第0个
@@ -103,10 +102,10 @@ bool load_config() {
         // 根据保存到的playlist_song现场建立歌单
         my_play_list_controller.add_playlist_tab();
         // 获取新创建的 playlist 对象
-        playlist* current_pl = my_play_list_controller.tabs.back().list_obj;
+        playlist *current_pl = my_play_list_controller.tabs.back().list_obj;
 
         size_t song_count = 0;
-        file.read((char*)&song_count, sizeof(size_t));
+        file.read((char *) &song_count, sizeof(size_t));
 
         vector<Song> temp_songs;
         temp_songs.reserve(song_count);
@@ -115,8 +114,8 @@ bool load_config() {
             Song s;
             // 重点，每次读取完需要的信息，他会自动往后面跑
             //
-            file.read((char*)&s.song_index, sizeof(int));
-            file.read((char*)&s.song_time, sizeof(int));
+            file.read((char *) &s.song_index, sizeof(int));
+            file.read((char *) &s.song_time, sizeof(int));
             readString(file, s.song_name);
             readString(file, s.song_root);
             readString(file, s.song_address);

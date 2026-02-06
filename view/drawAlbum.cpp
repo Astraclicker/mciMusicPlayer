@@ -3,15 +3,16 @@
 #include "drawPlayList.h"
 
 
-void drawAlbum (int index) {
+void drawAlbum(int index) {
     //°²È«¼ì²é
     if (my_play_list_controller.get_current_playlist_size() == 0) {
-         return;
-    }
-    if (index<0||index>my_play_list_controller.get_current_playlist_size()) {
         return;
     }
-    std::string CurrentPath = my_play_list_controller.get_current_song_root() +"/"+my_play_list_controller.get_current_song_name() + ".jpg";
+    if (index < 0 || index > my_play_list_controller.get_current_playlist_size()) {
+        return;
+    }
+    std::string CurrentPath = my_play_list_controller.get_current_song_root() + "/" + my_play_list_controller.
+                              get_current_song_name() + ".jpg";
 
     IMAGE cover_img;
     loadimage(&cover_img, CurrentPath.c_str(), width_album, length_album);
