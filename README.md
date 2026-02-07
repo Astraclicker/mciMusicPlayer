@@ -10,4 +10,4 @@
 | 技术 | 说明 | 备注 |
 |------|------|------|
 |easyx|UI|https://easyx.cn/|
-![img](./documents/产品原型图/img.png)
+![img](./img.png)
